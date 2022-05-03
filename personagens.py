@@ -1,9 +1,8 @@
 from asyncio.format_helpers import _format_callback_source
 
-
 class Personagem():
-    def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,/
-                 inteligencia, mana, xp, nivel, habilidades, ouro, caminhado):
+    def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
+    inteligencia, mana, xp, nivel, habilidades, ouro, caminhado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -20,12 +19,12 @@ class Personagem():
         self.caminhado = caminhado
 
 class npc():
-    def __init__(self, vida, vidaMax, ataque, defesa, classe, critico, nivel, ouro):
+    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, xp, ouro):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
         self.defesa = defesa
-        self.classe = classe
+        self.nome = nome
         self.critico = critico
-        self.nivel = nivel
+        self.xp = xp
         self.ouro = ouro

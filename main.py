@@ -1,8 +1,10 @@
+from asyncio.windows_events import NULL
 import random
 import Funcoes
 import personagens
 
 input("Quando você ver esse simbolo !: pressione enter para continuar")
+nome = input("Digite seu nome: ")
 print("CLASSES!!!!!!")
 print("GREG(G) \nATAQUE: 3\nDEFESA: 1\nVIDA: 8\nINTELIGENCIA: 2")
 print("MAICON(M) \nATAQUE: 2\n DEFESA: 2\n VIDA: 10\nINTELIGENCIA: 2")
@@ -51,14 +53,12 @@ magiaMultilacaoRegenerativa = False
 #artefatoGolpeGanancioso = 0
 
 habilidades = []
-
 #ESCOLHA DE CLASSE
 while not passar:
     decisaoClasse = input("Digite a letra inicial da sua classe : ")
     decisaoClasse = decisaoClasse.upper()
     if decisaoClasse == "M":
         print("CLASSE MAICON ESCOLHIDA")
-        nome = input("Digite seu nome: ")
         habilidades.append("RAP DE ANIME(RA)")
         habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
         jogador = personagens.Personagem\
@@ -73,7 +73,9 @@ while not passar:
              mana=4,
              xp=0,
              nivel=1,
-             habilidades=habilidades)
+             habilidades=habilidades,
+             ouro=0,
+             caminhado=0)
         passar = True
         passivaMasoquistaDaAcademia = True
         magiaRapDeAcademia = True
@@ -94,13 +96,15 @@ while not passar:
              mana=6,
              xp=0,
              nivel=1,
-             habilidades=habilidades)
+             habilidades=habilidades,
+             ouro= 0,
+             caminhado=0)
         passar = True
         passivaCabeloColorido = True
         magiaOrganizarAMente = True
         
 
-    if decisaoClasse == "R":
+    elif decisaoClasse == "R":
         print("CLASSE REISCH ESCOLHIDA")
         habilidades.append("CRESCIMENTO ACELERADO(PASSIVA)")
         habilidades.append("MULTILAÇÃO REGENERATIVA (MR)")
@@ -116,14 +120,16 @@ while not passar:
              mana=9,
              xp=0,
              nivel=1,
-             habilidades=habilidades)
+             habilidades=habilidades,
+             ouro= 0,
+             caminhado=0)
         passar = True
         passivaCrescimentoAcelerado = True
         magiaMultilacaoRegenerativa = True
         
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
-while vida > 0:
-    danoMitigado = defesa
+while jogador.vida > 0:
+    danoMitigado = jogador.defesa
     if marcadorArea == 0:
         input("Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores... !:")
 
@@ -140,32 +146,33 @@ while vida > 0:
                 descansoVida = round(jogador.vidaMax/5, 0)
                 print(f"você recuperou {descansoVida}pontos de vida")
                 jogador.vida += descansoVida
-                Funcoes.vidaLimite(jogador.vida, jogador.vidaMax)
+                jogador.vida = Funcoes.vidaLimite(jogador.vida, jogador.vidaMax)
 
     #A PARTIR DE UMA INT ALEATORIA É ESCOLHIDO UM MONSTRO PARA BATALHAR
-    decisaoMonstro = 0#random.randint(0,2)
-    if decisaoMonstro == 0:
-        print("UM SLIME APARECE!!!")
-        monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,\
-             classe="SLIME", critico= 5, nivel= 1, ouro= 10)
+    decisaoMonstro = random.randint(0,2)
+    if marcadorArea == 0:
+        if decisaoMonstro == 0:
+            print("UM SLIME APARECE!!!")
+            monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,
+                nome="SLIME", critico= 5, xp= 1, ouro= 10)
 
-    elif decisaoMonstro == 1:
-        print("UM GOBLIN APARECE!!!")
-        monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,\
-             classe="GOBLIN", critico= 7, nivel= 1, ouro= 10)
+        elif decisaoMonstro == 1:
+            print("UM GOBLIN APARECE!!!")
+            monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
+                nome="GOBLIN", critico= 7, xp= 1, ouro= 10)
 
-    elif decisaoMonstro == 2:
-        print("UM GOLEM BEBE APARECE!!!")
-        monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,\
-             classe="GOLEM BEBE", critico= 0, nivel= 1, ouro= 10)
+        elif decisaoMonstro == 2:
+            print("UM GOLEM BEBE APARECE!!!")
+            monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,
+                nome="GOLEM BEBE", critico= 0, xp= 10, ouro= 15)
 
-        efeitoPodeAtacarMonstro = 1
+            efeitoMonstroPodeAtacar = 1
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
     danoMitigado = monstro.defesa
 
-    while encerrarCombate == False:
+    while not encerrarCombate:
         passar = False
         #AREA QUE CONTROLA BUFFS QUE DURAM MAIS DE UM TURNO
         if efeitoDefesa == 0:
@@ -191,22 +198,24 @@ while vida > 0:
             danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
             if danoM < 0:
                 danoM = 0
-            print(f"Você sofreu {danoM}(-{danoMitigadoM}) pontos de dano\n")
-            vida -= danoM
+            print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
+            jogador.vida -= danoM
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
-        
-        Funcoes.status(monstro.vida,monstro.ataque,monstro.defesa)
-        continuar()
+        Funcoes.status(monstro.vida,monstro.ataque,monstro.defesa,monstro.nome)
+        Funcoes.status(jogador.vida,jogador.ataque,jogador.defesa,jogador.nome)
+        Funcoes.continuar()
         #MOSTRA AS DECISOES DE COMBATE PARA O JOGADOR
-        if podeAgir == True:
-            while passar == False:
+        if podeAgir:
+            while not passar:
+
                 print("AÇÕES :\n(A)ATACAR\n(D)DEFENDER\n(H)HABILIDADES\n(F)FUGIR ")
                 decisaoCombate = input("ESCOLHA UMA AÇÃO: ")
                 decisao0Combate = decisaoCombate.upper()
                 if decisaoCombate == "A":
-                    jogador.vida =(Funcoes.calculaDano(jogador.vida, jogador.ataque, criticoGarantido,\
-                                                 jogador.critico, foiCritico,passivaCabeloColorido, ))
+                    monstro.vida =(Funcoes.calculaDano(monstro.vida, jogador.ataque, criticoGarantido,
+                                 jogador.critico, foiCritico,passivaCabeloColorido, monstro.defesa, danoAumentado ))
                     foiCritico = False
+                    passar = True
                 elif decisaoCombate == "D":
                     danoMitigado = jogador.defesa*2
                     efeitoDefesa = 2
@@ -219,17 +228,13 @@ while vida > 0:
                             print(habilidade)
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE")
                         decisaoHabilidade = decisaoHabilidade.upper()
-                        if decisaoHabilidade == "MR":
-                            vida -= 2
-                            print("Você se multila e perde 2 pontos de vida")
-                            cura = random.randint(1, (jogador.inteligencia * 2))
-                            print(f"Você se cura {cura} pontos de vida")
-                            Funcoes.vidaLimite(jogador.vida,jogador.vidaMax)
+                        if decisaoHabilidade == "MR" and magiaMultilacaoRegenerativa:
+                            jogador.vida = Funcoes.magiaMultilacaoRegenerativa(jogador.vida, jogador.vidaMax, jogador.inteligencia)
                             passar = True
                         elif decisaoHabilidade == "OM":
                             estresse -= jogador.inteligencia
                             danoMitigado += jogador.inteligencia/2
-                            print("Você organiza sua mente, sua resiliencia aumenta e seus proximo golpe será critico")
+                            print("Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico")
                             criticoGarantido = True
                             passar = True
 
@@ -237,7 +242,7 @@ while vida > 0:
                             danoAumentado = jogador.ataque+jogador.defesa
                             efeitoDanoAumentado = 1
                             print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
-                            efeitoPodeAtacarMonstro = 1
+                            efeitoMonstroPodeAtacar = 1
                             efeitoPodeAgir = 5
                             passar = True
 
@@ -251,15 +256,23 @@ while vida > 0:
 
         if emboscada == True:
             emboscada = False
-        elif vidaM > 0 and efeitoPodeAtacarMonstro == 0:
+        elif monstro.vida > 0 and efeitoMonstroPodeAtacar == 0:
                 danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
                 if danoM < 0:
                     danoM = 0
                 print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
-                vida -= danoM
-        elif efeitoPodeAtacarMonstro > 0:
-            efeitoPodeAtacarMonstro -= 1
-        if vidaM <=0:
+                if jogador.vida == NULL:
+                    jogador.vida = 0
+                jogador.vida -= danoM
+        elif efeitoMonstroPodeAtacar > 0:
+            efeitoMonstroPodeAtacar -= 1
+        if jogador.vida <= 0:
+            encerrarCombate = True
+            print("Você morreu... ")
+        elif monstro.vida <=0:
             print("O MONSTRO MORREU!")
             encerrarCombate = True
-            continuar()
+            Funcoes.continuar()
+            print(f"+{monstro.ouro}G\n+{monstro.xp}XP")
+            jogador.ouro += monstro.ouro
+            jogador.xp += monstro.xp
