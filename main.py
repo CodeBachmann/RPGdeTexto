@@ -67,7 +67,7 @@ while passar == False:
         habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
         jogador = personagens.Personagem\
             (vida=10,
-             vidaMax= 10,
+             vidaMax=10,
              ataque=2,
              defesa=2,
              classe="MAICON",
