@@ -50,20 +50,19 @@ def statusMonstro():
     print(f"STATUS DO MONSTRO\nVida : {vidaM}\nAtaque : {ataqueM}\nDefesa : {defesaM}")
     return "\b"
 
-
-
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
 
 habilidades = []
 Funcoes.statusJogador()
+
 #ESCOLHA DE CLASSE
 while passar == False:
     decisaoClasse = input("Digite a letra inicial da sua classe : ")
     decisaoClasse = decisaoClasse.upper()
     if decisaoClasse == "M":
         print("CLASSE MAICON ESCOLHIDA")
-
+        nome = input("Digite seu nome: ")
         habilidades.append("RAP DE ANIME(RA)")
         habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
         jogador = personagens.Personagem\
@@ -73,13 +72,14 @@ while passar == False:
              defesa=2,
              classe="MAICON",
              critico=6,
+             nome=nome,
              inteligencia=2,
              mana=4,
              xp=0,
-             nivel = 1,
+             nivel=1,
              habilidades=habilidades)
-        jogador.habilidades.append("fosgo")
-        print(jogador)
+        #jogador.habilidades.append("fosgo")
+
     elif decisaoClasse == "G":
         print("CLASSE GREG ESCOLHIDA")
         ataque = 3
