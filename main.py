@@ -3,12 +3,32 @@ import random
 import Funcoes
 import personagens
 
-input("Quando você ver esse simbolo !: pressione enter para continuar")
+input("Quando você ver esse simbolo '!' : pressione enter para continuar")
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
-print("GREG(G) \nATAQUE: 3\nDEFESA: 1\nVIDA: 8\nINTELIGENCIA: 2\n")
-print("MAICON(M) \nATAQUE: 2\n DEFESA: 2\n VIDA: 10\nINTELIGENCIA: 2\n")
-print("REISCH(R) \nATAQUE: 3\n DEFESA: 1\n VIDA: 7\nINTELIGENCIA: 3\n")
+
+print("""
+GREG(G) 
+  ATAQUE: 3
+  DEFESA: 1
+  VIDA: 8
+  INTELIGENCIA: 2
+""")
+
+print("""MAICON(M) 
+  ATAQUE: 2 
+  DEFESA: 2
+  VIDA: 10 
+  INTELIGENCIA: 2
+""")
+
+print("""REISCH(R) 
+  ATAQUE: 3
+  DEFESA: 1
+  VIDA: 7
+  INTELIGENCIA: 3
+""")
+
 
 #EVENTOS
 passar = False
