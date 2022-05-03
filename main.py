@@ -2,8 +2,10 @@ from asyncio.windows_events import NULL
 import random
 import Funcoes
 import personagens
+import os
 
 input("Quando você ver esse simbolo '!' : pressione enter para continuar")
+os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
 
