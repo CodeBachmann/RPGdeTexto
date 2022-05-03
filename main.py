@@ -159,9 +159,11 @@ while jogador.vida > 0:
     if decisaoExplorar == "D":
         descanso = int(input("QUANTOS TURNOS VOCÊ DESEJA DESCANSAR: "))
         tempo = 0
+
         while tempo < descanso and emboscada == False:
             if random.randint(1,10) == 10:
                 emboscada = True
+                
             else:
                 descansoVida = round(jogador.vidaMax/5, 0)
                 print(f"você recuperou {descansoVida}pontos de vida")
@@ -199,27 +201,30 @@ while jogador.vida > 0:
             danoMitigado = jogador.defesa
         else:
             efeitoDefesa -= 1
+        #MELHORAR O SISTEMA DE STUN 
         if efeitoPodeAgir != 0 and efeitoPodeAgir != 5:
             podeAgir = False
             efeitoPodeAgir -= 1
         elif efeitoPodeAgir == 0:
             podeAgir = True
         elif efeitoPodeAgir ==5:
-            podeAgir == True
+            podeAgir = True
             efeitoPodeAgir = 1
 
         if efeitoDanoAumentado == 0:
             danoAumentado = 0
         else:
             efeitoDanoAumentado -= 1
+
         #ATIVA A EMBOSCADA
-        if emboscada == True:
+        if emboscada:
             print("VOCÊ FOI EMBOSCADO!!!")
             danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
             if danoM < 0:
                 danoM = 0
             print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
             jogador.vida -= danoM
+
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
         Funcoes.status(monstro.vida,monstro.ataque,monstro.defesa,monstro.nome)
         Funcoes.status(jogador.vida,jogador.ataque,jogador.defesa,jogador.nome)
@@ -231,26 +236,32 @@ while jogador.vida > 0:
                 print("AÇÕES :\n(A)ATACAR\n(D)DEFENDER\n(H)HABILIDADES\n(F)FUGIR ")
                 decisaoCombate = input("ESCOLHA UMA AÇÃO: ")
                 decisao0Combate = decisaoCombate.upper()
+
                 if decisaoCombate == "A":
                     monstro.vida =(Funcoes.calculaDano(monstro.vida, jogador.ataque, criticoGarantido,
                                  jogador.critico, foiCritico,passivaCabeloColorido, monstro.defesa, danoAumentado ))
                     foiCritico = False
                     passar = True
+
                 elif decisaoCombate == "D":
                     danoMitigado = jogador.defesa*2
                     efeitoDefesa = 2
                     passar = True
-                    print("SUA DEFESA FOI DOBRADA(2t)")
-                #HABILIDADES
+                    print("SUA DEFESA FOI DOBRADA(2t)\n")
+
+                #MAGIAS
                 elif decisaoCombate == "H":
                     while not passar:
+
                         for habilidade in habilidades:
                             print(habilidade)
+
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE")
                         decisaoHabilidade = decisaoHabilidade.upper()
                         if decisaoHabilidade == "MR" and magiaMultilacaoRegenerativa:
                             jogador.vida = Funcoes.magiaMultilacaoRegenerativa(jogador.vida, jogador.vidaMax, jogador.inteligencia)
                             passar = True
+
                         elif decisaoHabilidade == "OM":
                             estresse -= jogador.inteligencia
                             danoMitigado += jogador.inteligencia/2
@@ -274,9 +285,10 @@ while jogador.vida > 0:
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
 
-        if emboscada == True:
+        if emboscada:
             emboscada = False
         elif monstro.vida > 0 and efeitoMonstroPodeAtacar == 0:
+
                 danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
                 if danoM < 0:
                     danoM = 0
@@ -284,11 +296,14 @@ while jogador.vida > 0:
                 if jogador.vida == NULL:
                     jogador.vida = 0
                 jogador.vida -= danoM
+
         elif efeitoMonstroPodeAtacar > 0:
             efeitoMonstroPodeAtacar -= 1
+
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
+
         elif monstro.vida <=0:
             print("O MONSTRO MORREU!")
             encerrarCombate = True
