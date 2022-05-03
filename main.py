@@ -225,7 +225,7 @@ while vida > 0:
                     print("SUA DEFESA FOI DOBRADA(2t)")
                 #HABILIDADES
                 elif decisaoCombate == "H":
-                    while passar == False:
+                    while not passar:
                         for habilidade in habilidades:
                             print(habilidade)
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE")
@@ -233,20 +233,19 @@ while vida > 0:
                         if decisaoHabilidade == "MR":
                             vida -= 2
                             print("Você se multila e perde 2 pontos de vida")
-                            cura = random.randint(1, (i * 2))
+                            cura = random.randint(1, (jogador.inteligencia * 2))
                             print(f"Você se cura {cura} pontos de vida")
-                            if vida > vidaMax:
-                                vida = vidaMax
+                            Funcoes.vidaLimite(jogador.vida,jogador.vidaMax)
                             passar = True
                         elif decisaoHabilidade == "OM":
-                            estresse -= inteligencia
-                            danoMitigado +=inteligencia/2
+                            estresse -= jogador.inteligencia
+                            danoMitigado += jogador.inteligencia/2
                             print("Você organiza sua mente, sua resiliencia aumenta e seus proximo golpe será critico")
                             criticoGarantido = True
                             passar = True
 
                         elif decisaoHabilidade == "RA":
-                            danoAumentado = ataque+defesa
+                            danoAumentado = jogador.ataque+jogador.defesa
                             efeitoDanoAumentado = 1
                             print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
                             efeitoPodeAtacarMonstro = 1
@@ -258,8 +257,7 @@ while vida > 0:
                     passar = True
                 else:
                     print("DECISÃO INVALIDA")
-            else:
-                pr
+
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
 
         if emboscada == True:
