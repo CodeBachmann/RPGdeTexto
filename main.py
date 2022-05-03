@@ -5,10 +5,10 @@ import personagens
 
 input("Quando você ver esse simbolo !: pressione enter para continuar")
 nome = input("Digite seu nome: ")
-print("CLASSES!!!!!!")
-print("GREG(G) \nATAQUE: 3\nDEFESA: 1\nVIDA: 8\nINTELIGENCIA: 2")
-print("MAICON(M) \nATAQUE: 2\n DEFESA: 2\n VIDA: 10\nINTELIGENCIA: 2")
-print("REISCH(R) \nATAQUE: 3\n DEFESA: 1\n VIDA: 7\nINTELIGENCIA: 3")
+print("\n ------------CLASSES------------")
+print("GREG(G) \nATAQUE: 3\nDEFESA: 1\nVIDA: 8\nINTELIGENCIA: 2\n")
+print("MAICON(M) \nATAQUE: 2\n DEFESA: 2\n VIDA: 10\nINTELIGENCIA: 2\n")
+print("REISCH(R) \nATAQUE: 3\n DEFESA: 1\n VIDA: 7\nINTELIGENCIA: 3\n")
 
 #EVENTOS
 passar = False
