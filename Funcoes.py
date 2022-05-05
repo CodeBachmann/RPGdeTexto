@@ -36,7 +36,9 @@ def danoMitigado (defesa):
 def magiaMultilacaoRegenerativa (vida, vidaMax, inteligencia):
     dano = random.randint(0,3)
     vida -= dano
+    print(f"Você perdeu {dano} pontos de vida")
     if vida <= 0:
+        input("Você morreu... !:")
         return vida
     else:
         print("Você se multila e perde 2 pontos de vida")
