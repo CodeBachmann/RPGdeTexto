@@ -1,2 +1,2 @@
 # RPGdeTexto
- Um rpg de texto criado em pyhton
+ Um rpg de texto sendo criado em pyhton
