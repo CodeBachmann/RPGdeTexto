@@ -6,7 +6,7 @@ from pyparsing import And
 import Funcoes
 import personagens
 import os
-
+#diogo
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
 sleep(3)
 os.system('cls') or None
