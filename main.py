@@ -1,12 +1,10 @@
 from asyncio.windows_events import NULL
 import random
 from time import sleep
-
-from pyparsing import And
 import Funcoes
 import personagens
 import os
-#diogo
+#
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
 sleep(3)
 os.system('cls') or None
@@ -49,6 +47,10 @@ efeitoDefesa = False
 efeitoDanoAumentado = False
 efeitoPodeAgir = False
 efeitoMonstroPodeAtacar = False
+
+#CAMINHOS
+enfrentarMonstroElite = False
+caminhoChefe = False
 
 #STATUS
 vidaM = 0
@@ -160,7 +162,7 @@ while jogador.vida > 0:
         os.system('cls') or None
         monologo = True
     elif marcadorArea == 1 and monologo:
-        input
+        input("!:")
 
     print("Caminhos")
     caminhoMisterio = False
@@ -174,35 +176,46 @@ while jogador.vida > 0:
         caminhos = random.randint(1,3)
         input("Você pode:")
         cont = 0
-        while cont < caminhos:
-            escolha = random.randint(1, 100)
-            if escolha > 0 and escolha <= 50:
-                print(f"Lutar com um monstro comun(MC)\n")
-            elif escolha > 50 and escolha <= 75:
-                print(f"Investigar um misterio(M)\n")
-            elif escolha > 75 and escolha <= 90:
-                print(f"Lutar com um monstro de Elite(E)\n")
-            elif escolha > 90 and escolha <= 100:
-                print(f"Entrar na loja(L)\n")
+        if jogador.caminhado < 10:
+            while cont < caminhos:
+                escolha = random.randint(1, 100)
+                if escolha > 0 and escolha <= 50:
+                    print(f"Lutar com um monstro comun(C)\n")
+                    caminhoMonstroComun = True
+                elif escolha > 50 and escolha <= 75:
+                    print(f"Investigar um misterio(M)\n")
+                    caminhoMisterio = True
+                elif escolha > 75 and escolha <= 90:
+                    print(f"Lutar com um monstro de Elite(E)\n")
+                    caminhoMonstroElite = True
+                elif escolha > 90 and escolha <= 100:
+                    print(f"Entrar na loja(L)\n")
+                    caminhoLoja = True
+        else:
+            input(f"Você sente uma presença ameaçadora !:")
+            caminhoChefe = True
 
         while not passarCaminho:
 
             decisaoExplorar = input("Qual sua escolha: ")
             decisaoExplorar = decisaoExplorar.upper()
 
-            if decisaoExplorar == "MC" and caminhoMonstroComun:
+            if caminhoChefe:
+                passarCaminho = True
+            elif decisaoExplorar == "C" and caminhoMonstroComun:
                 enfrentarMonstroComun = True
+                passarCaminho = True
             elif decisaoExplorar == "E" and caminhoMonstroElite:
                 enfrentarMonstroElite = True
+                passarCaminho = True
             elif decisaoExplorar == "L" and caminhoLoja:
                 input("Você adentra a loja.. !:")
                 itemLoja = random.randint(0,100)
-                
-                
-            #elif decisaoExplorar == "M" and caminhoMisterio:
-            #   acessarMisterio = True
-            #else:
-            #   decisaoInvalida
+            elif decisaoExplorar == "M" and caminhoMisterio:
+              acessarMisterio = True
+              passarCaminho = True
+            else:
+                print("Decisao Invalida")
 
         os.system('cls') or None
 
@@ -219,12 +232,12 @@ while jogador.vida > 0:
             monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
                 nome="GOBLIN", critico= 7, ouro= 9)
 
-        elif decisaoMonstro == 2:
-            print("UM GOLEM BEBE APARECE!!!\n")
-            monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,
-                nome="GOLEM BEBE", critico= 0, ouro= 15)
+    if enfrentarMonstroElite:
+        print("UM GOLEM BEBE APARECE!!!\n")
+        monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,
+            nome="GOLEM BEBE", critico= 0, ouro= 15)
 
-            efeitoMonstroPodeAtacar = 1
+        efeitoMonstroPodeAtacar = 1
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
