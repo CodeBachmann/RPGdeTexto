@@ -47,4 +47,25 @@ def magiaMultilacaoRegenerativa (vida, vidaMax, inteligencia):
         vida = vidaLimite(vida,vidaMax)
         print(f"Vida atual: {vida}")
         return vida
-        
+#Loja
+def comprarNaLoja (itemLojaPocao, artefato, magia):
+    fecharLoja = False
+    itemLojaPocao = random.randint(0,99)
+    itemLojaArtefato = random.randint(0,99)
+    itemLojaMagia = random.randint(0,99)
+
+    while fecharLoja == False:
+        input("Você adentra a loja.. !:")
+        if itemLojaPocao < 34:
+            print("Pocao de Ataque - 50g(PA)")
+            podeComprarPocao = "Ataque"
+        elif itemLojaPocao < 67:
+            print("Pocao de Defesa - 50g(PD)")
+            podeComprarPocao = "Defesa"
+        elif itemLojaPocao < 100:
+            podeComprarPocao = "Inteligencia"
+            print("Pocao de Inteligencia - 50g(PI)")
+        if itemLojaArtefato < 50:
+            podeComprarArtefato = "Lagrima do Berserker"
+        elif itemLojaArtefato < 100:
+            podeComprarArtefato = ""

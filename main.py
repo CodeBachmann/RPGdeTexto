@@ -1,10 +1,10 @@
 from asyncio.windows_events import NULL
 import random
+from re import T
 from time import sleep
 import Funcoes
 import personagens
 import os
-#
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
 sleep(3)
 os.system('cls') or None
@@ -78,6 +78,7 @@ magiaMultilacaoRegenerativa = False
 
 #ARTEFATOS COMUNS
 artefatoGolpeGanancioso = False
+artefatoLagrimaDoBerserker = False
 
 #ITENS
 itemPedraCoracao = False
@@ -202,18 +203,24 @@ while jogador.vida > 0:
 
             if caminhoChefe:
                 passarCaminho = True
+                passar = True
             elif decisaoExplorar == "C" and caminhoMonstroComun:
                 enfrentarMonstroComun = True
                 passarCaminho = True
+                passar = True
             elif decisaoExplorar == "E" and caminhoMonstroElite:
                 enfrentarMonstroElite = True
                 passarCaminho = True
+                passar = True
             elif decisaoExplorar == "L" and caminhoLoja:
-                input("Você adentra a loja.. !:")
-                itemLoja = random.randint(0,100)
+                
+                
+
+                passarCaminho = True
             elif decisaoExplorar == "M" and caminhoMisterio:
               acessarMisterio = True
               passarCaminho = True
+              passar = True
             else:
                 print("Decisao Invalida")
 

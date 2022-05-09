@@ -25,5 +25,4 @@ class npc():
         self.defesa = defesa
         self.nome = nome
         self.critico = critico
-        
         self.ouro = ouro
