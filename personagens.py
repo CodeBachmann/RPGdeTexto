@@ -2,7 +2,7 @@ from asyncio.format_helpers import _format_callback_source
 
 class Personagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, habilidades, ouro, caminhado):
+    inteligencia, mana, habilidades, ouro, caminhado, artefatos):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -11,7 +11,7 @@ class Personagem():
         self.critico = critico
         self.inteligencia = inteligencia
         self.mana = mana
-       
+        self.artefatos = artefatos
         self.habilidades = habilidades
         self.nome = nome
         self.ouro = ouro

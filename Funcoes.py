@@ -48,24 +48,62 @@ def magiaMultilacaoRegenerativa (vida, vidaMax, inteligencia):
         print(f"Vida atual: {vida}")
         return vida
 #Loja
-def comprarNaLoja (itemLojaPocao, artefato, magia):
+def comprarNaLoja (ouro, ataque, defesa, inteligencia, artefato, magia):
     fecharLoja = False
     itemLojaPocao = random.randint(0,99)
     itemLojaArtefato = random.randint(0,99)
     itemLojaMagia = random.randint(0,99)
+    
 
     while fecharLoja == False:
+        compraRealizada = False
         input("Você adentra a loja.. !:")
+        print("Sair da loja(S)")
         if itemLojaPocao < 34:
             print("Pocao de Ataque - 50g(PA)")
-            podeComprarPocao = "Ataque"
+            podeComprarPocao = "PA"
+            precoPocao = 50
         elif itemLojaPocao < 67:
             print("Pocao de Defesa - 50g(PD)")
-            podeComprarPocao = "Defesa"
+            podeComprarPocao = "PD"
+            precoPocao = 50
         elif itemLojaPocao < 100:
-            podeComprarPocao = "Inteligencia"
+            podeComprarPocao = "PI"
+            precoPocao = 50
             print("Pocao de Inteligencia - 50g(PI)")
         if itemLojaArtefato < 50:
-            podeComprarArtefato = "Lagrima do Berserker"
+            podeComprarArtefato = "ALG"
+            precoArtefato = 120
+            print(f"Lagrima do Berserker 120g(ALB)")
         elif itemLojaArtefato < 100:
-            podeComprarArtefato = ""
+            podeComprarArtefato = "AGG"
+            precoArtefato = 132
+            print(f"Golpe Ganancioso 132g(AGG)")
+        if itemLojaMagia < 100:
+            podeComprarMagia = "CL"
+            precoMagia = 100
+            print(f"Pergaminho de magia Cura Leve (MCL) 100g")
+        while not compraRealizadainput:
+            decisao = input("O que você deseja comprar: ")
+            if decisao == podeComprarPocao:
+                if precoPocao <= ouro:
+                    if decisao == "PA":
+                        ataque += 1
+                        ouro -= precoPocao
+                    elif decisao == "PD":
+                        defesa += 1
+                        ouro -= precoPocao
+                    elif decisao == "PI":
+                        inteligencia += 1
+                        ouro -= precoPocao
+            elif decisao == podeComprarArtefato:
+                if decisao == "ALB":
+                    if precoArtefato <= ouro:
+                        artefato = podeComprarArtefato
+                        ouro -= precoArtefato
+                elif decisao == "AGG":
+                    if precoArtefato <= ouro:
+                        artefato = podeComprarArtefato
+                        ouro -= precoArtefato
+            elif decisao == podeComprarMagia:
+                
