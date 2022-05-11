@@ -79,6 +79,7 @@ magiaMultilacaoRegenerativa = False
 #ARTEFATOS COMUNS
 artefatoGolpeGanancioso = False
 artefatoLagrimaDoBerserker = False
+artefatos = []
 
 #ITENS
 itemPedraCoracao = False
@@ -104,7 +105,7 @@ while not passar:
              inteligencia=2,
              mana=4,         
              habilidades=habilidades,
-             ouro=0,
+             ouro=30,
              caminhado=0)
         passar = True
         passivaMasoquistaDaAcademia = True
@@ -125,7 +126,7 @@ while not passar:
              inteligencia=2,
              mana=6,
              habilidades=habilidades,
-             ouro= 0,
+             ouro= 30,
              caminhado=0)
         passar = True
         passivaCabeloColorido = True
@@ -147,7 +148,7 @@ while not passar:
              inteligencia=3,
              mana=9,
              habilidades=habilidades,
-             ouro= 0,
+             ouro= 30,
              caminhado=0)
         passar = True
         passivaCrescimentoAcelerado = True
@@ -170,11 +171,12 @@ while jogador.vida > 0:
     caminhoMonstroComun = False
     caminhoMonstroElite = False
     caminhoLoja = False
+    passar = False
 
     while not passar:
         passarCaminho = False
         jogador.caminhado += 1
-        caminhos = random.randint(1,3)
+        caminhos = random.randint(7,8)
         input("Você pode:")
         cont = 0
         if jogador.caminhado < 10:
@@ -192,6 +194,7 @@ while jogador.vida > 0:
                 elif escolha > 90 and escolha <= 100:
                     print(f"Entrar na loja(L)\n")
                     caminhoLoja = True
+                cont+= 1
         else:
             input(f"Você sente uma presença ameaçadora !:")
             caminhoChefe = True
@@ -213,9 +216,7 @@ while jogador.vida > 0:
                 passarCaminho = True
                 passar = True
             elif decisaoExplorar == "L" and caminhoLoja:
-                
-                
-
+                Funcoes.comprarNaLoja(jogador,jogador.ouro,jogador.ataque,jogador.defesa,jogador.inteligencia,artefatos,jogador.habilidades)
                 passarCaminho = True
             elif decisaoExplorar == "M" and caminhoMisterio:
               acessarMisterio = True
@@ -232,17 +233,17 @@ while jogador.vida > 0:
         if decisaoMonstro == 0:
             print("UM SLIME APARECE!!!\n")
             monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,
-                nome="SLIME", critico= 5, ouro= 9)
+                nome="SLIME", critico= 5, ouro= 23)
 
         elif decisaoMonstro == 1:
             print("UM GOBLIN APARECE!!!\n")
             monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
-                nome="GOBLIN", critico= 7, ouro= 9)
+                nome="GOBLIN", critico= 7, ouro=23)
 
     if enfrentarMonstroElite:
         print("UM GOLEM BEBE APARECE!!!\n")
         monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,
-            nome="GOLEM BEBE", critico= 0, ouro= 15)
+            nome="GOLEM BEBE", critico= 0, ouro= 40)
 
         efeitoMonstroPodeAtacar = 1
 
@@ -313,7 +314,7 @@ while jogador.vida > 0:
                         for habilidade in habilidades:
                             print(habilidade)
 
-                        decisaoHabilidade = input("ESCOLHA UMA HABILIDADE")
+                        decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
                         decisaoHabilidade = decisaoHabilidade.upper()
                         if decisaoHabilidade == "MR" and magiaMultilacaoRegenerativa:
                             print("Voce se multila com as unhas e oferece seu sangue a xaoc")
@@ -366,6 +367,8 @@ while jogador.vida > 0:
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
+            sleep(1)
+            exit(0)
 
         elif monstro.vida <=0:
             print("O MONSTRO MORREU!")
