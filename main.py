@@ -11,27 +11,28 @@ os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
 
-print("""SABEL, o somelier de estagio(S) 
-  ATAQUE: 3
-  DEFESA: 1
-  VIDA: 8
-  INTELIGENCIA: 2
+
+
+print(f"""{personagens.Sabel.classe}, o somelier de estagio(S) 
+  ATAQUE:       {personagens.Sabel.ataque}
+  DEFESA:       {personagens.Sabel.defesa}
+  VIDA:         {personagens.Sabel.vida}
+  INTELIGENCIA: {personagens.Sabel.inteligencia}
 """)
 
-print("""SANTOS, o bombado(SA) 
-  ATAQUE: 2 
-  DEFESA: 2
-  VIDA: 10 
-  INTELIGENCIA: 2
+print(f"""{personagens.Santos.classe}, o bombado(SA) 
+  ATAQUE:       {personagens.Santos.ataque}
+  DEFESA:       {personagens.Santos.defesa}
+  VIDA:         {personagens.Santos.vida}
+  INTELIGENCIA: {personagens.Santos.inteligencia}
 """)
 
-print("""REISCH, o emo feliz(R) 
-  ATAQUE: 3
-  DEFESA: 1
-  VIDA: 7
-  INTELIGENCIA: 3
+print(f"""{personagens.Reisch.classe}, o emo feliz(R) 
+  ATAQUE:       {personagens.Reisch.ataque}
+  DEFESA:       {personagens.Reisch.defesa}
+  VIDA:         {personagens.Reisch.vida}
+  INTELIGENCIA: {personagens.Reisch.inteligencia}
 """)
-
 
 #EVENTOS
 passar = False
@@ -94,19 +95,9 @@ while not passar:
         print("CLASSE SANTOS ESCOLHIDA")
         habilidades.append("RAP DE ANIME(RA)")
         habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
-        jogador = personagens.Personagem\
-            (vida=10,
-             vidaMax=10,
-             ataque=2,
-             defesa=2,
-             classe="SANTOS",
-             critico=6,
-             nome=nome,
-             inteligencia=2,
-             mana=4,         
-             habilidades=habilidades,
-             ouro=30,
-             caminhado=0)
+
+        jogador = personagens.Santos
+
         passar = True
         passivaMasoquistaDaAcademia = True
         magiaRapDeAcademia = True
@@ -115,19 +106,9 @@ while not passar:
         print("CLASSE SABEL ESCOLHIDA")
         habilidades.append("ORGANIZAR A MENTE(OM)")
         habilidades.append("CABELO COLORIDO(PASSIVO)")
-        jogador = personagens.Personagem\
-            (vida=8,
-             vidaMax=8,
-             ataque=3,
-             defesa=1,
-             classe="SABEL",
-             critico=8,
-             nome=nome,
-             inteligencia=2,
-             mana=6,
-             habilidades=habilidades,
-             ouro= 30,
-             caminhado=0)
+
+        jogador = personagens.Sabel
+
         passar = True
         passivaCabeloColorido = True
         magiaOrganizarAMente = True
@@ -137,19 +118,9 @@ while not passar:
         print("CLASSE REISCH ESCOLHIDA")
         habilidades.append("CRESCIMENTO ACELERADO(PASSIVA)")
         habilidades.append("MULTILAÇÃO REGENERATIVA (MR)")
-        jogador = personagens.Personagem\
-            (vida=7,
-             vidaMax=7,
-             ataque=3,
-             defesa=1,
-             classe="REISCH",
-             critico=3,
-             nome=nome,
-             inteligencia=3,
-             mana=9,
-             habilidades=habilidades,
-             ouro= 30,
-             caminhado=0)
+
+        jogador = personagens.Reisch
+
         passar = True
         passivaCrescimentoAcelerado = True
         magiaMultilacaoRegenerativa = True
