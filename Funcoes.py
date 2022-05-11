@@ -1,4 +1,5 @@
 import random
+from re import S
 
 def vidaLimite (vida, vidaMax):
     if vida > vidaMax:
@@ -54,7 +55,6 @@ def comprarNaLoja (ouro, ataque, defesa, inteligencia, artefato, magia):
     itemLojaArtefato = random.randint(0,99)
     itemLojaMagia = random.randint(0,99)
     
-
     while fecharLoja == False:
         compraRealizada = False
         input("Você adentra a loja.. !:")
@@ -80,30 +80,42 @@ def comprarNaLoja (ouro, ataque, defesa, inteligencia, artefato, magia):
             precoArtefato = 132
             print(f"Golpe Ganancioso 132g(AGG)")
         if itemLojaMagia < 100:
-            podeComprarMagia = "CL"
+            podeComprarMagia = "MCL"
             precoMagia = 100
             print(f"Pergaminho de magia Cura Leve (MCL) 100g")
-        while not compraRealizadainput:
-            decisao = input("O que você deseja comprar: ")
+        while not compraRealizada:
+            decisao = input("O que você deseja comprar: ").upper
             if decisao == podeComprarPocao:
                 if precoPocao <= ouro:
                     if decisao == "PA":
                         ataque += 1
                         ouro -= precoPocao
+                        print("Item comprado com sucesso")
                     elif decisao == "PD":
                         defesa += 1
                         ouro -= precoPocao
+                        print("Item comprado com sucesso")
                     elif decisao == "PI":
                         inteligencia += 1
                         ouro -= precoPocao
+                        print("Item comprado com sucesso")
             elif decisao == podeComprarArtefato:
                 if decisao == "ALB":
                     if precoArtefato <= ouro:
                         artefato = podeComprarArtefato
                         ouro -= precoArtefato
+                        print("Item comprado com sucesso")
                 elif decisao == "AGG":
                     if precoArtefato <= ouro:
                         artefato = podeComprarArtefato
                         ouro -= precoArtefato
+                        print("Item comprado com sucesso")
             elif decisao == podeComprarMagia:
-                
+                if decisao == "MCL":
+                    if precoMagia <= ouro:
+                        magia = podeComprarMagia
+                        ouro -= precoArtefato
+                        print("Item comprado com sucesso")
+            elif decisao == "S":
+                compraRealizada = True
+                fecharLoja = True
