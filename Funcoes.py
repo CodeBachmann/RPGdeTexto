@@ -49,7 +49,7 @@ def magiaMultilacaoRegenerativa (vida, vidaMax, inteligencia):
         print(f"Vida atual: {vida}")
         return vida
 #Loja
-def comprarNaLoja (self, ouro, ataque, defesa, inteligencia, artefato, magia):
+def comprarNaLoja (jogador):
     fecharLoja = False
     itemLojaPocao = random.randint(0,99)
     itemLojaArtefato = random.randint(0,99)
@@ -84,40 +84,40 @@ def comprarNaLoja (self, ouro, ataque, defesa, inteligencia, artefato, magia):
             precoMagia = 100
             print(f"Pergaminho de magia Cura Leve (MCL) 100g")
         while not compraRealizada:
-            print(f"Saldo atual: {self.ouro}")
+            print(f"Saldo atual: {jogador.ouro}")
             decisao = input("O que você deseja comprar: ")
             if decisao == podeComprarPocao:
-                if precoPocao <= ouro:
+                if precoPocao <= jogador.ouro:
                     if decisao == "PA":
-                        self.ataque += 1
-                        self.ouro -= precoPocao
+                        jogador.ataque += 1
+                        jogador.ouro -= precoPocao
                         print("Item comprado com sucesso")
                     elif decisao == "PD":
-                        self.defesa += 1
-                        self.ouro -= precoPocao
+                        jogador.defesa += 1
+                        jogador.ouro -= precoPocao
                         print("Item comprado com sucesso")
                     elif decisao == "PI":
-                        self.inteligencia += 1
-                        self.ouro -= precoPocao
+                        jogador.inteligencia += 1
+                        jogador.ouro -= precoPocao
                         print("Item comprado com sucesso")
                 else:
                     print("Você não tem ouro o suficiente")
             elif decisao == podeComprarArtefato:
                 if decisao == "ALB":
-                    if precoArtefato <= ouro:
-                        self.artefato = podeComprarArtefato
-                        self.ouro -= precoArtefato
+                    if precoArtefato <= jogador.ouro:
+                        jogador.artefato = podeComprarArtefato
+                        jogador.ouro -= precoArtefato
                         print("Item comprado com sucesso")
                 elif decisao == "AGG":
-                    if precoArtefato <= ouro:
-                        self.artefato = podeComprarArtefato
-                        self.ouro -= precoArtefato
+                    if precoArtefato <= jogador.ouro:
+                        jogador.artefato = podeComprarArtefato
+                        jogador.ouro -= precoArtefato
                         print("Item comprado com sucesso")
             elif decisao == podeComprarMagia:
                 if decisao == "MCL":
-                    if precoMagia <= ouro:
-                        self.magia = podeComprarMagia
-                        self.ouro -= precoArtefato
+                    if precoMagia <= jogador.ouro:
+                        jogador.magia = podeComprarMagia
+                        jogador.ouro -= precoArtefato
                         print("Item comprado com sucesso")
             elif decisao == "S":
                 compraRealizada = True

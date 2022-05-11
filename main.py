@@ -216,7 +216,7 @@ while jogador.vida > 0:
                 passarCaminho = True
                 passar = True
             elif decisaoExplorar == "L" and caminhoLoja:
-                Funcoes.comprarNaLoja(jogador,jogador.ouro,jogador.ataque,jogador.defesa,jogador.inteligencia,artefatos,jogador.habilidades)
+                Funcoes.comprarNaLoja(jogador)
                 passarCaminho = True
             elif decisaoExplorar == "M" and caminhoMisterio:
               acessarMisterio = True
