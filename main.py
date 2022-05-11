@@ -89,44 +89,37 @@ itemPedraCoracao = False
 habilidades = []
 #ESCOLHA DE CLASSE
 while not passar:
-    decisaoClasse = input("Digite a letra inicial da sua classe : ")
-    decisaoClasse = decisaoClasse.upper()
-    if decisaoClasse == "SA":
-        print("CLASSE SANTOS ESCOLHIDA")
-        habilidades.append("RAP DE ANIME(RA)")
-        habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
+  decisaoClasse = input("Digite a letra inicial da sua classe : ")
+  decisaoClasse = decisaoClasse.upper()
+  if decisaoClasse == "SA":
 
-        jogador = personagens.Santos
+      jogador = personagens.Santos        
+      
+      passar = True
+      passivaMasoquistaDaAcademia = True
+      magiaRapDeAcademia = True
 
-        passar = True
-        passivaMasoquistaDaAcademia = True
-        magiaRapDeAcademia = True
+  elif decisaoClasse == "S":
 
-    elif decisaoClasse == "S":
-        print("CLASSE SABEL ESCOLHIDA")
-        habilidades.append("ORGANIZAR A MENTE(OM)")
-        habilidades.append("CABELO COLORIDO(PASSIVO)")
+      jogador = personagens.Sabel
 
-        jogador = personagens.Sabel
+      passar = True
+      passivaCabeloColorido = True
+      magiaOrganizarAMente = True
+      
 
-        passar = True
-        passivaCabeloColorido = True
-        magiaOrganizarAMente = True
+  elif decisaoClasse == "R":
+
+      jogador = personagens.Reisch
+
+      passar = True
+      passivaCrescimentoAcelerado = True
+      magiaMultilacaoRegenerativa = True
+  sleep(1)
+
         
-
-    elif decisaoClasse == "R":
-        print("CLASSE REISCH ESCOLHIDA")
-        habilidades.append("CRESCIMENTO ACELERADO(PASSIVA)")
-        habilidades.append("MULTILAÇÃO REGENERATIVA (MR)")
-
-        jogador = personagens.Reisch
-
-        passar = True
-        passivaCrescimentoAcelerado = True
-        magiaMultilacaoRegenerativa = True
-    sleep(1)
-    os.system('cls') or None
-        
+print(f"CLASSE {jogador.classe} ESCOLHIDA")
+os.system('cls') or None
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
     danoMitigado = jogador.defesa
