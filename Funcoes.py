@@ -24,7 +24,7 @@ def calculaDano(vida, ataque, criticoGarantido, critico, foiCritico, passivaCabe
     return vida
 
 def status(vida, ataque, defesa, nome):
-    print(f"STATUS {nome} \nVida : {vida}\nAtaque : {ataque}\nDefesa : {defesa}")
+    print(f"STATUS {nome} \nVida : {vida}\nAtaque : {ataque}\nDefesa : {defesa}\n")
     return "\b"
 
 def continuar():
