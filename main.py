@@ -115,10 +115,10 @@ while not passar:
       passar = True
       passivaCrescimentoAcelerado = True
       magiaMultilacaoRegenerativa = True
-  sleep(1)
 
         
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
+sleep(2)
 os.system('cls') or None
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
