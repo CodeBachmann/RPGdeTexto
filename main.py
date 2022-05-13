@@ -92,27 +92,27 @@ decisaoClasse = ""
 while decisaoClasse not in classes:
   decisaoClasse = input("Digite a letra inicial da sua classe : ")
   decisaoClasse = decisaoClasse.upper()
-  if  decisaoClasse in classes
-      if decisaoClasse == "SA":
+  if decisaoClasse in classes:
+    if decisaoClasse == "SA":
 
-          jogador.artefatos.append("AM")
-          jogador.habilidades.append("HRDA")
-          jogador = personagens.Santos
-
-
-      elif decisaoClasse == "S":
-
-          jogador.artefatos.append("ACC")
-          jogador.habilidades.append("HOAM")
-          jogador = personagens.Sabel
+        jogador.artefatos.append("AM")
+        jogador.habilidades.append("HRDA")
+        jogador = personagens.Santos
 
 
+    elif decisaoClasse == "S":
 
-      elif decisaoClasse == "R":
+        jogador.artefatos.append("ACC")
+        jogador.habilidades.append("HOAM")
+        jogador = personagens.Sabel
 
-          jogador.artefatos.append("ACA")
-          jogador.habilidades.append("HMR")
-          jogador = personagens.Reisch
+
+
+    elif decisaoClasse == "R":
+
+        jogador.artefatos.append("ACA")
+        jogador.habilidades.append("HMR")
+        jogador = personagens.Reisch
 
 
 
