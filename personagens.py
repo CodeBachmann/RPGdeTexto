@@ -2,7 +2,7 @@ from asyncio.format_helpers import _format_callback_source
 
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, habilidades, ouro, caminhado):
+    inteligencia, mana, habilidades, ouro, caminhado, danoMitigado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -15,6 +15,7 @@ class CriarPersonagem():
         self.nome = nome
         self.ouro = ouro
         self.caminhado = caminhado
+        self.danoMitigado = danoMitigado
 
 class npc():
     def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro):
@@ -25,14 +26,11 @@ class npc():
         self.nome = nome
         self.critico = critico
         self.ouro = ouro
+        self.danoMitigado=0
 
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 
-habilidades = []
-
-habilidades.append("RAP DE ANIME(RA)")
-habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
 Sabel = CriarPersonagem(vida=8,
                         vidaMax=8,
                         ataque=3,
@@ -44,8 +42,9 @@ Sabel = CriarPersonagem(vida=8,
                         mana=6,
                         habilidades=habilidades,
                         ouro= 100,
-                        caminhado=0)
-        
+                        caminhado=0,
+                        danoMitigado=0)
+
 
 habilidades.append("RAP DE ANIME(RA)")
 habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
@@ -57,10 +56,11 @@ Santos = CriarPersonagem(vida=10,
                           critico=6,
                           nome='Maicon',
                           inteligencia=2,
-                          mana=4,         
+                          mana=4,
                           habilidades=habilidades,
                           ouro=30,
-                          caminhado=0)        
+                          caminhado=0,
+                          danoMitigado=0)
 
 
 
@@ -72,9 +72,10 @@ Reisch =   CriarPersonagem(vida=7,
                             defesa=1,
                             classe="REISCH",
                             critico=3,
-                            nome='nsei',
+                            nome='Vinicius',
                             inteligencia=3,
                             mana=9,
                             habilidades=habilidades,
                             ouro= 30,
-                            caminhado=0)
+                            caminhado=0,
+                            danoMitigado=0)

@@ -4,29 +4,31 @@ from re import S
 def vidaLimite (jogador):
     if jogador.vida > jogador.vidaMax:
         jogador.vida = jogador.vidaMax
-        
 
-def calculaDano(jogador, danoMitigadoMonstro, passivaCabeloColorido, danoAumentado, criticoGarantido):
+
+def calculaDano(monstro, jogador, passivaCabeloColorido, danoAumentado, criticoGarantido):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
-    
+
     if random.randint(0, 100) < jogador.critico or criticoGarantido == True:
         dano *= 2
         print("DANO CRITICO!!!")
         foiCritico = True
-    if passivaCabeloColorido == True and foiCritico == True:
-        dano += danoMitigadoMonstro
+    if "ACC" and foiCritico == True:
+        dano += danoMitigado(monstro.defesa)
     dano += danoAumentado
-    dano -= danoMitigadoMonstro
-    jogador.vida -= dano
+    dano -= danoMitigado(monstro.defesa)
+    monstro.vida -= dano
 
     print(f"Você inflinge {dano}(-{danoMitigadoMonstro}) pontos de dano")
-    
+
 
 def status(jogador):
     print(f"STATUS {jogador.nome} \nVida : {jogador.vida}\nAtaque : {jogador.ataque}\nDefesa : {jogador.defesa}\n")
     return "\b"
-
+def statusMonstro(monstro):
+    print(f"STATUS {monstro.nome} \nVida : {monstro.vida}\nAtaque : {monstro.ataque}\nDefesa : {monstro.defesa}\n")
+    return "\b"
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
 
@@ -46,14 +48,14 @@ def magiaMultilacaoRegenerativa (jogador):
         print(f"Você se cura {cura} pontos de vida")
         jogador.vida = vidaLimite(jogador.vida,jogador.vidaMax)
         print(f"Vida atual: {jogador.vida}")
-        
+
 #Loja
 def comprarNaLoja (jogador):
     fecharLoja = False
     itemLojaPocao = random.randint(0,99)
     itemLojaArtefato = random.randint(0,99)
     itemLojaMagia = random.randint(0,99)
-    
+
     while not fecharLoja:
         compraRealizada = False
         input("Você adentra a loja.. !:")
@@ -122,3 +124,12 @@ def comprarNaLoja (jogador):
                 compraRealizada = True
                 fecharLoja = True
                 print("Você sai da loja")
+def todosOsStatus(jogador):
+    print(f"Vida: {jogador.vida}")
+    print(f"Ataque: {jogador.ataque}")
+    print(f"Inteligencia: {jogador.inteligencia}")
+    print(f"Defesa: {jogador.defesa}")
+    print(f"Ouro: {jogador.ouro}")
+    print(f"Habilidades: {jogador.habilidades}")
+    print(f"Artefatos: {jogador.artefatos}")
+    print(f"Critico: {jogador.critico}")

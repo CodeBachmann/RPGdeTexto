@@ -13,21 +13,21 @@ print("\n ------------CLASSES------------")
 
 
 
-print(f"""{personagens.Sabel.classe}, o somelier de estagio(S) 
+print(f"""{personagens.Sabel.classe}, o somelier de estagio(S)
   ATAQUE:       {personagens.Sabel.ataque}
   DEFESA:       {personagens.Sabel.defesa}
   VIDA:         {personagens.Sabel.vida}
   INTELIGENCIA: {personagens.Sabel.inteligencia}
 """)
 
-print(f"""{personagens.Santos.classe}, o bombado(SA) 
+print(f"""{personagens.Santos.classe}, o bombado(SA)
   ATAQUE:       {personagens.Santos.ataque}
   DEFESA:       {personagens.Santos.defesa}
   VIDA:         {personagens.Santos.vida}
   INTELIGENCIA: {personagens.Santos.inteligencia}
 """)
 
-print(f"""{personagens.Reisch.classe}, o emo feliz(R) 
+print(f"""{personagens.Reisch.classe}, o emo feliz(R)
   ATAQUE:       {personagens.Reisch.ataque}
   DEFESA:       {personagens.Reisch.defesa}
   VIDA:         {personagens.Reisch.vida}
@@ -67,15 +67,15 @@ estresse = 0
 ouro = 0
 caminhado = 0
 
-#DECLARO AS PASSIVAS
-passivaCabeloColorido = False
-passivaCrescimentoAcelerado = False
-passivaMasoquistaDaAcademia = False
+#DECLARO AS artefatoS
+artefatoCabeloColorido = False
+artefatoCrescimentoAcelerado = False
+artefatoMasoquistaDaAcademia = False
 
-#MAGIAS
-magiaRapDeAcademia = False
-magiaOrganizarAMente = False
-magiaMultilacaoRegenerativa = False
+#habilidadeS
+habilidadeRapDeAcademia = False
+habilidadeOrganizarAMente = False
+habilidadeMultilacaoRegenerativa = False
 
 #ARTEFATOS COMUNS
 artefatoGolpeGanancioso = False
@@ -84,39 +84,38 @@ artefatos = []
 
 #ITENS
 itemPedraCoracao = False
-
-
 habilidades = []
+classes = ["SA", "S", "R"]
+decisaoClasse = ""
+
 #ESCOLHA DE CLASSE
-while not passar:
+while decisaoClasse not in classes:
   decisaoClasse = input("Digite a letra inicial da sua classe : ")
   decisaoClasse = decisaoClasse.upper()
-  if decisaoClasse == "SA":
+  if  decisaoClasse in classes
+      if decisaoClasse == "SA":
 
-      jogador = personagens.Santos        
-      
-      passar = True
-      passivaMasoquistaDaAcademia = True
-      magiaRapDeAcademia = True
+          jogador.artefatos.append("AM")
+          jogador.habilidades.append("HRDA")
+          jogador = personagens.Santos
 
-  elif decisaoClasse == "S":
 
-      jogador = personagens.Sabel
+      elif decisaoClasse == "S":
 
-      passar = True
-      passivaCabeloColorido = True
-      magiaOrganizarAMente = True
-      
+          jogador.artefatos.append("ACC")
+          jogador.habilidades.append("HOAM")
+          jogador = personagens.Sabel
 
-  elif decisaoClasse == "R":
 
-      jogador = personagens.Reisch
 
-      passar = True
-      passivaCrescimentoAcelerado = True
-      magiaMultilacaoRegenerativa = True
+      elif decisaoClasse == "R":
 
-        
+          jogador.artefatos.append("ACA")
+          jogador.habilidades.append("HMR")
+          jogador = personagens.Reisch
+
+
+
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(2)
 os.system('cls') or None
@@ -222,7 +221,7 @@ while jogador.vida > 0:
             danoMitigado = jogador.defesa
         else:
             efeitoDefesa -= 1
-        #MELHORAR O SISTEMA DE STUN 
+        #MELHORAR O SISTEMA DE STUN
         if efeitoPodeAgir != 0 and efeitoPodeAgir != 5:
             podeAgir = False
             efeitoPodeAgir -= 1
@@ -247,8 +246,8 @@ while jogador.vida > 0:
             jogador.vida -= danoM
 
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
-        Funcoes.status(monstro.vida,monstro.ataque,monstro.defesa,monstro.nome)
-        Funcoes.status(jogador.vida,jogador.ataque,jogador.defesa,jogador.nome)
+        Funcoes.statusMonstro(monstro)
+        Funcoes.status(jogador)
         Funcoes.continuar()
         #MOSTRA AS DECISOES DE COMBATE PARA O JOGADOR
         if podeAgir:
@@ -260,8 +259,7 @@ while jogador.vida > 0:
                 os.system('cls') or None
 
                 if decisaoCombate == "A":
-                    monstro.vida =(Funcoes.calculaDano(monstro.vida, jogador.ataque, criticoGarantido,
-                                 jogador.critico, foiCritico,passivaCabeloColorido, monstro.defesa, danoAumentado ))
+                    monstro.vida =(Funcoes.calculaDano(jogador, monstro, foiCritico, danoAumentado))
                     foiCritico = False
                     passar = True
 
@@ -271,7 +269,7 @@ while jogador.vida > 0:
                     passar = True
                     print("SUA DEFESA FOI DOBRADA(2t)\n")
 
-                #MAGIAS
+                #habilidadeS
                 elif decisaoCombate == "H":
                     while not passar:
                         for habilidade in habilidades:
@@ -282,7 +280,7 @@ while jogador.vida > 0:
                         if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades:
                             print("Voce se multila com as unhas e oferece seu sangue a xaoc")
                             sleep(1)
-                            jogador.vida = Funcoes.magiaMultilacaoRegenerativa(jogador.vida, jogador.vidaMax, jogador.inteligencia)
+                            jogador.vida = Funcoes.habilidadeMultilacaoRegenerativa(jogador)
                             passar = True
 
                         elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades:
@@ -306,7 +304,7 @@ while jogador.vida > 0:
                     encerrarCombate = True
                     passar = True
                 elif decisaoCombate == "I":
-                    print()
+                    Funcoes.todosOsStatus(jogador)
                 else:
                     print("DECISÃO INVALIDA")
 
