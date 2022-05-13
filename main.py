@@ -6,7 +6,7 @@ import Funcoes
 import personagens
 import os
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
-sleep(3)
+sleep(2)
 os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
@@ -274,19 +274,18 @@ while jogador.vida > 0:
                 #MAGIAS
                 elif decisaoCombate == "H":
                     while not passar:
-
                         for habilidade in habilidades:
                             print(habilidade)
 
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
                         decisaoHabilidade = decisaoHabilidade.upper()
-                        if decisaoHabilidade == "MR" and magiaMultilacaoRegenerativa:
+                        if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades:
                             print("Voce se multila com as unhas e oferece seu sangue a xaoc")
                             sleep(1)
                             jogador.vida = Funcoes.magiaMultilacaoRegenerativa(jogador.vida, jogador.vidaMax, jogador.inteligencia)
                             passar = True
 
-                        elif decisaoHabilidade == "OM" and magiaOrganizarAMente:
+                        elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades:
                             estresse -= jogador.inteligencia
                             danoMitigado += jogador.inteligencia/2
                             input("Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
@@ -294,7 +293,7 @@ while jogador.vida > 0:
                             criticoGarantido = True
                             passar = True
 
-                        elif decisaoHabilidade == "RA" and magiaRapDeAcademia:
+                        elif decisaoHabilidade == "HRDA" and "HRDA" in jogador.habilidades:
                             danoAumentado = jogador.ataque+jogador.defesa
                             efeitoDanoAumentado = 1
                             print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")

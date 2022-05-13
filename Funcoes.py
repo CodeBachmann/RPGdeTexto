@@ -1,16 +1,16 @@
 import random
 from re import S
 
-def vidaLimite (vida, vidaMax):
-    if vida > vidaMax:
-        vida = vidaMax
-        return vida
+def vidaLimite (jogador):
+    if jogador.vida > jogador.vidaMax:
+        jogador.vida = jogador.vidaMax
+        
 
-def calculaDano(vida, ataque, criticoGarantido, critico, foiCritico, passivaCabeloColorido, danoMitigadoMonstro, danoAumentado):
+def calculaDano(jogador, danoMitigadoMonstro, passivaCabeloColorido, danoAumentado, criticoGarantido):
 
-    dano = ataque + random.randint(1, ataque)
+    dano = jogador.ataque + random.randint(1, jogador.ataque)
     
-    if random.randint(0, 100) < critico or criticoGarantido == True:
+    if random.randint(0, 100) < jogador.critico or criticoGarantido == True:
         dano *= 2
         print("DANO CRITICO!!!")
         foiCritico = True
@@ -18,13 +18,13 @@ def calculaDano(vida, ataque, criticoGarantido, critico, foiCritico, passivaCabe
         dano += danoMitigadoMonstro
     dano += danoAumentado
     dano -= danoMitigadoMonstro
-    vida -= dano
+    jogador.vida -= dano
 
     print(f"Você inflinge {dano}(-{danoMitigadoMonstro}) pontos de dano")
-    return vida
+    
 
-def status(vida, ataque, defesa, nome):
-    print(f"STATUS {nome} \nVida : {vida}\nAtaque : {ataque}\nDefesa : {defesa}\n")
+def status(jogador):
+    print(f"STATUS {jogador.nome} \nVida : {jogador.vida}\nAtaque : {jogador.ataque}\nDefesa : {jogador.defesa}\n")
     return "\b"
 
 def continuar():
@@ -34,20 +34,19 @@ def danoMitigado (defesa):
     danoMitigado = defesa
     return danoMitigado
 #Magias
-def magiaMultilacaoRegenerativa (vida, vidaMax, inteligencia):
-    dano = random.randint(0,3)
-    vida -= dano
+def magiaMultilacaoRegenerativa (jogador):
+    dano = random.randint(0,2)
+    jogador.vida -= dano
     print(f"Você perdeu {dano} pontos de vida")
-    if vida <= 0:
+    if jogador.vida <= 0:
         input("Você morreu... !:")
-        return vida
     else:
-        print("Você se multila e perde 2 pontos de vida")
-        cura = random.randint(1, (inteligencia * 2))
+        cura = random.randint(1, (jogador.inteligencia * 2))
+        jogador.vida += cura
         print(f"Você se cura {cura} pontos de vida")
-        vida = vidaLimite(vida,vidaMax)
-        print(f"Vida atual: {vida}")
-        return vida
+        jogador.vida = vidaLimite(jogador.vida,jogador.vidaMax)
+        print(f"Vida atual: {jogador.vida}")
+        
 #Loja
 def comprarNaLoja (jogador):
     fecharLoja = False
