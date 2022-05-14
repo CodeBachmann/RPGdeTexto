@@ -134,6 +134,8 @@ while jogador.vida > 0:
         else:
             input(f"Você sente uma presença ameaçadora !:")
             caminhoChefe = True
+            jogador.caminhado = 0
+            passarCaminho = True
 
         while not passarCaminho:
 
@@ -166,22 +168,25 @@ while jogador.vida > 0:
     #A PARTIR DE UMA INT ALEATORIA É ESCOLHIDO UM MONSTRO PARA BATALHAR
     decisaoMonstro = random.randint(0,1)
     if marcadorArea == 0:
-        if decisaoMonstro == 0:
+        if decisaoMonstro == 0 and enfrentarMonstroComun:
             print("UM SLIME APARECE!!!\n")
             monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,
                 nome="SLIME", critico= 5, ouro= 23)
 
-        elif decisaoMonstro == 1:
+        elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
             monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
                 nome="GOBLIN", critico= 7, ouro=23)
 
-    if enfrentarMonstroElite:
-        print("UM GOLEM BEBE APARECE!!!\n")
-        monstro = personagens.npc(vida = 7, vidaMax= 6, ataque= 3, defesa= 3,
-            nome="GOLEM BEBE", critico= 0, ouro= 40)
-
-        efeitoMonstroPodeAtacar = 1
+        elif enfrentarMonstroElite:
+            print("UM GOLEM BEBE APARECE!!!\n")
+            monstro = personagens.npc(vida = 7, vidaMax= 7, ataque= 3, defesa= 3,
+                nome="GOLEM BEBE", critico= 0, ouro= 40)
+            efeitoMonstroPodeAtacar = 1
+        elif caminhoChefe:
+            print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!")
+            monstro = personagens.npc(vida = 15, vidaMax= 15, ataque= 4, defesa= 3,
+                nome="REI SLIME", critico= 0, ouro= 100)
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
