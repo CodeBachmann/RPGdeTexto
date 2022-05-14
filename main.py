@@ -113,7 +113,7 @@ while jogador.vida > 0:
         passarCaminho = False
         jogador.caminhado += 1
         caminhos = random.randint(7,8)
-        input("Você pode:")
+        print("Você pode: ")
         cont = 0
         if jogador.caminhado < 10:
             while cont < caminhos:
