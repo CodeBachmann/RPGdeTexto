@@ -11,8 +11,6 @@ os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
 
-
-
 print(f"""{personagens.Sabel.classe}, o somelier de estagio(S)
   ATAQUE:       {personagens.Sabel.ataque}
   DEFESA:       {personagens.Sabel.defesa}
@@ -45,41 +43,21 @@ monologo = False
 
 #EFEITOS
 efeitoDefesa = False
-efeitoDanoAumentado = False
+efeitoDanoAumentado = 0
 efeitoPodeAgir = False
-efeitoMonstroPodeAtacar = False
+efeitoMonstroPodeAtacar = 0
 
 #CAMINHOS
 enfrentarMonstroElite = False
 caminhoChefe = False
 
 #STATUS
-vidaM = 0
-vida = 0
-vidaMax = 0
-vidaMaxM = 0
 danoM = 0
 dano = 0
-defesa = 0
-danoAumentado = 0
-marcadorArea = 0
-estresse = 0
 ouro = 0
-caminhado = 0
-
-#DECLARO AS artefatoS
-artefatoCabeloColorido = False
-artefatoCrescimentoAcelerado = False
-artefatoMasoquistaDaAcademia = False
-
-#habilidadeS
-habilidadeRapDeAcademia = False
-habilidadeOrganizarAMente = False
-habilidadeMultilacaoRegenerativa = False
+marcadorArea = 0
 
 #ARTEFATOS COMUNS
-artefatoGolpeGanancioso = False
-artefatoLagrimaDoBerserker = False
 artefatos = []
 
 #ITENS
@@ -95,26 +73,21 @@ while decisaoClasse not in classes:
   if decisaoClasse in classes:
     if decisaoClasse == "SA":
 
+        jogador = personagens.Santos
         jogador.artefatos.append("AM")
         jogador.habilidades.append("HRDA")
-        jogador = personagens.Santos
-
 
     elif decisaoClasse == "S":
 
+        jogador = personagens.Sabel
         jogador.artefatos.append("ACC")
         jogador.habilidades.append("HOAM")
-        jogador = personagens.Sabel
-
-
 
     elif decisaoClasse == "R":
 
+        jogador = personagens.Reisch
         jogador.artefatos.append("ACA")
         jogador.habilidades.append("HMR")
-        jogador = personagens.Reisch
-
-
 
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(2)
@@ -232,17 +205,17 @@ while jogador.vida > 0:
             efeitoPodeAgir = 1
 
         if efeitoDanoAumentado == 0:
-            danoAumentado = 0
+            jogador.danoAumentado = 0
         else:
             efeitoDanoAumentado -= 1
 
         #ATIVA A EMBOSCADA
         if emboscada:
             print("VOCÊ FOI EMBOSCADO!!!\n")
-            danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
+            danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - jogador.danoMitigado
             if danoM < 0:
                 danoM = 0
-            print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
+            print(f"Você sofreu {danoM}(-{jogador.danoMitigado}) pontos de dano\n")
             jogador.vida -= danoM
 
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
@@ -259,7 +232,8 @@ while jogador.vida > 0:
                 os.system('cls') or None
 
                 if decisaoCombate == "A":
-                    monstro.vida =(Funcoes.calculaDano(jogador, monstro, foiCritico, danoAumentado))
+                    
+                    Funcoes.calculaDano(jogador, monstro, foiCritico)
                     foiCritico = False
                     passar = True
 
@@ -272,7 +246,7 @@ while jogador.vida > 0:
                 #habilidadeS
                 elif decisaoCombate == "H":
                     while not passar:
-                        for habilidade in habilidades:
+                        for habilidade in jogador.habilidades:
                             print(habilidade)
 
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
@@ -284,15 +258,14 @@ while jogador.vida > 0:
                             passar = True
 
                         elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades:
-                            estresse -= jogador.inteligencia
-                            danoMitigado += jogador.inteligencia/2
+                            jogador.danoMitigado += jogador.inteligencia/2
                             input("Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
                             sleep(1)
                             criticoGarantido = True
                             passar = True
 
                         elif decisaoHabilidade == "HRDA" and "HRDA" in jogador.habilidades:
-                            danoAumentado = jogador.ataque+jogador.defesa
+                            jogador.danoAumentado = jogador.ataque+jogador.defesa
                             efeitoDanoAumentado = 1
                             print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
                             sleep(1)
@@ -309,18 +282,16 @@ while jogador.vida > 0:
                     print("DECISÃO INVALIDA")
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
-
         if emboscada:
             emboscada = False
         elif monstro.vida > 0 and efeitoMonstroPodeAtacar == 0:
-
-                danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
-                if danoM < 0:
-                    danoM = 0
-                print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
-                if jogador.vida == NULL:
-                    jogador.vida = 0
-                jogador.vida -= danoM
+            danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
+            if danoM < 0:
+                danoM = 0
+            print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
+            if jogador.vida == NULL:
+                jogador.vida = 0
+            jogador.vida -= danoM
 
         elif efeitoMonstroPodeAtacar > 0:
             efeitoMonstroPodeAtacar -= 1

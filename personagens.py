@@ -2,7 +2,7 @@ from asyncio.format_helpers import _format_callback_source
 
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, habilidades, ouro, caminhado, danoMitigado):
+    inteligencia, mana, habilidades, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -16,7 +16,8 @@ class CriarPersonagem():
         self.ouro = ouro
         self.caminhado = caminhado
         self.danoMitigado = danoMitigado
-
+        self.artefatos = artefatos
+        self.danoAumentado = danoAumentado
 class npc():
     def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro):
         self.vida = vida
@@ -28,9 +29,9 @@ class npc():
         self.ouro = ouro
         self.danoMitigado=0
 
-
 #-------------------------------------------- Personagens ---------------------------------------------------------
-
+habilidades = []
+artefatos = []
 Sabel = CriarPersonagem(vida=8,
                         vidaMax=8,
                         ataque=3,
@@ -41,13 +42,12 @@ Sabel = CriarPersonagem(vida=8,
                         inteligencia=2,
                         mana=6,
                         habilidades=habilidades,
+                        artefatos=artefatos,
                         ouro= 100,
                         caminhado=0,
-                        danoMitigado=0)
+                        danoMitigado=0,
+                        danoAumentado=0)
 
-
-habilidades.append("RAP DE ANIME(RA)")
-habilidades.append("MASOQUISTA DA ACADEMIA (PASSIVA)")
 Santos = CriarPersonagem(vida=10,
                           vidaMax=10,
                           ataque=2,
@@ -58,14 +58,12 @@ Santos = CriarPersonagem(vida=10,
                           inteligencia=2,
                           mana=4,
                           habilidades=habilidades,
+                          artefatos=artefatos,
                           ouro=30,
                           caminhado=0,
-                          danoMitigado=0)
+                          danoMitigado=0,
+                          danoAumentado=0)
 
-
-
-habilidades.append("CRESCIMENTO ACELERADO(PASSIVA)")
-habilidades.append("MULTILAÇÃO REGENERATIVA (MR)")
 Reisch =   CriarPersonagem(vida=7,
                             vidaMax=7,
                             ataque=3,
@@ -76,6 +74,8 @@ Reisch =   CriarPersonagem(vida=7,
                             inteligencia=3,
                             mana=9,
                             habilidades=habilidades,
+                            artefatos=artefatos,
                             ouro= 30,
                             caminhado=0,
-                            danoMitigado=0)
+                            danoMitigado=0,
+                            danoAumentado=0)

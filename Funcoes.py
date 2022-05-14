@@ -6,7 +6,7 @@ def vidaLimite (jogador):
         jogador.vida = jogador.vidaMax
 
 
-def calculaDano(monstro, jogador, passivaCabeloColorido, danoAumentado, criticoGarantido):
+def calculaDano(jogador, monstro, criticoGarantido):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
 
@@ -14,13 +14,13 @@ def calculaDano(monstro, jogador, passivaCabeloColorido, danoAumentado, criticoG
         dano *= 2
         print("DANO CRITICO!!!")
         foiCritico = True
-    if "ACC" and foiCritico == True:
-        dano += danoMitigado(monstro.defesa)
-    dano += danoAumentado
-    dano -= danoMitigado(monstro.defesa)
+    if "ACC" in jogador.habilidades and foiCritico == True:
+        dano += monstro.defesa
+    dano += jogador.danoAumentado
+    dano -= monstro.defesa
     monstro.vida -= dano
 
-    print(f"Você inflinge {dano}(-{danoMitigadoMonstro}) pontos de dano")
+    print(f"Você inflinge {dano}(-{monstro.defesa}) pontos de dano")
 
 
 def status(jogador):
@@ -32,9 +32,6 @@ def statusMonstro(monstro):
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
 
-def danoMitigado (defesa):
-    danoMitigado = defesa
-    return danoMitigado
 #Magias
 def magiaMultilacaoRegenerativa (jogador):
     dano = random.randint(0,2)
@@ -52,9 +49,9 @@ def magiaMultilacaoRegenerativa (jogador):
 #Loja
 def comprarNaLoja (jogador):
     fecharLoja = False
-    itemLojaPocao = random.randint(0,99)
-    itemLojaArtefato = random.randint(0,99)
-    itemLojaMagia = random.randint(0,99)
+    itemLojaPocao = random.randint(0,100)
+    itemLojaArtefato = random.randint(0,100)
+    itemLojaMagia = random.randint(0,100)
 
     while not fecharLoja:
         compraRealizada = False
@@ -124,6 +121,7 @@ def comprarNaLoja (jogador):
                 compraRealizada = True
                 fecharLoja = True
                 print("Você sai da loja")
+
 def todosOsStatus(jogador):
     print(f"Vida: {jogador.vida}")
     print(f"Ataque: {jogador.ataque}")
