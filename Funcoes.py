@@ -4,8 +4,16 @@ from re import S
 def vidaLimite (jogador):
     if jogador.vida > jogador.vidaMax:
         jogador.vida = jogador.vidaMax
-
-
+def manaLimite (jogador):
+    if jogador.mana > jogador.manaMax:
+        jogador.mana = jogador.manaMax
+def adicionarHabilidade (jogador):
+    if "HRDA" in jogador.habilidades:
+        jogador.habilidadeDesc.append("(HRDA[2]) Rap de Academia -> Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
+    if "HMR" in jogador.habilidades:
+        jogador.habilidadesDesc.append("(HMR[5]) Multilação Regenerativa -> Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
+    if "HOAM" in jogador.habilidades:
+        jogador.habilidadesDesc.append("(HOAM[2]) Organizar a Mente -> Recupera um pouco de vida, o proximo ataque será Critico")
 def calculaDano(jogador, monstro, criticoGarantido):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
@@ -15,10 +23,13 @@ def calculaDano(jogador, monstro, criticoGarantido):
         print("DANO CRITICO!!!")
         foiCritico = True
     if "ACC" in jogador.habilidades and foiCritico == True:
-        dano += monstro.defesa
+        dano += monstro.danoMitigado
+        jogador.vida += dano
     dano += jogador.danoAumentado
     dano -= monstro.defesa
     monstro.vida -= dano
+    vidaLimite(jogador)
+    jogador.danoAumentado = 0
 
     print(f"Você inflinge {dano}(-{monstro.defesa}) pontos de dano")
 
@@ -58,6 +69,9 @@ def comprarNaLoja (jogador):
     itemLojaPocao = random.randint(0,100)
     itemLojaArtefato = random.randint(0,100)
     itemLojaMagia = random.randint(0,100)
+    pocaoComprado = False
+    artefatoComprado = False
+    habilidadeComprado = False
 
     while not fecharLoja:
         compraRealizada = False
@@ -84,44 +98,58 @@ def comprarNaLoja (jogador):
             precoArtefato = 132
             print(f"Golpe Ganancioso 132g(AGG)")
         if itemLojaMagia < 100:
-            podeComprarMagia = "MCL"
+            podeComprarHabilidade = "HCL"
             precoMagia = 100
-            print(f"Pergaminho de magia Cura Leve (MCL) 100g")
+            print(f"Pergaminho de magia Cura Leve (HCL) 100g")
+        print("Recuperar 5 pontos de Vida - 25g(RV)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")
             decisao = input("O que você deseja comprar: ")
-            if decisao == podeComprarPocao:
+            if decisao == "RV" and jogador.ouro >= 25:
+                jogador.ouro -= 25
+                jogador.vida += 5
+                vidaLimite(jogador)
+
+            elif decisao == podeComprarPocao and not pocaoComprado:
                 if precoPocao <= jogador.ouro:
                     if decisao == "PA":
                         jogador.ataque += 1
                         jogador.ouro -= precoPocao
+                        pocaoComprado = True
                         print("Item comprado com sucesso")
                     elif decisao == "PD":
                         jogador.defesa += 1
                         jogador.ouro -= precoPocao
+                        pocaoComprado = True
                         print("Item comprado com sucesso")
                     elif decisao == "PI":
                         jogador.inteligencia += 1
                         jogador.ouro -= precoPocao
+                        pocaoComprado = True
                         print("Item comprado com sucesso")
                 else:
                     print("Você não tem ouro o suficiente")
-            elif decisao == podeComprarArtefato:
+
+            elif decisao == podeComprarArtefato and not artefatoComprado:
                 if decisao == "ALB":
                     if precoArtefato <= jogador.ouro:
-                        jogador.artefato = podeComprarArtefato
+                        jogador.artefatos.append(podeComprarArtefato)
                         jogador.ouro -= precoArtefato
+                        artefatoComprado = True
                         print("Item comprado com sucesso")
                 elif decisao == "AGG":
                     if precoArtefato <= jogador.ouro:
-                        jogador.artefato = podeComprarArtefato
+                        jogador.artefatos.append(podeComprarArtefato)
                         jogador.ouro -= precoArtefato
+                        artefatoComprado = True
                         print("Item comprado com sucesso")
-            elif decisao == podeComprarMagia:
-                if decisao == "MCL":
+
+            elif decisao == podeComprarHabilidade and not habilidadeComprado:
+                if decisao == "HCL":
                     if precoMagia <= jogador.ouro:
-                        jogador.magia = podeComprarMagia
+                        jogador.habilidades.append(podeComprarHabilidade)
                         jogador.ouro -= precoArtefato
+                        habilidadeComprado = True
                         print("Item comprado com sucesso")
             elif decisao == "S":
                 compraRealizada = True
@@ -132,7 +160,7 @@ def todosOsStatus(jogador):
     print(f"Vida: {jogador.vida}")
     print(f"Ataque: {jogador.ataque}")
     print(f"Inteligencia: {jogador.inteligencia}")
-    print(f"Jogador: {jogador.mana}")
+    print(f"Mana: {jogador.mana}")
     print(f"Defesa: {jogador.defesa}")
     print(f"Ouro: {jogador.ouro}")
     print(f"Habilidades: {jogador.habilidades}")

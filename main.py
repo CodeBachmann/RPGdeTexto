@@ -79,13 +79,14 @@ while decisaoClasse not in classes:
     if decisaoClasse == "SA":
 
         jogador = personagens.Santos
-        jogador.artefatos.append("AM")
+        jogador.artefatos.append("AMDA")#Artefato >Masoquista da academia<
+                                        #sempre que o jogador recebe dano, o proximo ataque do jogador causa dano extra
         jogador.habilidades.append("HRDA")
 
     elif decisaoClasse == "S":
 
         jogador = personagens.Sabel
-        jogador.artefatos.append("ACC")
+        jogador.artefatos.append("ACC")#Critico recupera vida e ignora o dano mitigado
         jogador.habilidades.append("HOAM")
 
     elif decisaoClasse == "R":
@@ -206,6 +207,7 @@ while jogador.vida > 0:
 
     while not encerrarCombate:
         passar = False
+        
         #AREA QUE CONTROLA BUFFS QUE DURAM MAIS DE UM TURNO
         if efeitoDefesa == 0:
             danoMitigado = jogador.defesa
@@ -262,10 +264,12 @@ while jogador.vida > 0:
 
                 #habilidadeS
                 elif decisaoCombate == "H":
-                    while not passar:
-                        for habilidade in jogador.habilidades:
-                            print(habilidade)
 
+                    while not passar:
+                        Funcoes.adicionarHabilidade(jogador)
+                        for habilidade in jogador.habilidadesDesc:
+                            print(habilidade)
+                        print("Voltar(V)")
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
                         decisaoHabilidade = decisaoHabilidade.upper()
 
@@ -305,6 +309,12 @@ while jogador.vida > 0:
             emboscada = False
         elif monstro.vida > 0 and efeitoMonstroPodeAtacar == 0:
             danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
+            if "ACD" in jogador.artefatos:
+                jogador.mana += int(danoM/2)
+                print(f"você recupera {int(danoM/2)} pontos de mana")
+            if "AMDA" in jogador.artefatos:
+                jogador.danoAumentado = int(danoM/2)
+                print("A dor te motiva, seu proximo ataque causa dano extra")
             if danoM < 0:
                 danoM = 0
             print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")

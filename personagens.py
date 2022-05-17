@@ -2,7 +2,7 @@ from asyncio.format_helpers import _format_callback_source
 
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, manaMax, regenMana, habilidades, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
+    inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -14,11 +14,13 @@ class CriarPersonagem():
         self.manaMax = manaMax
         self.regenMana = regenMana
         self.habilidades = habilidades
+        self.habilidadesDesc = habilidadesDesc
         self.nome = nome
         self.ouro = ouro
         self.caminhado = caminhado
         self.danoMitigado = danoMitigado
         self.artefatos = artefatos
+        self.artefatosDesc = artefatosDesc
         self.danoAumentado = danoAumentado
 class npc():
     def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, danoMitigado):
@@ -33,7 +35,9 @@ class npc():
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
+habilidadesDesc = []
 artefatos = []
+artefatosDesc = []
 Sabel = CriarPersonagem(vida=8,
                         vidaMax=8,
                         ataque=3,
@@ -47,6 +51,8 @@ Sabel = CriarPersonagem(vida=8,
                         regenMana=1,
                         habilidades=habilidades,
                         artefatos=artefatos,
+                        habilidadesDesc=habilidadesDesc,
+                        artefatosDesc= artefatosDesc,
                         ouro= 100,
                         caminhado=0,
                         danoMitigado=0,
@@ -64,6 +70,8 @@ Santos = CriarPersonagem(vida=10,
                         manaMax=4,
                         regenMana=1,
                         habilidades=habilidades,
+                        habilidadesDesc=habilidadesDesc,
+                        artefatosDesc= artefatosDesc,
                         artefatos=artefatos,
                         ouro=30,
                         caminhado=0,
@@ -82,6 +90,8 @@ Reisch = CriarPersonagem(vida=7,
                         manaMax=9,
                         regenMana=1,
                         habilidades=habilidades,
+                        habilidadesDesc=habilidadesDesc,
+                        artefatosDesc= artefatosDesc,
                         artefatos=artefatos,
                         ouro= 30,
                         caminhado=0,
