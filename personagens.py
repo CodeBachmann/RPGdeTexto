@@ -2,7 +2,7 @@ from asyncio.format_helpers import _format_callback_source
 
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, habilidades, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
+    inteligencia, mana, manaMax, regenMana, habilidades, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -11,6 +11,8 @@ class CriarPersonagem():
         self.critico = critico
         self.inteligencia = inteligencia
         self.mana = mana
+        self.manaMax = manaMax
+        self.regenMana = regenMana
         self.habilidades = habilidades
         self.nome = nome
         self.ouro = ouro
@@ -19,7 +21,7 @@ class CriarPersonagem():
         self.artefatos = artefatos
         self.danoAumentado = danoAumentado
 class npc():
-    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro):
+    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, danoMitigado):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -27,7 +29,7 @@ class npc():
         self.nome = nome
         self.critico = critico
         self.ouro = ouro
-        self.danoMitigado=0
+        self.danoMitigado= danoMitigado
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
@@ -41,6 +43,8 @@ Sabel = CriarPersonagem(vida=8,
                         nome='Greg',
                         inteligencia=2,
                         mana=6,
+                        manaMax=6,
+                        regenMana=1,
                         habilidades=habilidades,
                         artefatos=artefatos,
                         ouro= 100,
@@ -49,33 +53,37 @@ Sabel = CriarPersonagem(vida=8,
                         danoAumentado=0)
 
 Santos = CriarPersonagem(vida=10,
-                          vidaMax=10,
-                          ataque=2,
-                          defesa=2,
-                          classe="SANTOS",
-                          critico=6,
-                          nome='Maicon',
-                          inteligencia=2,
-                          mana=4,
-                          habilidades=habilidades,
-                          artefatos=artefatos,
-                          ouro=30,
-                          caminhado=0,
-                          danoMitigado=0,
-                          danoAumentado=0)
+                        vidaMax=10,
+                        ataque=2,
+                        defesa=2,
+                        classe="SANTOS",
+                        critico=6,
+                        nome='Maicon',
+                        inteligencia=2,
+                        mana=4,
+                        manaMax=4,
+                        regenMana=1,
+                        habilidades=habilidades,
+                        artefatos=artefatos,
+                        ouro=30,
+                        caminhado=0,
+                        danoMitigado=0,
+                        danoAumentado=0)
 
-Reisch =   CriarPersonagem(vida=7,
-                            vidaMax=7,
-                            ataque=3,
-                            defesa=1,
-                            classe="REISCH",
-                            critico=3,
-                            nome='Vinicius',
-                            inteligencia=3,
-                            mana=9,
-                            habilidades=habilidades,
-                            artefatos=artefatos,
-                            ouro= 30,
-                            caminhado=0,
-                            danoMitigado=0,
-                            danoAumentado=0)
+Reisch = CriarPersonagem(vida=7,
+                        vidaMax=7,
+                        ataque=3,
+                        defesa=1,
+                        classe="REISCH",
+                        critico=3,
+                        nome='Vinicius',
+                        inteligencia=3,
+                        mana=9,
+                        manaMax=9,
+                        regenMana=1,
+                        habilidades=habilidades,
+                        artefatos=artefatos,
+                        ouro= 30,
+                        caminhado=0,
+                        danoMitigado=0,
+                        danoAumentado=0)

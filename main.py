@@ -1,12 +1,12 @@
 from asyncio.windows_events import NULL
 import random
 from re import T
-from time import sleep
+from time import monotonic, sleep
 import Funcoes
 import personagens
 import os
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
-sleep(2)
+sleep(1)
 os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
@@ -47,9 +47,14 @@ efeitoDanoAumentado = 0
 efeitoPodeAgir = False
 efeitoMonstroPodeAtacar = 0
 
+
+
 #CAMINHOS
 enfrentarMonstroElite = False
 caminhoChefe = False
+enfrentarMonstroComun = False
+acessarMisterio = False
+
 
 #STATUS
 danoM = 0
@@ -86,11 +91,13 @@ while decisaoClasse not in classes:
     elif decisaoClasse == "R":
 
         jogador = personagens.Reisch
-        jogador.artefatos.append("ACA")
-        jogador.habilidades.append("HMR")
+        jogador.artefatos.append("ACD") #Artefato >Conhecimento da dor<
+                                        #sempre que o jogador recebe dano metade desse dano é convertido em mana
+        jogador.habilidades.append("HMR")#Habilidade >Multilação Regenerativa< 
+                                         #Sacrifica HP, Causa dano ao monstro, todo dano causado é convertido em vida
 
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
-sleep(2)
+sleep(1)
 os.system('cls') or None
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
@@ -112,8 +119,8 @@ while jogador.vida > 0:
     while not passar:
         passarCaminho = False
         jogador.caminhado += 1
-        caminhos = random.randint(7,8)
-        print("Você pode: ")
+        caminhos = random.randint(4,5)
+        print(f"Você pode: \nSeu saldo: {jogador.ouro}")
         cont = 0
         if jogador.caminhado < 10:
             while cont < caminhos:
@@ -121,13 +128,13 @@ while jogador.vida > 0:
                 if escolha > 0 and escolha <= 50:
                     print(f"Lutar com um monstro comun(C)\n")
                     caminhoMonstroComun = True
-                elif escolha > 50 and escolha <= 75:
-                    print(f"Investigar um misterio(M)\n")
-                    caminhoMisterio = True
-                elif escolha > 75 and escolha <= 90:
+                # elif escolha > 50 and escolha <= 75:
+                #     print(f"Investigar um misterio(M)\n")
+                #     caminhoMisterio = True
+                elif escolha > 50 and escolha <= 80:
                     print(f"Lutar com um monstro de Elite(E)\n")
                     caminhoMonstroElite = True
-                elif escolha > 90 and escolha <= 100:
+                elif escolha > 80 and escolha <= 100:
                     print(f"Entrar na loja(L)\n")
                     caminhoLoja = True
                 cont+= 1
@@ -136,6 +143,7 @@ while jogador.vida > 0:
             caminhoChefe = True
             jogador.caminhado = 0
             passarCaminho = True
+            passar = True
 
         while not passarCaminho:
 
@@ -171,26 +179,30 @@ while jogador.vida > 0:
         if decisaoMonstro == 0 and enfrentarMonstroComun:
             print("UM SLIME APARECE!!!\n")
             monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,
-                nome="SLIME", critico= 5, ouro= 23)
+                nome="SLIME", critico= 5, ouro= 23, danoMitigado=3)
+            enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
             monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
-                nome="GOBLIN", critico= 7, ouro=23)
+                nome="GOBLIN", critico= 7, ouro=23, danoMitigado=2)
+            enfrentarMonstroComun = False
 
         elif enfrentarMonstroElite:
             print("UM GOLEM BEBE APARECE!!!\n")
             monstro = personagens.npc(vida = 7, vidaMax= 7, ataque= 3, defesa= 3,
-                nome="GOLEM BEBE", critico= 0, ouro= 40)
+                nome="GOLEM BEBE", critico= 0, ouro= 40, danoMitigado= 3)
             efeitoMonstroPodeAtacar = 1
+            enfrentarMonstroElite = False
         elif caminhoChefe:
-            print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!")
+            print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
             monstro = personagens.npc(vida = 15, vidaMax= 15, ataque= 4, defesa= 3,
-                nome="REI SLIME", critico= 0, ouro= 100)
+                nome="REI SLIME", critico= 0, ouro= 100, danoMitigado= 3)
+            caminhoChefe = False
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
-    danoMitigado = monstro.defesa
+    monstro.danoMitigado = monstro.defesa
 
     while not encerrarCombate:
         passar = False
@@ -208,7 +220,7 @@ while jogador.vida > 0:
         elif efeitoPodeAgir ==5:
             podeAgir = True
             efeitoPodeAgir = 1
-
+        #BUFFAR DANO
         if efeitoDanoAumentado == 0:
             jogador.danoAumentado = 0
         else:
@@ -256,10 +268,10 @@ while jogador.vida > 0:
 
                         decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
                         decisaoHabilidade = decisaoHabilidade.upper()
-                        if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades:
-                            print("Voce se multila com as unhas e oferece seu sangue a xaoc")
+
+                        if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades and jogador.mana >= 3:
                             sleep(1)
-                            jogador.vida = Funcoes.habilidadeMultilacaoRegenerativa(jogador)
+                            Funcoes.habilidadeMultilacaoRegenerativa(jogador, monstro)
                             passar = True
 
                         elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades:
@@ -277,6 +289,8 @@ while jogador.vida > 0:
                             efeitoMonstroPodeAtacar = 1
                             efeitoPodeAgir = 5
                             passar = True
+                        else:
+                            print("")
 
                 elif decisaoCombate == "F":
                     encerrarCombate = True
@@ -284,7 +298,7 @@ while jogador.vida > 0:
                 elif decisaoCombate == "I":
                     Funcoes.todosOsStatus(jogador)
                 else:
-                    print("DECISÃO INVALIDA")
+                    print("")
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
         if emboscada:
@@ -314,3 +328,4 @@ while jogador.vida > 0:
             ouro = random.randint(int(monstro.ouro/2),int(monstro.ouro*1.5))
             print(f"+{ouro}G")
             jogador.ouro += ouro
+            efeitoPodeAgir = 0

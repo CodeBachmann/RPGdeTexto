@@ -33,17 +33,23 @@ def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
 
 #Magias
-def magiaMultilacaoRegenerativa (jogador):
+def habilidadeMultilacaoRegenerativa (jogador, monstro):
+    print("Voce se multila com as unhas e oferece seu sangue a xaoc")
+    jogador.mana -= 3
     dano = random.randint(0,2)
     jogador.vida -= dano
     print(f"Você perdeu {dano} pontos de vida")
     if jogador.vida <= 0:
         input("Você morreu... !:")
     else:
-        cura = random.randint(1, (jogador.inteligencia * 2))
-        jogador.vida += cura
-        print(f"Você se cura {cura} pontos de vida")
-        jogador.vida = vidaLimite(jogador.vida,jogador.vidaMax)
+        dano = int(jogador.inteligencia/2)+(random.randint(1,jogador.inteligencia)+jogador.ataque)
+        jogador.vida += dano - monstro.danoMitigado
+        
+        if dano - monstro.danoMitigado > 0:
+            monstro.vida -= dano - monstro.danoMitigado
+            print(f"você inflinge {dano - monstro.danoMitigado} pontos de dano")
+        print(f"Você se cura {dano - monstro.danoMitigado} pontos de vida")
+        vidaLimite(jogador)
         print(f"Vida atual: {jogador.vida}")
 
 #Loja
@@ -126,6 +132,7 @@ def todosOsStatus(jogador):
     print(f"Vida: {jogador.vida}")
     print(f"Ataque: {jogador.ataque}")
     print(f"Inteligencia: {jogador.inteligencia}")
+    print(f"Jogador: {jogador.mana}")
     print(f"Defesa: {jogador.defesa}")
     print(f"Ouro: {jogador.ouro}")
     print(f"Habilidades: {jogador.habilidades}")
