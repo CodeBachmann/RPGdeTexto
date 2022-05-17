@@ -8,12 +8,16 @@ def manaLimite (jogador):
     if jogador.mana > jogador.manaMax:
         jogador.mana = jogador.manaMax
 def adicionarHabilidade (jogador):
+    habilidade = []
     if "HRDA" in jogador.habilidades:
-        jogador.habilidadeDesc.append("(HRDA[2]) Rap de Academia -> Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
+        habilidade.append("(HRDA[2]) Rap de Academia -> Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
     if "HMR" in jogador.habilidades:
-        jogador.habilidadesDesc.append("(HMR[5]) Multilação Regenerativa -> Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
+        habilidade.append("(HMR[5]) Multilação Regenerativa -> Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
     if "HOAM" in jogador.habilidades:
-        jogador.habilidadesDesc.append("(HOAM[2]) Organizar a Mente -> Recupera um pouco de vida, o proximo ataque será Critico")
+        habilidade.append("(HOAM[2]) Organizar a Mente -> Recupera um pouco de vida, o proximo ataque será Critico")
+    for elemento in habilidade:
+        if elemento not in jogador.habilidadesDesc:
+            jogador.habilidadesDesc.append(elemento)
 def calculaDano(jogador, monstro, criticoGarantido):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
@@ -77,27 +81,27 @@ def comprarNaLoja (jogador):
         compraRealizada = False
         input("Você adentra a loja.. !:")
         print("Sair da loja(S)")
-        if itemLojaPocao < 34:
+        if itemLojaPocao <= 34:
             print("Pocao de Ataque - 50g(PA)")
             podeComprarPocao = "PA"
             precoPocao = 50
-        elif itemLojaPocao < 67:
+        elif itemLojaPocao <= 67:
             print("Pocao de Defesa - 50g(PD)")
             podeComprarPocao = "PD"
             precoPocao = 50
-        elif itemLojaPocao < 100:
+        elif itemLojaPocao <= 100:
             podeComprarPocao = "PI"
             precoPocao = 50
             print("Pocao de Inteligencia - 50g(PI)")
-        if itemLojaArtefato < 50:
+        if itemLojaArtefato <= 50:
             podeComprarArtefato = "ALG"
             precoArtefato = 120
             print(f"Lagrima do Berserker 120g(ALB)")
-        elif itemLojaArtefato < 100:
+        elif itemLojaArtefato <= 100:
             podeComprarArtefato = "AGG"
             precoArtefato = 132
             print(f"Golpe Ganancioso 132g(AGG)")
-        if itemLojaMagia < 100:
+        if itemLojaMagia <= 100:
             podeComprarHabilidade = "HCL"
             precoMagia = 100
             print(f"Pergaminho de magia Cura Leve (HCL) 100g")
