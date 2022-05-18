@@ -2,7 +2,8 @@ from asyncio.format_helpers import _format_callback_source
 
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
-    inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, ouro, caminhado, danoMitigado, artefatos, danoAumentado):
+    inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, 
+    ouro, caminhado, danoMitigado, artefatos, danoAumentado, passar, podeAgir):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -22,8 +23,17 @@ class CriarPersonagem():
         self.artefatos = artefatos
         self.artefatosDesc = artefatosDesc
         self.danoAumentado = danoAumentado
+        self.passar = passar,
+        self.podeAgir = podeAgir
+class timers():
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir):
+        self.defesa = defesa
+        self.podeAgir = podeAgir
+        self.danoAumentado = danoAumentado,
+        self.monstroAgir = monstroAgir
+
 class npc():
-    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, danoMitigado):
+    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, danoMitigado, podeAgir):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -32,12 +42,18 @@ class npc():
         self.critico = critico
         self.ouro = ouro
         self.danoMitigado= danoMitigado
+        self.podeAgir = podeAgir
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
 habilidadesDesc = []
 artefatos = []
 artefatosDesc = []
+efx = timers(defesa = 0,
+            podeAgir= 0,
+            danoAumentado = 0,
+            monstroAgir = 0)
+
 Sabel = CriarPersonagem(vida=8,
                         vidaMax=8,
                         ataque=3,
@@ -56,7 +72,9 @@ Sabel = CriarPersonagem(vida=8,
                         ouro= 100,
                         caminhado=0,
                         danoMitigado=0,
-                        danoAumentado=0)
+                        danoAumentado=0,
+                        passar = False,
+                        podeAgir= True)
 
 Santos = CriarPersonagem(vida=10,
                         vidaMax=10,
@@ -76,7 +94,9 @@ Santos = CriarPersonagem(vida=10,
                         ouro=30,
                         caminhado=0,
                         danoMitigado=0,
-                        danoAumentado=0)
+                        danoAumentado=0,
+                        passar = False,
+                        podeAgir= True)
 
 Reisch = CriarPersonagem(vida=7,
                         vidaMax=7,
@@ -96,4 +116,8 @@ Reisch = CriarPersonagem(vida=7,
                         ouro= 30,
                         caminhado=0,
                         danoMitigado=0,
-                        danoAumentado=0)
+                        danoAumentado=0,
+                        passar = False,
+                        podeAgir= True)
+
+

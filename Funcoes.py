@@ -4,9 +4,11 @@ from re import S
 def vidaLimite (jogador):
     if jogador.vida > jogador.vidaMax:
         jogador.vida = jogador.vidaMax
+
 def manaLimite (jogador):
     if jogador.mana > jogador.manaMax:
         jogador.mana = jogador.manaMax
+
 def adicionarHabilidade (jogador):
     habilidade = []
     if "HRDA" in jogador.habilidades:
@@ -18,6 +20,7 @@ def adicionarHabilidade (jogador):
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(elemento)
+            
 def calculaDano(jogador, monstro, criticoGarantido):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
@@ -46,26 +49,6 @@ def statusMonstro(monstro):
     return "\b"
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
-
-#Magias
-def habilidadeMultilacaoRegenerativa (jogador, monstro):
-    print("Voce se multila com as unhas e oferece seu sangue a xaoc")
-    jogador.mana -= 3
-    dano = random.randint(0,2)
-    jogador.vida -= dano
-    print(f"Você perdeu {dano} pontos de vida")
-    if jogador.vida <= 0:
-        input("Você morreu... !:")
-    else:
-        dano = int(jogador.inteligencia/2)+(random.randint(1,jogador.inteligencia)+jogador.ataque)
-        jogador.vida += dano - monstro.danoMitigado
-        
-        if dano - monstro.danoMitigado > 0:
-            monstro.vida -= dano - monstro.danoMitigado
-            print(f"você inflinge {dano - monstro.danoMitigado} pontos de dano")
-        print(f"Você se cura {dano - monstro.danoMitigado} pontos de vida")
-        vidaLimite(jogador)
-        print(f"Vida atual: {jogador.vida}")
 
 #Loja
 def comprarNaLoja (jogador):
