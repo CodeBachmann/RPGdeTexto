@@ -21,14 +21,14 @@ def adicionarHabilidade (jogador):
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(elemento)
             
-def calculaDano(jogador, monstro, criticoGarantido):
+def atacar(jogador, monstro):
 
     dano = jogador.ataque + random.randint(1, jogador.ataque)
 
-    if random.randint(0, 100) < jogador.critico or criticoGarantido == True:
+    if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
         dano *= 2
         print("DANO CRITICO!!!")
-        foiCritico = True
+        jogador.foiCritico = True
     if "ACC" in jogador.habilidades and foiCritico == True:
         dano += monstro.danoMitigado
         jogador.vida += dano
@@ -37,7 +37,8 @@ def calculaDano(jogador, monstro, criticoGarantido):
     monstro.vida -= dano
     vidaLimite(jogador)
     jogador.danoAumentado = 0
-
+    jogador.foiCritico = False
+    jogador.passar = True
     print(f"Você inflinge {dano}(-{monstro.defesa}) pontos de dano")
 
 

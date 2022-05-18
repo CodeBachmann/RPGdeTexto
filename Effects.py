@@ -1,3 +1,4 @@
+import Funcoes
 def atordoar (jogador, efeito):
     if efeito.podeAgir != 0 and efeito.podeAgir != 5:
         jogador.podeAgir = False

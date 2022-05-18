@@ -3,7 +3,7 @@ from asyncio.format_helpers import _format_callback_source
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
     inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, 
-    ouro, caminhado, danoMitigado, artefatos, danoAumentado, passar, podeAgir):
+    ouro, caminhado, danoMitigado, artefatos, danoAumentado, passar, podeAgir, criticoGarantido, foiCritico):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -23,13 +23,15 @@ class CriarPersonagem():
         self.artefatos = artefatos
         self.artefatosDesc = artefatosDesc
         self.danoAumentado = danoAumentado
-        self.passar = passar,
+        self.passar = passar
         self.podeAgir = podeAgir
+        self.criticoGarantido = criticoGarantido
+        self.foiCritico = foiCritico
 class timers():
     def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir):
         self.defesa = defesa
         self.podeAgir = podeAgir
-        self.danoAumentado = danoAumentado,
+        self.danoAumentado = danoAumentado
         self.monstroAgir = monstroAgir
 
 class npc():
@@ -74,7 +76,9 @@ Sabel = CriarPersonagem(vida=8,
                         danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
-                        podeAgir= True)
+                        podeAgir= True,
+                        criticoGarantido = False,
+                        foiCritico= False)
 
 Santos = CriarPersonagem(vida=10,
                         vidaMax=10,
@@ -96,7 +100,9 @@ Santos = CriarPersonagem(vida=10,
                         danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
-                        podeAgir= True)
+                        podeAgir= True,
+                        criticoGarantido = False,
+                        foiCritico= False)
 
 Reisch = CriarPersonagem(vida=7,
                         vidaMax=7,
@@ -118,6 +124,8 @@ Reisch = CriarPersonagem(vida=7,
                         danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
-                        podeAgir= True)
+                        podeAgir= True,
+                        criticoGarantido = False,
+                        foiCritico= False)
 
 

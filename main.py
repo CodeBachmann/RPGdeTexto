@@ -35,18 +35,9 @@ print(f"""{personagens.Reisch.classe}, o emo feliz(R)
 """)
 
 #EVENTOS
-passar = False
 encerrarCombate = False
 emboscada = False
-podeAtacar = True
-criticoGarantido = False
-foiCritico = True
 monologo = False
-
-#efeito.S
-
-
-
 
 #CAMINHOS
 enfrentarMonstroElite = False
@@ -54,14 +45,11 @@ caminhoChefe = False
 enfrentarMonstroComun = False
 acessarMisterio = False
 
-
 #STATUS
 danoM = 0
 dano = 0
 ouro = 0
 marcadorArea = 0
-
-#ARTEFATOS COMUNS
 artefatos = []
 
 #ITENS
@@ -94,8 +82,7 @@ while decisaoClasse not in classes:
         jogador = personagens.Reisch
         jogador.artefatos.append("ACD") #Artefato >Conhecimento da dor<
                                         #sempre que o jogador recebe dano metade desse dano é convertido em mana
-        jogador.habilidades.append("HMR")#Habilidade >Multilação Regenerativa< 
-                                         #Sacrifica HP, Causa dano ao monstro, todo dano causado é convertido em vida
+        jogador.habilidades.append("HMR")
 
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(1)
@@ -109,6 +96,7 @@ while jogador.vida > 0:
         monologo = True
     elif marcadorArea == 1 and monologo:
         input("!:")
+        monologo = False
 
     print("Caminhos")
     caminhoMisterio = False
@@ -118,7 +106,6 @@ while jogador.vida > 0:
     jogador.passar = False
 
     while not jogador.passar:
-        jogador.passarCaminho = False
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
         print(f"Você pode: \nSeu saldo: {jogador.ouro}")
@@ -143,8 +130,8 @@ while jogador.vida > 0:
             input(f"Você sente uma presença ameaçadora !:")
             caminhoChefe = True
             jogador.caminhado = 0
-            jogador.passarCaminho = True
             jogador.passar = True
+            break
 
         while True:
 
@@ -206,6 +193,7 @@ while jogador.vida > 0:
             monstro = personagens.npc(vida = 15, vidaMax= 15, ataque= 4, defesa= 3,
                 nome="REI SLIME", critico= 0, ouro= 100, danoMitigado= 3, podeAgir = True)
             caminhoChefe = False
+            marcadorArea = 1
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
@@ -225,7 +213,7 @@ while jogador.vida > 0:
         if efeito.danoAumentado == 0:
             jogador.danoAumentado = 0
         else:
-            efeito.danoAumentado -= 1
+            efeito.danoAumentado = efeito.danoAumentado - 1
 
         #ATIVA A EMBOSCADA
         if emboscada:
@@ -251,10 +239,7 @@ while jogador.vida > 0:
                 os.system('cls') or None
 
                 if decisaoCombate == "A":
-                    
-                    Funcoes.calculaDano(jogador, monstro, foiCritico)
-                    foiCritico = False
-                    jogador.passar = True
+                    Funcoes.atacar(jogador, monstro)
 
                 elif decisaoCombate == "D":
                     danoMitigado = jogador.defesa*2
@@ -271,31 +256,19 @@ while jogador.vida > 0:
                             print(habilidade)
 
                         print("Voltar(V)")
-                        decisaoHabilidade = input("ESCOLHA UMA HABILIDADE: ")
-                        decisaoHabilidade = decisaoHabilidade.upper()
+                        decisaoHabilidade = (input("ESCOLHA UMA HABILIDADE: ")).upper()
 
                         if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades and jogador.mana >= 3:
                             sleep(1)
                             Skills.multilacaoRegenerativa(jogador, monstro)
-                            jogador.passar = True
                             break
 
                         elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades:
-                            jogador.danoMitigado += jogador.inteligencia/2
-                            input("Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
-                            sleep(1)
-                            criticoGarantido = True
-                            jogador.passar = True
+                            Skills.organizarAMente(jogador)
                             break
 
                         elif decisaoHabilidade == "HRDA" and "HRDA" in jogador.habilidades:
-                            jogador.danoAumentado = jogador.ataque+jogador.defesa
-                            efeito.danoAumentado = 1
-                            print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
-                            sleep(1)
-                            efeito.monstroAgir = 1
-                            efeito.podeAgir = 5
-                            jogador.passar = True
+                            Skills.rapDeAcademia(jogador, efeito)
                             break
 
                         elif "V":
