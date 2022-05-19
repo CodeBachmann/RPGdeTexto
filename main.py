@@ -13,26 +13,30 @@ os.system('cls') or None
 nome = input("Digite seu nome: ")
 print("\n ------------CLASSES------------")
 
-print(f"""{personagens.Sabel.classe}, o somelier de estagio(S)
-  ATAQUE:       {personagens.Sabel.ataque}
-  DEFESA:       {personagens.Sabel.defesa}
-  VIDA:         {personagens.Sabel.vida}
-  INTELIGENCIA: {personagens.Sabel.inteligencia}
-""")
+Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(S)')
+Funcoes.apresentacaoDeClasse(personagens.Santos, 'o bombado(SA)')
+Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(R)')
 
-print(f"""{personagens.Santos.classe}, o bombado(SA)
-  ATAQUE:       {personagens.Santos.ataque}
-  DEFESA:       {personagens.Santos.defesa}
-  VIDA:         {personagens.Santos.vida}
-  INTELIGENCIA: {personagens.Santos.inteligencia}
-""")
+# print(f"""{personagens.Sabel.classe}, o somelier de estagio(S)
+#   ATAQUE:       {personagens.Sabel.ataque}
+#   DEFESA:       {personagens.Sabel.defesa}
+#   VIDA:         {personagens.Sabel.vida}
+#   INTELIGENCIA: {personagens.Sabel.inteligencia}
+# """)
 
-print(f"""{personagens.Reisch.classe}, o emo feliz(R)
-  ATAQUE:       {personagens.Reisch.ataque}
-  DEFESA:       {personagens.Reisch.defesa}
-  VIDA:         {personagens.Reisch.vida}
-  INTELIGENCIA: {personagens.Reisch.inteligencia}
-""")
+# print(f"""{personagens.Santos.classe}, o bombado(SA)
+#   ATAQUE:       {personagens.Santos.ataque}
+#   DEFESA:       {personagens.Santos.defesa}
+#   VIDA:         {personagens.Santos.vida}
+#   INTELIGENCIA: {personagens.Santos.inteligencia}
+# """)
+
+# print(f"""{personagens.Reisch.classe}, o emo feliz(R)
+#   ATAQUE:       {personagens.Reisch.ataque}
+#   DEFESA:       {personagens.Reisch.defesa}
+#   VIDA:         {personagens.Reisch.vida}
+#   INTELIGENCIA: {personagens.Reisch.inteligencia}
+# """)
 
 #EVENTOS
 encerrarCombate = False

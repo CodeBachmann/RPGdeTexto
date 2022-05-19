@@ -154,3 +154,12 @@ def todosOsStatus(jogador):
     print(f"Habilidades: {jogador.habilidades}")
     print(f"Artefatos: {jogador.artefatos}")
     print(f"Critico: {jogador.critico}")
+
+
+def apresentacaoDeClasse(classe, caracteristica):
+  print(f"""{classe.classe}, {caracteristica}
+  ATAQUE:       {classe.ataque}
+  DEFESA:       {classe.defesa}
+  VIDA:         {classe.vida}
+  INTELIGENCIA: {classe.inteligencia}
+  """)
