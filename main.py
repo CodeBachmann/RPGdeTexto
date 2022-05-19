@@ -67,8 +67,9 @@ while decisaoClasse not in classes:
                                         #sempre que o jogador recebe dano metade desse dano é convertido em mana
         jogador.habilidades.append("HMR")
 
+os.system('cls') or None
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
-sleep(1)
+sleep(2)
 os.system('cls') or None
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
@@ -81,7 +82,7 @@ while jogador.vida > 0:
         input("!:")
         monologo = False
 
-    print("Caminhos")
+    print("~~~~~~Caminhos~~~~~~\n")
     caminhoMisterio = False
     caminhoMonstroComun = False
     caminhoMonstroElite = False
@@ -91,7 +92,7 @@ while jogador.vida > 0:
     while not jogador.passar:
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
-        print(f"Você pode: \nSeu saldo: {jogador.ouro}")
+        print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
         cont = 0
         if jogador.caminhado < 10:
             while cont < caminhos:
@@ -118,7 +119,7 @@ while jogador.vida > 0:
 
         while True:
 
-            decisaoExplorar = input("Qual sua escolha: ")
+            decisaoExplorar = input("\nQual sua escolha: ")
             decisaoExplorar = decisaoExplorar.upper()
 
             if caminhoChefe:
