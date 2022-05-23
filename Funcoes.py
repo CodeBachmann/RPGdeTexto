@@ -29,7 +29,7 @@ def atacar(jogador, monstro):
         dano *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
-    if "ACC" in jogador.habilidades and foiCritico == True:
+    if "ACC" in jogador.habilidades and jogador.foiCritico == True:
         dano += monstro.danoMitigado
         jogador.vida += dano
     dano += jogador.danoAumentado
@@ -37,6 +37,7 @@ def atacar(jogador, monstro):
     monstro.vida -= dano
     vidaLimite(jogador)
     jogador.danoAumentado = 0
+    jogador.criticoGarantido = False
     jogador.foiCritico = False
     jogador.passar = True
     print(f"Você inflinge {dano}(-{monstro.defesa}) pontos de dano")
