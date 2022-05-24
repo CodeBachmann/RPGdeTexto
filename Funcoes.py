@@ -23,10 +23,10 @@ def adicionarHabilidade (jogador):
             
 def atacar(jogador, monstro):
 
-    dano = jogador.ataque + random.randint(1, jogador.ataque)
+    dano = jogador.ataque + random.randint(1, int(jogador.ataque/2))
     mitiga = (monstro.defesa/100)+1
-    vidaReal = monstro.vidaMax*mitiga
-    danoReal = (dano*monstro.vidaMax)/vidaReal
+    vidaReal = int(monstro.vidaMax*mitiga)
+    danoReal = int((dano*monstro.vidaMax)/vidaReal)
 
     if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
         dano *= 2

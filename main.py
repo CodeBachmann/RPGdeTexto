@@ -270,9 +270,7 @@ while jogador.vida > 0:
                     print("")
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
-        if emboscada:
-            emboscada = False
-        elif monstro.vida > 0 and efeito.monstroAgir == 0:
+        if monstro.vida > 0 and efeito.monstroAgir == 0:
             danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
             if "ACD" in jogador.artefatos:
                 jogador.mana += int(danoM/2)
