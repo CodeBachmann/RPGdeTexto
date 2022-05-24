@@ -23,23 +23,28 @@ def adicionarHabilidade (jogador):
             
 def atacar(jogador, monstro):
 
-    dano = jogador.ataque + random.randint(1, jogador.ataque)
+    dano = jogador.ataque + random.randint(1, int(jogador.ataque/2))
+    mitiga = (monstro.defesa/100)+1
+    vidaReal = int(monstro.vidaMax*mitiga)
+    danoReal = int((dano*monstro.vidaMax)/vidaReal)
 
     if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
         dano *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
-    if "ACC" in jogador.habilidades and foiCritico == True:
+    if "ACC" in jogador.habilidades and jogador.foiCritico == True:
         dano += monstro.danoMitigado
         jogador.vida += dano
+        print("Você penetra a armadura do oponente e rouba sua vitalidade ")
     dano += jogador.danoAumentado
-    dano -= monstro.defesa
-    monstro.vida -= dano
+   
+    monstro.vida -= danoReal
     vidaLimite(jogador)
     jogador.danoAumentado = 0
+    jogador.criticoGarantido = False
     jogador.foiCritico = False
     jogador.passar = True
-    print(f"Você inflinge {dano}(-{monstro.defesa}) pontos de dano")
+    print(f"Você inflinge ({danoReal})-({dano-danoReal}) pontos de dano")
 
 
 def status(jogador):
@@ -106,7 +111,7 @@ def comprarNaLoja (jogador):
                         pocaoComprado = True
                         print("Item comprado com sucesso")
                     elif decisao == "PD":
-                        jogador.defesa += 1
+                        jogador.defesa += 10
                         jogador.ouro -= precoPocao
                         pocaoComprado = True
                         print("Item comprado com sucesso")

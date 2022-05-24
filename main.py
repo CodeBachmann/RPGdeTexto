@@ -155,26 +155,26 @@ while jogador.vida > 0:
         if decisaoMonstro == 0 and enfrentarMonstroComun:
 
             print("UM SLIME APARECE!!!\n")
-            monstro = personagens.npc(vida = 6, vidaMax= 6, ataque= 2, defesa= 3,
+            monstro = personagens.npc(vida = 20, vidaMax= 20, ataque= 4, defesa= 50,
                 nome="SLIME", critico= 5, ouro= 23, danoMitigado=3, podeAgir = True)
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
-            monstro = personagens.npc(vida = 5, vidaMax= 5, ataque= 3, defesa= 2,
+            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 6, defesa= 30,
                 nome="GOBLIN", critico= 7, ouro=23, danoMitigado=2, podeAgir = True)
             enfrentarMonstroComun = False
 
         elif enfrentarMonstroElite:
             print("UM GOLEM BEBE APARECE!!!\n")
-            monstro = personagens.npc(vida = 7, vidaMax= 7, ataque= 3, defesa= 3,
+            monstro = personagens.npc(vida = 35, vidaMax= 35, ataque= 8, defesa= 80,
                 nome="GOLEM BEBE", critico= 0, ouro= 40, danoMitigado= 3, podeAgir = True)
             efeito.monstroAgir = 1
             enfrentarMonstroElite = False
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 15, vidaMax= 15, ataque= 4, defesa= 3,
+            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 13, defesa= 70,
                 nome="REI SLIME", critico= 0, ouro= 100, danoMitigado= 3, podeAgir = True)
             caminhoChefe = False
             marcadorArea = 1
@@ -270,9 +270,7 @@ while jogador.vida > 0:
                     print("")
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
-        if emboscada:
-            emboscada = False
-        elif monstro.vida > 0 and efeito.monstroAgir == 0:
+        if monstro.vida > 0 and efeito.monstroAgir == 0:
             danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
             if "ACD" in jogador.artefatos:
                 jogador.mana += int(danoM/2)
