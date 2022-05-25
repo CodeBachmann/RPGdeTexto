@@ -1,5 +1,5 @@
 import time
-import keyboard # pip3 install keyboard
+#import keyboard # pip3 install keyboard
 import os
 import monstros as m
 import cenario
@@ -21,7 +21,7 @@ class p:
 jogador = m.esqueleto
 monstro = m.aranha
 
-
+"""
 while jogador.vida > 0:  
   time.sleep(0.3) 
   os.system('cls') 
@@ -35,6 +35,7 @@ while jogador.vida > 0:
           print("RECUPERAR")   
           acoes.recuperaVida(jogador, monstro)  
           break
-  acoes.atacaJogador(jogador, monstro)    
+"""
+acoes.atacaJogador(jogador, monstro)    
   
         
