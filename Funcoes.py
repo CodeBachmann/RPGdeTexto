@@ -32,9 +32,9 @@ def atacar(jogador, monstro):
         dano *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
-    if "ACC" in jogador.habilidades and jogador.foiCritico == True:
-        dano += monstro.danoMitigado
-        jogador.vida += dano
+    if "ACC" in jogador.artefatos and jogador.foiCritico == True:
+        danoReal += int(dano - danoReal)
+        jogador.vida += int(dano/4)
         print("Você penetra a armadura do oponente e rouba sua vitalidade ")
     dano += jogador.danoAumentado
    

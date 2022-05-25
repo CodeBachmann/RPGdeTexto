@@ -271,19 +271,22 @@ while jogador.vida > 0:
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
         if monstro.vida > 0 and efeito.monstroAgir == 0:
-            danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - danoMitigado
+            danoM = (monstro.ataque + (random.randint(0, monstro.ataque)))
+            mitiga = (jogador.defesa/100)+1
+            vidaReal = jogador.vidaMax*mitiga
+            danoMReal = (danoM * jogador.vidaMax)/vidaReal 
             if "ACD" in jogador.artefatos:
-                jogador.mana += int(danoM/2)
-                print(f"você recupera {int(danoM/2)} pontos de mana")
+                jogador.mana += int(danoMReal/2)
+                print(f"você recupera {int(danoMReal/2)} pontos de mana")
             if "AMDA" in jogador.artefatos:
-                jogador.danoAumentado = int(danoM/2)
+                jogador.danoAumentado = int(danoMReal/2)
                 print("A dor te motiva, seu proximo ataque causa dano extra")
-            if danoM < 0:
-                danoM = 0
-            print(f"Você sofreu {danoM}(-{danoMitigado}) pontos de dano\n")
+            if danoMReal < 0:
+                danoMReal = 0
+            print(f"Você sofreu {int(danoMReal)}(-{int(danoM-danoMReal)}) pontos de dano\n")
             if jogador.vida == NULL:
                 jogador.vida = 0
-            jogador.vida -= danoM
+            jogador.vida -= int(danoMReal)
 
         elif efeito.monstroAgir > 0:
             efeito.monstroAgir -= 1
