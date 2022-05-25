@@ -3,7 +3,7 @@ from asyncio.format_helpers import _format_callback_source
 class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
     inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, 
-    ouro, caminhado, danoMitigado, artefatos, danoAumentado, passar, podeAgir, criticoGarantido, foiCritico):
+    ouro, caminhado, artefatos, danoAumentado, passar, podeAgir, criticoGarantido, foiCritico, dano, danoReal):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -19,7 +19,6 @@ class CriarPersonagem():
         self.nome = nome
         self.ouro = ouro
         self.caminhado = caminhado
-        self.danoMitigado = danoMitigado
         self.artefatos = artefatos
         self.artefatosDesc = artefatosDesc
         self.danoAumentado = danoAumentado
@@ -27,6 +26,9 @@ class CriarPersonagem():
         self.podeAgir = podeAgir
         self.criticoGarantido = criticoGarantido
         self.foiCritico = foiCritico
+        self.dano = dano
+        self.danoReal = danoReal
+        
 class timers():
     def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir):
         self.defesa = defesa
@@ -35,7 +37,7 @@ class timers():
         self.monstroAgir = monstroAgir
 
 class npc():
-    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, danoMitigado, podeAgir):
+    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, podeAgir, dano, danoReal):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -43,8 +45,9 @@ class npc():
         self.nome = nome
         self.critico = critico
         self.ouro = ouro
-        self.danoMitigado= danoMitigado
         self.podeAgir = podeAgir
+        self.dano = dano
+        self.danoReal = danoReal
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
@@ -73,12 +76,13 @@ Sabel = CriarPersonagem(vida=26,
                         artefatosDesc= artefatosDesc,
                         ouro= 100,
                         caminhado=0,
-                        danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
                         podeAgir= True,
                         criticoGarantido = False,
-                        foiCritico= False)
+                        foiCritico= False,
+                        dano = 0,
+                        danoReal= 0)
 
 Santos = CriarPersonagem(vida=30,
                         vidaMax=30,
@@ -97,12 +101,13 @@ Santos = CriarPersonagem(vida=30,
                         artefatos=artefatos,
                         ouro=30,
                         caminhado=0,
-                        danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
                         podeAgir= True,
                         criticoGarantido = False,
-                        foiCritico= False)
+                        foiCritico= False,
+                        dano = 0,
+                        danoReal= 0)
 
 Reisch = CriarPersonagem(vida=21,
                         vidaMax=21,
@@ -121,11 +126,12 @@ Reisch = CriarPersonagem(vida=21,
                         artefatos=artefatos,
                         ouro= 30,
                         caminhado=0,
-                        danoMitigado=0,
                         danoAumentado=0,
                         passar = False,
                         podeAgir= True,
                         criticoGarantido = False,
-                        foiCritico= False)
+                        foiCritico= False,
+                        dano = 0,
+                        danoReal= 0)
 
 

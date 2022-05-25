@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import random
 from re import S
 
@@ -20,32 +21,50 @@ def adicionarHabilidade (jogador):
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(elemento)
-            
+
+def calculaDano(atacante, defensor):
+    atacante.dano = (atacante.ataque + (random.randint(0, atacante.ataque)))
+    mitiga = (defensor.defesa/100)+1
+    vidaReal = defensor.vidaMax*mitiga
+    atacante.danoReal = int((atacante.dano * defensor.vidaMax)/vidaReal)
+    
+
 def atacar(jogador, monstro):
 
-    dano = jogador.ataque + random.randint(1, int(jogador.ataque/2))
-    mitiga = (monstro.defesa/100)+1
-    vidaReal = int(monstro.vidaMax*mitiga)
-    danoReal = int((dano*monstro.vidaMax)/vidaReal)
-
+    calculaDano(jogador, monstro)
     if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
-        dano *= 2
+        jogador.dano *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
     if "ACC" in jogador.artefatos and jogador.foiCritico == True:
-        danoReal += int(dano - danoReal)
-        jogador.vida += int(dano/4)
+        jogador.danoReal += int(jogador.dano - jogador.danoReal)
+        jogador.vida += int(jogador.dano/4)
         print("Você penetra a armadura do oponente e rouba sua vitalidade ")
-    dano += jogador.danoAumentado
-   
-    monstro.vida -= danoReal
+    jogador.danoReal += jogador.danoAumentado
+    monstro.vida -= jogador.danoReal
     vidaLimite(jogador)
     jogador.danoAumentado = 0
     jogador.criticoGarantido = False
     jogador.foiCritico = False
     jogador.passar = True
-    print(f"Você inflinge ({danoReal})-({dano-danoReal}) pontos de dano")
+    print(f"Você inflinge {jogador.danoReal}(-{jogador.dano-jogador.danoReal}) pontos de dano")
 
+    
+def monstroAtacar(jogador, monstro):
+    calculaDano(monstro, jogador)
+    if "ACD" in jogador.artefatos:
+        jogador.mana += int(monstro.danoReal/2)
+        print(f"você recupera {int(monstro.danoReal/2)} pontos de mana")
+    if "AMDA" in jogador.artefatos:
+        jogador.danoAumentado = int(monstro.danoReal/2)
+        print("A dor te motiva, seu proximo ataque causa dano extra")
+    if monstro.danoReal < 0:
+        monstro.danoReal = 0
+    print(f"Você sofreu {int(monstro.danoReal)}(-{int(monstro.dano-monstro.danoReal)}) pontos de dano\n")
+    if jogador.vida == NULL:
+        jogador.vida = 0
+    jogador.vida -= int(monstro.danoReal)
+    
 
 def status(jogador):
     print(f"STATUS {jogador.nome} \nVida : {jogador.vida}\nAtaque : {jogador.ataque}\nDefesa : {jogador.defesa}\n")
@@ -159,7 +178,6 @@ def todosOsStatus(jogador):
     print(f"Habilidades: {jogador.habilidades}")
     print(f"Artefatos: {jogador.artefatos}")
     print(f"Critico: {jogador.critico}")
-
 
 def apresentacaoDeClasse(classe, caracteristica):
   print(f"""{classe.classe}, {caracteristica}

@@ -29,14 +29,11 @@ enfrentarMonstroComun = False
 acessarMisterio = False
 
 #STATUS
-danoM = 0
 dano = 0
 ouro = 0
 marcadorArea = 0
 artefatos = []
 
-#ITENS
-itemPedraCoracao = False
 habilidades = []
 classes = ["SA", "S", "R"]
 decisaoClasse = ""
@@ -73,7 +70,6 @@ sleep(2)
 os.system('cls') or None
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
-    danoMitigado = jogador.defesa
     if marcadorArea == 0 and not monologo:
         input("Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores... !:")
         os.system('cls') or None
@@ -94,15 +90,12 @@ while jogador.vida > 0:
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
         cont = 0
-        if jogador.caminhado < 10:
+        if jogador.caminhado < 10 and jogador.caminhado != 1:
             while cont < caminhos:
                 escolha = random.randint(1, 100)
                 if escolha > 0 and escolha <= 50:
                     print(f"Lutar com um monstro comun(C)\n")
                     caminhoMonstroComun = True
-                # elif escolha > 50 and escolha <= 75:
-                #     print(f"Investigar um misterio(M)\n")
-                #     caminhoMisterio = True
                 elif escolha > 50 and escolha <= 80:
                     print(f"Lutar com um monstro de Elite(E)\n")
                     caminhoMonstroElite = True
@@ -110,6 +103,9 @@ while jogador.vida > 0:
                     print(f"Entrar na loja(L)\n")
                     caminhoLoja = True
                 cont+= 1
+        elif jogador.caminhado == 1:
+            print(f"Lutar com um monstro comun(C)\n")
+            caminhoMonstroComun = True
         else:
             input(f"Você sente uma presença ameaçadora !:")
             caminhoChefe = True
@@ -156,41 +152,41 @@ while jogador.vida > 0:
 
             print("UM SLIME APARECE!!!\n")
             monstro = personagens.npc(vida = 20, vidaMax= 20, ataque= 4, defesa= 50,
-                nome="SLIME", critico= 5, ouro= 23, danoMitigado=3, podeAgir = True)
+                nome="SLIME", critico= 5, ouro= 23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
             monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 6, defesa= 30,
-                nome="GOBLIN", critico= 7, ouro=23, danoMitigado=2, podeAgir = True)
+                nome="GOBLIN", critico= 7, ouro=23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
         elif enfrentarMonstroElite:
             print("UM GOLEM BEBE APARECE!!!\n")
             monstro = personagens.npc(vida = 35, vidaMax= 35, ataque= 8, defesa= 80,
-                nome="GOLEM BEBE", critico= 0, ouro= 40, danoMitigado= 3, podeAgir = True)
+                nome="GOLEM BEBE", critico= 0, ouro= 40, podeAgir = True, dano = 0, danoReal = 0)
             efeito.monstroAgir = 1
             enfrentarMonstroElite = False
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
             monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 13, defesa= 70,
-                nome="REI SLIME", critico= 0, ouro= 100, danoMitigado= 3, podeAgir = True)
+                nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
-    monstro.danoMitigado = monstro.defesa
+    #monstro.danoMitigado = monstro.defesa
 
     while not encerrarCombate:
         jogador.passar = False
         
         #AREA QUE CONTROLA BUFFS QUE DURAM MAIS DE UM TURNO
-        if efeito.defesa == 0:
-            jogador.danoMitigado = jogador.defesa
-        else:
-            efeito.defesa -= 1
+        #if efeito.defesa == 0:
+        #    jogador.danoMitigado = jogador.defesa
+        #else:
+        #    efeito.defesa -= 1
         #MELHORAR O SISTEMA DE STUN
         Effects.atordoar(jogador, efeito)
         #BUFFAR DANO
@@ -198,15 +194,6 @@ while jogador.vida > 0:
             jogador.danoAumentado = 0
         else:
             efeito.danoAumentado = efeito.danoAumentado - 1
-
-        #ATIVA A EMBOSCADA
-        if emboscada:
-            print("VOCÊ FOI EMBOSCADO!!!\n")
-            danoM = (monstro.ataque + (random.randint(0, monstro.ataque))) - jogador.danoMitigado
-            if danoM < 0:
-                danoM = 0
-            print(f"Você sofreu {danoM}(-{jogador.danoMitigado}) pontos de dano\n")
-            jogador.vida -= danoM
 
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
         Funcoes.status(monstro)
@@ -217,7 +204,7 @@ while jogador.vida > 0:
             jogador.passar = False
             while not jogador.passar:
 
-                print("AÇÕES :\n(A)ATACAR\n(D)DEFENDER\n(H)HABILIDADES\n(F)FUGIR\n(I)ITENS\n")
+                print("AÇÕES :\n(A)ATACAR\n(H)HABILIDADES\n(F)FUGIR\n(I)ITENS\n")
                 decisaoCombate = input("ESCOLHA UMA AÇÃO: ")
                 decisaoCombate = decisaoCombate.upper()
                 os.system('cls') or None
@@ -225,12 +212,11 @@ while jogador.vida > 0:
                 if decisaoCombate == "A":
                     Funcoes.atacar(jogador, monstro)
 
-                elif decisaoCombate == "D":
-                    danoMitigado = jogador.defesa*2
-                    efeito.Defesa = 2
-                    jogador.passar = True
-                    print("SUA DEFESA FOI DOBRADA(2t)\n")
-
+                #elif decisaoCombate == "D":
+                #    danoMitigado = jogador.defesa*2
+                #    efeito.Defesa = 2
+                #    jogador.passar = True
+                #    print("SUA DEFESA FOI DOBRADA(2t)\n")
                 #habilidadeS
                 elif decisaoCombate == "H":
 
@@ -271,22 +257,7 @@ while jogador.vida > 0:
 
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
         if monstro.vida > 0 and efeito.monstroAgir == 0:
-            danoM = (monstro.ataque + (random.randint(0, monstro.ataque)))
-            mitiga = (jogador.defesa/100)+1
-            vidaReal = jogador.vidaMax*mitiga
-            danoMReal = (danoM * jogador.vidaMax)/vidaReal 
-            if "ACD" in jogador.artefatos:
-                jogador.mana += int(danoMReal/2)
-                print(f"você recupera {int(danoMReal/2)} pontos de mana")
-            if "AMDA" in jogador.artefatos:
-                jogador.danoAumentado = int(danoMReal/2)
-                print("A dor te motiva, seu proximo ataque causa dano extra")
-            if danoMReal < 0:
-                danoMReal = 0
-            print(f"Você sofreu {int(danoMReal)}(-{int(danoM-danoMReal)}) pontos de dano\n")
-            if jogador.vida == NULL:
-                jogador.vida = 0
-            jogador.vida -= int(danoMReal)
+           Funcoes.monstroAtacar(jogador, monstro)
 
         elif efeito.monstroAgir > 0:
             efeito.monstroAgir -= 1
@@ -294,7 +265,7 @@ while jogador.vida > 0:
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
-            sleep(1)
+            sleep(2)
             exit(0)
 
         elif monstro.vida <=0:

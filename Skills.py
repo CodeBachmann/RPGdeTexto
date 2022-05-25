@@ -23,7 +23,7 @@ def multilacaoRegenerativa (jogador, monstro):
         jogador.passar = True
 
 def rapDeAcademia (jogador, efeito):
-    jogador.danoAumentado = jogador.ataque + int(jogador.defesa/15)
+    jogador.danoAumentado = jogador.ataque + int(jogador.defesa/10)
     efeito.danoAumentado = 1
     print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
     sleep(1)
