@@ -18,3 +18,8 @@ def lagrimaBerserker (jogador, efeito):
         if efeito.danoAumentado < 1:
             efeito.danoAumentado = 1
         print(f"Lagrima do Berserker: +{efeito.tempoCombate} dano")
+
+def conhecimentoDor (jogador, monstro):
+    if "ACD" in jogador.artefatos:
+        jogador.mana += int(monstro.danoReal/3)
+        print(f"você recupera {int(monstro.danoReal/3)} pontos de mana")

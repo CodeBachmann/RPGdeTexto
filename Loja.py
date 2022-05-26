@@ -4,7 +4,7 @@ def comprarNaLoja (jogador):
     fecharLoja = False
     itemLojaPocao = random.randint(0,100)
     itemLojaArtefato = random.randint(0,100)
-    itemLojaMagia = random.randint(0,100)
+    itemLojaHabilidade = random.randint(0,100)
     pocaoComprado = False
     artefatoComprado = False
     habilidadeComprado = False
@@ -26,25 +26,27 @@ def comprarNaLoja (jogador):
             precoPocao = 50
             print("Pocao de Inteligencia - 50g(PI)")
         if itemLojaArtefato <= 50:
-            podeComprarArtefato = "ALG"
+            podeComprarArtefato = "ALB"
             precoArtefato = 95
             print(f"Lagrima do Berserker 95g(ALB)")
         elif itemLojaArtefato <= 100:
             podeComprarArtefato = "AGG"
             precoArtefato = 90
             print(f"Golpe Ganancioso 90g(AGG)")
-        if itemLojaMagia <= 70:
+        if itemLojaHabilidade <= 100:
             podeComprarHabilidade = "HCL"
-            precoMagia = 70
-            print(f"Pergaminho de magia Cura Leve (HCL) 70g")
+            precoHabilidade = 70
+            print(f"Pergaminho de Habilidade Cura Leve (HCL) 70g")
+
         print("Recuperar 1/3 HP MAX - 25g(RV)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")
             decisao = input("O que você deseja comprar: ")
+            
             if decisao == "RV" and jogador.ouro >= 25:
                 jogador.ouro -= 25
                 jogador.vida += int(jogador.vida/3)
-                jogador.vidaLimite(jogador)
+                Funcoes.vidaLimite(jogador)
                 print(f"+{int(jogador.vida/3)}HP")
 
             elif decisao == podeComprarPocao and not pocaoComprado:
@@ -83,12 +85,14 @@ def comprarNaLoja (jogador):
 
             elif decisao == podeComprarHabilidade and not habilidadeComprado:
                 if decisao == "HCL":
-                    if precoMagia <= jogador.ouro:
+                    if precoHabilidade <= jogador.ouro:
                         jogador.habilidades.append(podeComprarHabilidade)
-                        jogador.ouro -= precoArtefato
+                        jogador.ouro -= precoHabilidade
                         habilidadeComprado = True
                         print("Item comprado com sucesso")
             elif decisao == "S":
                 compraRealizada = True
                 fecharLoja = True
                 print("Você sai da loja")
+            else:
+                print("Decisao Invalida!!!")

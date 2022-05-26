@@ -1,9 +1,9 @@
 
 import time
-import keyboard # pip3 install keyboard
+import keyboard as kb #py -m pip install keyboard
 import os
+os.system('cls') or None
 
-os.system('cls') or NoneA
 
 
 vida = 3
@@ -15,11 +15,11 @@ while vida > 0:
   print("(A)ataque: 3 dano   --  (R)recuperar: 2 vida\n")  
   print(f"vida: {vida} - monstro: {vidaM}")  
   while True:
-      if keyboard.read_key() == "A":
+      if kb.read_key() == "A":
           print("ATAQUE")
           vidaM -= 3
           break
-      if keyboard.read_key() == "R":
+      if kb.read_key() == "R":
           print("RECUPERAR")   
           vida += 2  
           break

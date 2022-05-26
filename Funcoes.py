@@ -11,19 +11,20 @@ def manaLimite (jogador):
     if jogador.mana > jogador.manaMax:
         jogador.mana = jogador.manaMax
 
-def adicionarHabilidade (jogador):
+def adicionarHabilidade (jogador, efeito):
     habilidade = []
     if "HRDA" in jogador.habilidades:
         habilidade.append("(HRDA) Custo: [2] Rap de Academia -- Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
     if "HMR" in jogador.habilidades:
-        habilidade.append("(HMR) Custo: [5] Multilação Regenerativa -- Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
+        habilidade.append("(HMR) Custo: [4] Multilação Regenerativa -- Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
     if "HOAM" in jogador.habilidades:
         habilidade.append("(HOAM) Custo: [2] Organizar a Mente -- Recupera um pouco de vida, o proximo ataque será Critico")
     if "HCL" in jogador.habilidades:
-        habilidade.append("(HCL) Custo: [2] Cura Leve -- Recupera vida baseado na sua inteligencia")
+        habilidade.append("(HCL) Custo: [4] Cura Leve -- Recupera vida baseado na sua inteligencia")
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
-            jogador.habilidadesDesc.append(elemento)
+            jogador.habilidadesDesc.append(f"{efeito.quantidadeHabilidades} - " + elemento)
+            efeito.quantidadeHabilidades += 1
 
 def calculaDano(atacante, defensor):
     mitiga = (defensor.defesa/100)+1
@@ -55,9 +56,7 @@ def atacar(jogador, monstro, efeito):
 def monstroAtacar(jogador, monstro):
     monstro.dano = (monstro.ataque + (random.randint(0, int(monstro.ataque*0.7))))
     calculaDano(monstro, jogador)
-    if "ACD" in jogador.artefatos:
-        jogador.mana += int(monstro.danoReal/2)
-        print(f"você recupera {int(monstro.danoReal/2)} pontos de mana")
+    
     if "AMDA" in jogador.artefatos:
         jogador.danoAumentado = int(monstro.danoReal/2)
         print("A dor te motiva, seu proximo ataque causa dano extra")
