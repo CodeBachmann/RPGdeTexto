@@ -30,11 +30,12 @@ class CriarPersonagem():
         self.danoReal = danoReal
         
 class timers():
-    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir):
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate):
         self.defesa = defesa
         self.podeAgir = podeAgir
         self.danoAumentado = danoAumentado
         self.monstroAgir = monstroAgir
+        self.tempoCombate = tempoCombate
 
 class npc():
     def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, podeAgir, dano, danoReal):
@@ -57,7 +58,8 @@ artefatosDesc = []
 efx = timers(defesa = 0,
             podeAgir= 0,
             danoAumentado = 0,
-            monstroAgir = 0)
+            monstroAgir = 0,
+            tempoCombate=0)
 
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,
@@ -66,15 +68,15 @@ Sabel = CriarPersonagem(vida=26,
                         classe="SABEL",
                         critico=8,
                         nome='Greg',
-                        inteligencia=2,
-                        mana=6,
-                        manaMax=6,
+                        inteligencia=4,
+                        mana=7,
+                        manaMax=7,
                         regenMana=1,
                         habilidades=habilidades,
                         artefatos=artefatos,
                         habilidadesDesc=habilidadesDesc,
                         artefatosDesc= artefatosDesc,
-                        ouro= 100,
+                        ouro= 70,
                         caminhado=0,
                         danoAumentado=0,
                         passar = False,
@@ -84,22 +86,22 @@ Sabel = CriarPersonagem(vida=26,
                         dano = 0,
                         danoReal= 0)
 
-Santos = CriarPersonagem(vida=30,
-                        vidaMax=30,
-                        ataque=5,
+Santos = CriarPersonagem(vida=35,
+                        vidaMax=35,
+                        ataque=6,
                         defesa=55,
                         classe="SANTOS",
                         critico=6,
                         nome='Maicon',
-                        inteligencia=2,
-                        mana=4,
-                        manaMax=4,
+                        inteligencia=3,
+                        mana=6,
+                        manaMax=6,
                         regenMana=1,
                         habilidades=habilidades,
                         habilidadesDesc=habilidadesDesc,
                         artefatosDesc= artefatosDesc,
                         artefatos=artefatos,
-                        ouro=30,
+                        ouro=85,
                         caminhado=0,
                         danoAumentado=0,
                         passar = False,
@@ -112,11 +114,11 @@ Santos = CriarPersonagem(vida=30,
 Reisch = CriarPersonagem(vida=21,
                         vidaMax=21,
                         ataque=8,
-                        defesa=34,
+                        defesa=29,
                         classe="REISCH",
                         critico=3,
                         nome='Vinicius',
-                        inteligencia=3,
+                        inteligencia=6,
                         mana=9,
                         manaMax=9,
                         regenMana=1,
@@ -124,7 +126,7 @@ Reisch = CriarPersonagem(vida=21,
                         habilidadesDesc=habilidadesDesc,
                         artefatosDesc= artefatosDesc,
                         artefatos=artefatos,
-                        ouro= 30,
+                        ouro= 45,
                         caminhado=0,
                         danoAumentado=0,
                         passar = False,

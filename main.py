@@ -7,10 +7,11 @@ import personagens
 import os
 import Effects
 import Skills
+import Loja
 input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
 sleep(1)
 os.system('cls') or None
-nome = input("Digite seu nome: ")
+
 print("\n ------------CLASSES------------")
 
 Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(S)')
@@ -64,6 +65,7 @@ while decisaoClasse not in classes:
                                         #sempre que o jogador recebe dano metade desse dano é convertido em mana
         jogador.habilidades.append("HMR")
 
+jogador.nome = input("Digite seu nome: ")
 os.system('cls') or None
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(2)
@@ -132,7 +134,7 @@ while jogador.vida > 0:
                 break
 
             elif decisaoExplorar == "L" and caminhoLoja:
-                Funcoes.comprarNaLoja(jogador)
+                Loja.comprarNaLoja(jogador)
                 break
                 
             elif decisaoExplorar == "M" and caminhoMisterio:
@@ -151,37 +153,39 @@ while jogador.vida > 0:
         if decisaoMonstro == 0 and enfrentarMonstroComun:
 
             print("UM SLIME APARECE!!!\n")
-            monstro = personagens.npc(vida = 20, vidaMax= 20, ataque= 4, defesa= 50,
+            monstro = personagens.npc(vida = 20, vidaMax= 20, ataque= 4, defesa= 24,
                 nome="SLIME", critico= 5, ouro= 23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
-            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 6, defesa= 30,
+            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 6, defesa= 15,
                 nome="GOBLIN", critico= 7, ouro=23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
         elif enfrentarMonstroElite:
             print("UM GOLEM BEBE APARECE!!!\n")
-            monstro = personagens.npc(vida = 35, vidaMax= 35, ataque= 8, defesa= 80,
+            monstro = personagens.npc(vida = 35, vidaMax= 35, ataque= 8, defesa= 41,
                 nome="GOLEM BEBE", critico= 0, ouro= 40, podeAgir = True, dano = 0, danoReal = 0)
             efeito.monstroAgir = 1
             enfrentarMonstroElite = False
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 13, defesa= 70,
+            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 13, defesa= 36,
                 nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
+    efeito.tempoCombate = 0
+    
     #monstro.danoMitigado = monstro.defesa
 
     while not encerrarCombate:
         jogador.passar = False
-        
+        efeito.tempoCombate += 1
         #AREA QUE CONTROLA BUFFS QUE DURAM MAIS DE UM TURNO
         #if efeito.defesa == 0:
         #    jogador.danoMitigado = jogador.defesa
@@ -210,14 +214,7 @@ while jogador.vida > 0:
                 os.system('cls') or None
 
                 if decisaoCombate == "A":
-                    Funcoes.atacar(jogador, monstro)
-
-                #elif decisaoCombate == "D":
-                #    danoMitigado = jogador.defesa*2
-                #    efeito.Defesa = 2
-                #    jogador.passar = True
-                #    print("SUA DEFESA FOI DOBRADA(2t)\n")
-                #habilidadeS
+                    Funcoes.atacar(jogador, monstro, efeito)
                 elif decisaoCombate == "H":
 
                     while True:
@@ -239,6 +236,10 @@ while jogador.vida > 0:
 
                         elif decisaoHabilidade == "HRDA" and "HRDA" in jogador.habilidades:
                             Skills.rapDeAcademia(jogador, efeito)
+                            break
+
+                        elif decisaoHabilidade == "HCL" and "HCL" in jogador.habilidades:
+                            Skills.curaLeve(jogador)
                             break
 
                         elif "V":
@@ -272,7 +273,7 @@ while jogador.vida > 0:
             print("O MONSTRO MORREU!")
             encerrarCombate = True
             Funcoes.continuar()
-            ouro = random.randint(int(monstro.ouro/2),int(monstro.ouro*1.5))
+            ouro = random.randint(int(monstro.ouro),int(monstro.ouro*1.5))
             print(f"+{ouro}G")
             jogador.ouro += ouro
             efeito.podeAgir = 0
