@@ -186,3 +186,83 @@ def apresentacaoDeClasse(classe, caracteristica):
   VIDA:         {classe.vida}
   INTELIGENCIA: {classe.inteligencia}
   """)
+
+def apresentacaoDeClasses1(classes):
+
+  cabeca = f'Classe - Ata - Def - Vid - Int'
+  atributos = ''
+  nome = ''
+
+  for c in classes:
+    espacoAtributo = 4
+    espacoClasse = 8 - len(c[0].classe)
+
+    # Ifs para que o tamanho, em string, das variáveis seja o mesmo
+    # caso o valor seja menor q 10, ou seja, tenha apenas um digito, é adicionado um espaço antes
+    ataque       = '' if c[0].ataque > 9 else ' '  
+    defesa       = '' if c[0].defesa > 9 else ' '  
+    vida         = '' if c[0].vida > 9 else ' '  
+    inteligencia = '' if c[0].inteligencia > 9 else ' '  
+
+    nome         += f'{c[0].classe}{" "*espacoClasse}'
+    ataque       += f'{c[0].ataque}{" "*espacoAtributo} '
+    defesa       += f'{c[0].defesa}{" "*espacoAtributo} '
+    vida         += f'{c[0].vida}{" "*espacoAtributo} '
+    inteligencia += f'{c[0].inteligencia}\n'
+
+    atributos += nome + ataque + defesa + vida + inteligencia
+
+
+  print('\n')
+  print(cabeca)
+  print(atributos)
+  print('\n')
+
+
+def apresentacaoDeClasses2(classes):
+
+  cabeca       = f'CLASSES:   '
+  ataque       = f'Ata:       '
+  defesa       = f'Def:       '
+  vida         = f'Vid:       '
+  inteligencia = f'Int:       '
+
+  for classe in classes:
+    espaco = len(classe[0].classe) + 5
+    
+    # ifs para que o tamanho, em string, das variáveis seja o mesmo
+    # caso o valor seja menor q 10, ou seja, tenha apenas um digito, é adicionado um espaço antes 
+    ataque       += '' if classe[0].ataque > 9 else ' '  
+    defesa       += '' if classe[0].defesa > 9 else ' '  
+    vida         += '' if classe[0].vida > 9 else ' '  
+    inteligencia += '' if classe[0].inteligencia > 9 else ' '  
+
+    cabeca       += f'{classe[1]} {classe[0].classe} - '
+    ataque       += f'{classe[0].ataque}{" "*espaco}'
+    defesa       += f'{classe[0].defesa}{" "*espaco}'
+    vida         += f'{classe[0].vida}{" "*espaco}'
+    inteligencia += f'{classe[0].inteligencia}{" "*espaco}'
+
+
+  print(f"""{cabeca}
+  {ataque}  
+  {defesa}  
+  {vida}
+  {inteligencia}
+  """)
+  print('\n')
+  print('\n')
+
+
+
+
+
+print('\n ~~teste apresentacaoDeClasses1 apresentacaoDeClasses2~~~~')
+import personagens
+apresentacaoDeClasses1( [[personagens.Sabel, '(S)'], 
+                        [personagens.Santos, '(SA)'], 
+                        [personagens.Reisch, '(R)']] )
+
+apresentacaoDeClasses2( [[personagens.Sabel, '(S)'], 
+                        [personagens.Santos, '(SA)'], 
+                        [personagens.Reisch, '(R)']] )                        
