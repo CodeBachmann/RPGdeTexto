@@ -173,12 +173,12 @@ def apresentacaoDeClasses2(classes):
 
 
 
-print('\n ~~teste apresentacaoDeClasses1 apresentacaoDeClasses2~~~~')
-import personagens
-apresentacaoDeClasses1( [[personagens.Sabel, '(S)'], 
-                        [personagens.Santos, '(SA)'], 
-                        [personagens.Reisch, '(R)']] )
+# print('\n ~~teste apresentacaoDeClasses1 apresentacaoDeClasses2~~~~')
+# import personagens
+# apresentacaoDeClasses1( [[personagens.Sabel, '(S)'], 
+#                         [personagens.Santos, '(SA)'], 
+#                         [personagens.Reisch, '(R)']] )
 
-apresentacaoDeClasses2( [[personagens.Sabel, '(S)'], 
-                        [personagens.Santos, '(SA)'], 
-                        [personagens.Reisch, '(R)']] )                        
+# apresentacaoDeClasses2( [[personagens.Sabel, '(S)'], 
+#                         [personagens.Santos, '(SA)'], 
+#                         [personagens.Reisch, '(R)']] )                        
