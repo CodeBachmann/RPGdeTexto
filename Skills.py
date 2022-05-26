@@ -11,19 +11,19 @@ def multilacaoRegenerativa (jogador, monstro):
     if jogador.vida <= 0:
         input("Você morreu... !:")
     else:
-        dano = int(jogador.inteligencia/2)+(random.randint(1,jogador.inteligencia)+jogador.ataque)
-        jogador.vida += dano
-        
-        if dano - monstro.danoMitigado > 0:
-            monstro.vida -= dano - monstro.danoMitigado
-            print(f"você inflinge {dano - monstro.danoMitigado} pontos de dano")
-        print(f"Você se cura {dano - monstro.danoMitigado} pontos de vida")
+        jogador.dano = int(jogador.inteligencia/2)+(random.randint(1,int(jogador.inteligencia/2)))+jogador.ataque
+        Funcoes.calculaDano(jogador, monstro)
+        jogador.vida += int(jogador.danoReal/1.4)
+        monstro.vida -= jogador.danoReal
+        print(f"você inflinge {jogador.danoReal} pontos de dano")
+        print(f"Você se cura {int(jogador.danoReal/2)} pontos de vida")
         Funcoes.vidaLimite(jogador)
         print(f"Vida atual: {jogador.vida}")
         jogador.passar = True
+        jogador.dano = 0
 
 def rapDeAcademia (jogador, efeito):
-    jogador.danoAumentado = jogador.ataque + int(jogador.defesa/10)
+    jogador.danoAumentado = jogador.ataque + int(jogador.defesa/7)
     efeito.danoAumentado = 1
     print("Apos ouvir o RAP DO SAITAMA você sente que tem que dar tudo de si em um golpe final!!!")
     sleep(1)
@@ -37,3 +37,8 @@ def organizarAMente (jogador):
     sleep(1)
     jogador.criticoGarantido = True
     jogador.passar = True
+
+def curaLeve (jogador):
+    jogador.mana -= 2
+    cura = 2+jogador.inteligencia+random.randint(1, jogador.inteligencia)
+    print(f" +{cura}HP \n")
