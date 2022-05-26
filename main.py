@@ -7,15 +7,8 @@ import personagens
 import os
 import Effects
 import Skills
-input("Quando você ver esse simbolo '!' : pressione enter para continuar ou espere um pouco")
-sleep(1)
-os.system('cls') or None
-nome = input("Digite seu nome: ")
-print("\n ------------CLASSES------------")
 
-Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(S)')
-Funcoes.apresentacaoDeClasse(personagens.Santos, 'o bombado(SA)')
-Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(R)')
+# --------------------------------- VARIÁVEIS --------------------------------- #
 
 #EVENTOS
 encerrarCombate = False
@@ -39,6 +32,19 @@ classes = ["SA", "S", "R"]
 decisaoClasse = ""
 efeito = personagens.efx
 
+# --------------------------------- INÍCIO --------------------------------- #
+
+input("Quando você ver esse simbolo '!' : pressione enter para continuar e espere um pouco")
+sleep(1)
+os.system('cls') or None
+nome = input("Digite seu nome: ")
+print("\n ------------CLASSES------------")
+
+Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(S)')
+Funcoes.apresentacaoDeClasse(personagens.Santos, 'o bombado(SA)')
+Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(R)')
+
+
 #ESCOLHA DE CLASSE
 while decisaoClasse not in classes:
   decisaoClasse = input("Digite a letra inicial da sua classe : ")
@@ -46,23 +52,23 @@ while decisaoClasse not in classes:
   if decisaoClasse in classes:
     if decisaoClasse == "SA":
 
+        personagens.Santos.artefatos.append("AMDA")#Artefato >Masoquista da academia<        
+                                                   #sempre que o jogador recebe dano, o proximo ataque do jogador causa dano extra
+        personagens.Santos.habilidades.append("HRDA")
         jogador = personagens.Santos
-        jogador.artefatos.append("AMDA")#Artefato >Masoquista da academia<        
-                                    #sempre que o jogador recebe dano, o proximo ataque do jogador causa dano extra
-        jogador.habilidades.append("HRDA")
 
     elif decisaoClasse == "S":
 
+        personagens.Sabel.artefatos.append("ACC")#Critico recupera vida e ignora o dano mitigado
+        personagens.Sabel.habilidades.append("HOAM")
         jogador = personagens.Sabel
-        jogador.artefatos.append("ACC")#Critico recupera vida e ignora o dano mitigado
-        jogador.habilidades.append("HOAM")
 
     elif decisaoClasse == "R":
 
+        personagens.Reisch.artefatos.append("ACD") #Artefato >Conhecimento da dor<
+                                                   #sempre que o jogador recebe dano metade desse dano é convertido em mana
+        personagens.Reisch.habilidades.append("HMR")
         jogador = personagens.Reisch
-        jogador.artefatos.append("ACD") #Artefato >Conhecimento da dor<
-                                        #sempre que o jogador recebe dano metade desse dano é convertido em mana
-        jogador.habilidades.append("HMR")
 
 os.system('cls') or None
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
