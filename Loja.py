@@ -16,7 +16,7 @@ def comprarNaLoja (jogador):
         compraRealizada = False
         print("Você adentra a loja... ")
         sleep(1)
-        print("Sair da loja(5)")
+        print("Sair da loja - (5)")
         if itemLojaPocao <= 25:
             print("Pocao de Ataque - 60g(1)")
             podeComprarPocao = "PA"
@@ -36,15 +36,15 @@ def comprarNaLoja (jogador):
         if itemLojaArtefato <= 50:
             podeComprarArtefato = "ALB"
             precoArtefato = 95
-            print(f"Lagrima do Berserker 95g(2)")
+            print(f"Lagrima do Berserker - 95g(2)")
         elif itemLojaArtefato <= 100:
             podeComprarArtefato = "AGG"
             precoArtefato = 40
-            print(f"Golpe Ganancioso 40g(2)")
+            print(f"Golpe Ganancioso - 40g(2)")
         if itemLojaHabilidade <= 100:
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve (3) 70g")
+            print(f"Pergaminho de Habilidade Cura Leve - 70g(3) ")
 
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
