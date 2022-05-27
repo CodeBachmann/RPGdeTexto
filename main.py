@@ -218,6 +218,8 @@ while jogador.vida > 0:
                         Funcoes.adicionarHabilidade(jogador, efeito)
                         for habilidade in jogador.habilidadesDesc:
                             print(habilidade)
+                        print(f"{efeito.quantidadeHabilidades} - Voltar")
+
                         while True:
                             
                             if keyboard.read_key() == "0" and 1 >= efeito.quantidadeHabilidades:
@@ -236,7 +238,8 @@ while jogador.vida > 0:
                                 decisaoHabilidade = "V"
                                 break
 
-                        print(f"Voltar({efeito.quantidadeHabilidades})")
+                        efeito.quantidadeHabilidades = 0
+                        jogador.habilidadesDesc = []
                         if decisaoHabilidade != "V":
                             decisaoHabilidade = jogador.habilidades[indice]
                         

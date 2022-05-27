@@ -1,5 +1,8 @@
 import random
+from time import sleep
 import Funcoes
+import keyboard
+from time import sleep
 def comprarNaLoja (jogador):
     fecharLoja = False
     itemLojaPocao = random.randint(0,100)
@@ -11,86 +14,82 @@ def comprarNaLoja (jogador):
 
     while not fecharLoja:
         compraRealizada = False
-        input("Você adentra a loja.. !:")
-        print("Sair da loja(S)")
+        print("Você adentra a loja... ")
+        sleep(1)
+        print("Sair da loja(5)")
         if itemLojaPocao <= 34:
-            print("Pocao de Ataque - 50g(PA)")
+            print("Pocao de Ataque - 50g(1)")
             podeComprarPocao = "PA"
             precoPocao = 50
         elif itemLojaPocao <= 67:
-            print("Pocao de Defesa - 50g(PD)")
+            print("Pocao de Defesa - 50g(1)")
             podeComprarPocao = "PD"
             precoPocao = 50
         elif itemLojaPocao <= 100:
             podeComprarPocao = "PI"
             precoPocao = 50
-            print("Pocao de Inteligencia - 50g(PI)")
+            print("Pocao de Inteligencia - 50g(1)")
         if itemLojaArtefato <= 50:
             podeComprarArtefato = "ALB"
             precoArtefato = 95
-            print(f"Lagrima do Berserker 95g(ALB)")
+            print(f"Lagrima do Berserker 95g(2)")
         elif itemLojaArtefato <= 100:
             podeComprarArtefato = "AGG"
-            precoArtefato = 90
-            print(f"Golpe Ganancioso 90g(AGG)")
+            precoArtefato = 40
+            print(f"Golpe Ganancioso 40g(2)")
         if itemLojaHabilidade <= 100:
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve (HCL) 70g")
+            print(f"Pergaminho de Habilidade Cura Leve (3) 70g")
 
-        print("Recuperar 1/3 HP MAX - 25g(RV)")
+        print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")
-            decisao = input("O que você deseja comprar: ")
             
-            if decisao == "RV" and jogador.ouro >= 25:
-                jogador.ouro -= 25
-                jogador.vida += int(jogador.vida/3)
-                Funcoes.vidaLimite(jogador)
-                print(f"+{int(jogador.vida/3)}HP")
+            
+            if keyboard.read_key() == "4":
+                if jogador.ouro >= 25:
+                    jogador.ouro -= 25
+                    jogador.vida += int(jogador.vida/3)
+                    Funcoes.vidaLimite(jogador)
+                    print(f"+{int(jogador.vida/3)}HP")
+                else:
+                    print("Ouro insuficiente!!!")
 
-            elif decisao == podeComprarPocao and not pocaoComprado:
-                if precoPocao <= jogador.ouro:
-                    if decisao == "PA":
-                        jogador.ataque += 2
-                        jogador.ouro -= precoPocao
-                        pocaoComprado = True
-                        print("Item comprado com sucesso")
-                    elif decisao == "PD":
-                        jogador.defesa += 10
-                        jogador.ouro -= precoPocao
-                        pocaoComprado = True
-                        print("Item comprado com sucesso")
-                    elif decisao == "PI":
-                        jogador.inteligencia += 2
+            if not pocaoComprado:
+                if keyboard.read_key() == "1":
+                     if precoPocao <= jogador.ouro:
+                        if podeComprarPocao == "PA":
+                            jogador.ataque += 2
+                        elif podeComprarPocao == "PD":
+                            jogador.defesa += 11
+                        elif podeComprarPocao == "PI":
+                            jogador.inteligencia += 2
                         jogador.ouro -= precoPocao
                         pocaoComprado = True
                         print("Item comprado com sucesso")
                 else:
                     print("Você não tem ouro o suficiente")
 
-            elif decisao == podeComprarArtefato and not artefatoComprado:
-                if decisao == "ALB":
-                    if precoArtefato <= jogador.ouro:
+            if not artefatoComprado:
+                if precoArtefato <= jogador.ouro:
+                    if keyboard.read_key() == "2":
                         jogador.artefatos.append(podeComprarArtefato)
                         jogador.ouro -= precoArtefato
                         artefatoComprado = True
                         print("Item comprado com sucesso")
-                elif decisao == "AGG":
-                    if precoArtefato <= jogador.ouro:
-                        jogador.artefatos.append(podeComprarArtefato)
-                        jogador.ouro -= precoArtefato
-                        artefatoComprado = True
-                        print("Item comprado com sucesso")
+                else:
+                    print("Você não tem ouro o suficiente")
 
-            elif decisao == podeComprarHabilidade and not habilidadeComprado:
-                if decisao == "HCL":
+            if not habilidadeComprado:
+                if keyboard.read_key() == "3":
                     if precoHabilidade <= jogador.ouro:
                         jogador.habilidades.append(podeComprarHabilidade)
                         jogador.ouro -= precoHabilidade
                         habilidadeComprado = True
                         print("Item comprado com sucesso")
-            elif decisao == "S":
+
+            if keyboard.read_key() == "5":
                 compraRealizada = True
                 fecharLoja = True
                 print("Você sai da loja")

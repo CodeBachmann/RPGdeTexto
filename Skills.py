@@ -36,14 +36,14 @@ def rapDeAcademia (jogador, efeito):
 def organizarAMente (jogador):
     jogador.mana -= 2
     jogador.vida += int(jogador.inteligencia/2)
-    input("Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
+    input("-2 MP | Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
     sleep(1)
     jogador.criticoGarantido = True
     jogador.passar = True
 
 def curaLeve (jogador):
     jogador.mana -= 4
-    cura = 2+jogador.inteligencia+random.randint(1, jogador.inteligencia/1.1)
+    cura = 2+jogador.inteligencia+random.randint(1, int(jogador.inteligencia/1.1))
     jogador.vida += cura
     print(f" +{cura}HP \n")
     if jogador.acaoBonus == True:
