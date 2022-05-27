@@ -17,18 +17,22 @@ def comprarNaLoja (jogador):
         print("Você adentra a loja... ")
         sleep(1)
         print("Sair da loja(5)")
-        if itemLojaPocao <= 34:
-            print("Pocao de Ataque - 50g(1)")
+        if itemLojaPocao <= 25:
+            print("Pocao de Ataque - 60g(1)")
             podeComprarPocao = "PA"
-            precoPocao = 50
-        elif itemLojaPocao <= 67:
-            print("Pocao de Defesa - 50g(1)")
+            precoPocao = 60
+        elif itemLojaPocao <= 50:
+            print("Pocao de Defesa - 45g(1)")
             podeComprarPocao = "PD"
-            precoPocao = 50
-        elif itemLojaPocao <= 100:
+            precoPocao = 45
+        elif itemLojaPocao <= 75:
             podeComprarPocao = "PI"
             precoPocao = 50
-            print("Pocao de Inteligencia - 50g(1)")
+            print("Pocao de Inteligencia - 40g(1)")
+        elif itemLojaPocao <= 100:
+            podeComprarPocao = "PV" 
+            precoPocao = 55
+            print("Pocao de Vida - 55g(1)")
         if itemLojaArtefato <= 50:
             podeComprarArtefato = "ALB"
             precoArtefato = 95
@@ -65,6 +69,9 @@ def comprarNaLoja (jogador):
                             jogador.defesa += 11
                         elif podeComprarPocao == "PI":
                             jogador.inteligencia += 2
+                        elif podeComprarPocao == "PV":
+                            jogador.vidaMax += 6
+                            jogador.vida += 6
                         jogador.ouro -= precoPocao
                         pocaoComprado = True
                         print("Item comprado com sucesso")

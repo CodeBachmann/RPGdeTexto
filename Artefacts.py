@@ -1,15 +1,21 @@
+from time import sleep
+
+
 def golpeGanancioso (jogador, monstro):
     if "AGG" in jogador.artefatos:
-        if jogador.dano == monstro.vida:
-            jogador.ouro += 30
-            print("GOLPE GANACIOSO: +30G")
+        if jogador.danoReal > monstro.vida:
+            ouroExtra = jogador.danoReal - monstro.vida
+            jogador.ouro += ouroExtra
+            print(f"GOLPE GANACIOSO: +{ouroExtra}G")
+            sleep(0.5)
 
 
 def cabeloColorido (jogador):
     if "ACC" in jogador.artefatos and jogador.foiCritico == True:
         jogador.danoReal += int((jogador.dano*2) - jogador.danoReal)
         jogador.vida += int(jogador.dano/4)
-        print("Você penetra a armadura do oponente e rouba sua vitalidade ")
+        print(f"CABELO COLORIDO:  {jogador.dano - jogador.danoReal} DANO EXTRA/nCABELO COLORIDO: +{int(jogador.dano/4)}HP")
+        sleep(0.5)
 
 
 def lagrimaBerserker (jogador, efeito):
@@ -17,9 +23,19 @@ def lagrimaBerserker (jogador, efeito):
         jogador.danoAumentado += efeito.tempoCombate
         if efeito.danoAumentado < 1:
             efeito.danoAumentado = 1
-        print(f"Lagrima do Berserker: +{efeito.tempoCombate} dano")
+        print(f"LAGRIMA DO BERSERKER: +{efeito.tempoCombate} DANO EXTRA")
+        sleep(0.5)
+
 
 def conhecimentoDor (jogador, monstro):
     if "ACD" in jogador.artefatos:
         jogador.mana += int(monstro.danoReal/3)
-        print(f"você recupera {int(monstro.danoReal/3)} pontos de mana")
+        print(f"CONHECIMENTO DA DOR: +{int(monstro.danoReal/3)} MP ")
+        sleep(0.5)
+
+
+def masoquistaAcademia (jogador, monstro):
+    if "AMDA" in jogador.artefatos:
+        jogador.danoAumentado += int(monstro.danoReal/2)
+        print(f"MASOQUISTA DA ACADEMIA: +{int(monstro.danoReal/2)} DANO EXTRA")
+        sleep(0.5)

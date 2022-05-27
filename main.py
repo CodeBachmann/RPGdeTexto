@@ -176,7 +176,7 @@ while jogador.vida > 0:
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 13, defesa= 36,
+            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 10, defesa= 36,
                 nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1

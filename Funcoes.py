@@ -1,6 +1,7 @@
 from asyncio.windows_events import NULL
 import random
 import Artefacts
+from time import sleep
 from re import S
 
 def vidaLimite (jogador):
@@ -50,17 +51,16 @@ def atacar(jogador, monstro, efeito):
     jogador.criticoGarantido = False
     jogador.foiCritico = False
     jogador.passar = True
-    print(f"Você inflinge {jogador.danoReal}(-{jogador.dano-jogador.danoReal}) pontos de dano")
+    print(f"VOCÊ INFLINGE: {jogador.danoReal}(-{jogador.dano-jogador.danoReal}) DE DANO")
+    sleep(0.5)
 
     
 def monstroAtacar(jogador, monstro):
     monstro.dano = (monstro.ataque + (random.randint(0, int(monstro.ataque*0.7))))
     calculaDano(monstro, jogador)
-    
-    if "AMDA" in jogador.artefatos:
-        jogador.danoAumentado = int(monstro.danoReal/2)
-        print("A dor te motiva, seu proximo ataque causa dano extra")
-    print(f"Você sofreu {int(monstro.danoReal)}(-{int(monstro.dano-monstro.danoReal)}) pontos de dano\n")
+    Artefacts.conhecimentoDor(jogador, monstro)
+    Artefacts.masoquistaAcademia(jogador, monstro)
+    print(f"VOCÊ SOFREU: {int(monstro.danoReal)}(-{int(monstro.dano-monstro.danoReal)}) DE DANO")
     if jogador.vida == NULL:
         jogador.vida = 0
     jogador.vida -= int(monstro.danoReal)
