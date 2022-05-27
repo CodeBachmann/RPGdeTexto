@@ -10,7 +10,7 @@ import os
 import Effects
 import Skills
 import Loja
-import keyboard
+import keyboard # 
 # --------------------------------- VARIÁVEIS --------------------------------- #
 
 #EVENTOS
@@ -71,7 +71,7 @@ while True:
             jogador = personagens.Reisch
             break
 
-input("1")
+# input("1")
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(2)
 os.system('cls') or None
