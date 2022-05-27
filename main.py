@@ -10,7 +10,7 @@ import os
 import Effects
 import Skills
 import Loja
-import keyboard # 
+import keyboard 
 # --------------------------------- VARIÁVEIS --------------------------------- #
 
 #EVENTOS
