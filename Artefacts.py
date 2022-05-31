@@ -1,4 +1,5 @@
-from time import sleep
+from time import sleep          
+import Funcoes
 
 
 def golpeGanancioso (jogador, monstro):
@@ -29,8 +30,8 @@ def lagrimaBerserker (jogador, efeito):
 
 def conhecimentoDor (jogador, monstro):
     if "ACD" in jogador.artefatos:
-        jogador.mana += int(monstro.danoReal/3)
-        print(f"CONHECIMENTO DA DOR: +{int(monstro.danoReal/3)} MP ")
+        jogador.mana += int(monstro.danoReal/4)
+        print(f"CONHECIMENTO DA DOR: +{int(monstro.danoReal/4)} MP ")
         sleep(0.5)
 
 
@@ -39,3 +40,10 @@ def masoquistaAcademia (jogador, monstro):
         jogador.danoAumentado += int(monstro.danoReal/2)
         print(f"MASOQUISTA DA ACADEMIA: +{int(monstro.danoReal/2)} DANO EXTRA")
         sleep(0.5)
+
+def idoloXaoc(jogador, monstro):
+    if "AIX" in jogador.artefatos:
+        if monstro.vida <= 0:
+            jogador.vida += int(jogador.vidaMax/4)
+            print(f"+{int(jogador.vidaMax/4)} HP | Xaoc consome o corpo do oponente, você se sente revigorado")
+            Funcoes.vidaLimite(jogador)

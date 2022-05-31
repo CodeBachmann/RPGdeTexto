@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from distutils.command.clean import clean
 from operator import truediv
 import random
 from re import T
@@ -7,6 +8,7 @@ from typing import Any
 import Funcoes
 import personagens
 import os
+import Artefacts
 import Effects
 import Skills
 import Loja
@@ -149,7 +151,7 @@ while jogador.vida > 0:
                 print("Decisao Invalida")
 
         os.system('cls') or None
-
+        
 
     #A PARTIR DE UMA INT ALEATORIA É ESCOLHIDO UM MONSTRO PARA BATALHAR
     decisaoMonstro = random.randint(0,1)
@@ -176,7 +178,7 @@ while jogador.vida > 0:
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 75, vidaMax= 75, ataque= 10, defesa= 36,
+            monstro = personagens.npc(vida = 50, vidaMax= 50, ataque= 10, defesa= 36,
                 nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1
@@ -194,14 +196,8 @@ while jogador.vida > 0:
         Funcoes.manaLimite(jogador)
         Effects.atordoar(jogador, efeito)
 
-        #BUFFAR DANO
-        if efeito.danoAumentado == 0:
-            jogador.danoAumentado = 0
-        else:
-            efeito.danoAumentado = efeito.danoAumentado - 1
-
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
-        Funcoes.status(monstro)
+        Funcoes.statusMonstro(monstro)
         Funcoes.status(jogador)
         sleep(1)
         #MOSTRA AS DECISOES DE COMBATE PARA O JOGADOR
@@ -219,31 +215,33 @@ while jogador.vida > 0:
                         for habilidade in jogador.habilidadesDesc:
                             print(habilidade)
                         print(f"{efeito.quantidadeHabilidades} - Voltar")
+                        volta = str(efeito.quantidadeHabilidades)
 
                         while True:
                             
-                            if keyboard.read_key() == "0" and 1 >= efeito.quantidadeHabilidades:
-                                indice = 0
+                            if 1 <= efeito.quantidadeHabilidades and keyboard.read_key() == "0":
+                                decisaoHabilidade = jogador.habilidades[0]
                                 break
-                            if keyboard.read_key() == "1" and 2 >= efeito.quantidadeHabilidades:
-                                indice = 1
+
+                            if 2 <= efeito.quantidadeHabilidades and keyboard.read_key() == "1":  
+                                decisaoHabilidade = jogador.habilidades[1]
                                 break
-                            if keyboard.read_key() == "2" and 3 >= efeito.quantidadeHabilidades:
-                                indice = 2
+
+                            if 3 <= efeito.quantidadeHabilidades and keyboard.read_key() == "2":
+                                decisaoHabilidade = jogador.habilidades[2]
                                 break
-                            if keyboard.read_key() == "3" and 4 >= efeito.quantidadeHabilidades:
-                                indice = 3
+                            
+                            if 4 <= efeito.quantidadeHabilidades and keyboard.read_key() == "3":
+                                decisaoHabilidade = jogador.habilidades[3]
                                 break
-                            if keyboard.read_key() == str(efeito.quantidadeHabilidades):
+
+                            if keyboard.read_key() == volta:
                                 decisaoHabilidade = "V"
                                 break
 
                         efeito.quantidadeHabilidades = 0
                         jogador.habilidadesDesc = []
-                        if decisaoHabilidade != "V":
-                            decisaoHabilidade = jogador.habilidades[indice]
                         
-
                         if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades and jogador.mana >= 4:
                             sleep(1)
                             Skills.multilacaoRegenerativa(jogador, monstro)
@@ -261,11 +259,14 @@ while jogador.vida > 0:
                             Skills.curaLeve(jogador)
                             break
 
+                        elif decisaoHabilidade == "HPA" and "HPA" in jogador.habilidades and jogador.mana >= 3:
+                            Skills.pancadaAtordoante(jogador, monstro, efeito)
+
                         elif "V":
                             break
 
                         else:
-                            print("")
+                            print("Decisao invalida!!")
 
                 elif keyboard.read_key() == "3":
                     encerrarCombate = True
@@ -281,6 +282,7 @@ while jogador.vida > 0:
            Funcoes.monstroAtacar(jogador, monstro)
 
         elif efeito.monstroAgir > 0:
+            print("O monstro não age nesse turno!")
             efeito.monstroAgir -= 1
 
         if jogador.vida <= 0:
@@ -291,6 +293,7 @@ while jogador.vida > 0:
 
         elif monstro.vida <=0:
             print("O MONSTRO MORREU!")
+            Artefacts.idoloXaoc(jogador, monstro)
             encerrarCombate = True
             sleep(1)
             ouro = random.randint(int(monstro.ouro),int(monstro.ouro*1.5))

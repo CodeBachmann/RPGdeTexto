@@ -40,16 +40,16 @@ def rapDeAcademia (jogador, efeito):
 def organizarAMente (jogador):
     jogador.mana -= 2
     jogador.vida += int(jogador.inteligencia/2)
-    input("-2 MP | Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
+    print("-2 MP | Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
     sleep(0.5)
     jogador.criticoGarantido = True
     jogador.passar = True
 
 def curaLeve (jogador):
     jogador.mana -= 4
-    cura = 2+jogador.inteligencia+random.randint(1, int(jogador.inteligencia/1.1))
+    cura = 3+int(jogador.inteligencia*0.7)+random.randint(1, int(jogador.inteligencia*0.5))
     jogador.vida += cura
-    print(f" +{cura}HP \n")
+    print(f"+{cura} HP | -4 MP | Você sente sua energia ser drenada, mas seu corpo se recupera\n")
     sleep(0.5)
     if jogador.acaoBonus == True:
         jogador.acaoBonus = False
@@ -57,11 +57,12 @@ def curaLeve (jogador):
     else:
         jogador.passar = True
     
-def pancadaAtordoante (jogador, monstro):
+def pancadaAtordoante (jogador, monstro, efeito):
     jogador.mana -= 3
+    print("-3 MP")
     sorte = random.randint(0,100)
     if sorte > 49:
-        monstro.podeAgir = False
+        efeito.monstroAgir = 1
         print(f"O MONSTRO É ATORDOADO!!!")
     jogador.dano = (int(jogador.ataque*0.8) + (random.randint(0, int(jogador.ataque*0.5))))
     Funcoes.calculaDano(jogador, monstro)

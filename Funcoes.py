@@ -22,6 +22,8 @@ def adicionarHabilidade (jogador, efeito):
         habilidade.append("(HOAM) Custo: [2] Organizar a Mente -- Recupera um pouco de vida, o proximo ataque será Critico")
     if "HCL" in jogador.habilidades:
         habilidade.append("(HCL) Custo: [4] Cura Leve -- Recupera vida baseado na sua inteligencia")
+    if "HPA" in jogador.habilidades:
+        habilidade.append("(HPA) Custo: [3] Pancada Atordoante -- Causa dano e tem 1/2 chance de atordoar")
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(f"{efeito.quantidadeHabilidades} - " + elemento)
@@ -67,7 +69,8 @@ def monstroAtacar(jogador, monstro):
     
 
 def status(jogador):
-    print(f"STATUS {jogador.nome} \nVida : {jogador.vida}\nAtaque : {jogador.ataque}\nDefesa : {jogador.defesa}\n")
+    print(f"STATUS {jogador.nome} \nVIDA : {jogador.vida}\nATAQUE : {jogador.ataque}\nDEFESA : {jogador.defesa}\n\
+        MANA : {jogador.mana}")
     return "\b"
 
 
@@ -100,6 +103,7 @@ def apresentacaoDeClasse(classe, caracteristica):
   DEFESA:       {classe.defesa}
   VIDA:         {classe.vida}
   INTELIGENCIA: {classe.inteligencia}
+  MANA:         {classe.mana}
   """)
 
 def apresentacaoDeClasses1(classes):
