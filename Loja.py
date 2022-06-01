@@ -18,33 +18,49 @@ def comprarNaLoja (jogador):
         sleep(1)
         print("Sair da loja - (5)")
         if itemLojaPocao <= 25:
-            print("Pocao de Ataque - 60g(1)")
             podeComprarPocao = "PA"
             precoPocao = 60
+            print("Pocao de Ataque - 60g(1)")
+
         elif itemLojaPocao <= 50:
-            print("Pocao de Defesa - 45g(1)")
             podeComprarPocao = "PD"
             precoPocao = 45
+            print("Pocao de Defesa - 45g(1)")
+
         elif itemLojaPocao <= 75:
             podeComprarPocao = "PI"
             precoPocao = 50
             print("Pocao de Inteligencia - 40g(1)")
+            
         elif itemLojaPocao <= 100:
             podeComprarPocao = "PV" 
             precoPocao = 55
             print("Pocao de Vida - 55g(1)")
-        if itemLojaArtefato <= 50:
+
+        if itemLojaArtefato <= 33:
             podeComprarArtefato = "ALB"
             precoArtefato = 95
             print(f"Lagrima do Berserker - 95g(2)")
-        elif itemLojaArtefato <= 100:
+
+        elif itemLojaArtefato <= 66:
             podeComprarArtefato = "AGG"
             precoArtefato = 40
             print(f"Golpe Ganancioso - 40g(2)")
-        if itemLojaHabilidade <= 100:
+
+        elif itemLojaArtefato <= 100:
+            podeComprarArtefato = "AIX"
+            precoArtefato = 65
+            print(f"Idolo Xaoc - 65g(2)")
+
+        if itemLojaHabilidade <= 50:
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve - 70g(3) ")
+            print(f"Pergaminho de Habilidade Cura Leve - 70g(3)")
+
+        elif itemLojaHabilidade <= 100:
+            podeComprarHabilidade = "HPA"
+            precoHabilidade = 85
+            print(f"Pancada Atordoante - 80g(3)")
 
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
@@ -54,9 +70,9 @@ def comprarNaLoja (jogador):
             if keyboard.read_key() == "4":
                 if jogador.ouro >= 25:
                     jogador.ouro -= 25
-                    jogador.vida += int(jogador.vida/3)
+                    jogador.vida += int(jogador.vidaMax/3)
                     Funcoes.vidaLimite(jogador)
-                    print(f"+{int(jogador.vida/3)}HP")
+                    print(f"+{int(jogador.vidaMax/3)}HP")
                 else:
                     print("Ouro insuficiente!!!")
 
