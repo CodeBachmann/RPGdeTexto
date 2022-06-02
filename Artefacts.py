@@ -6,16 +6,17 @@ def golpeGanancioso (jogador, monstro):
     if "AGG" in jogador.artefatos:
         if jogador.danoReal > monstro.vida:
             ouroExtra = jogador.danoReal - monstro.vida
-            jogador.ouro += ouroExtra
+            jogador.ouro += int(ouroExtra*1.4)
             print(f"GOLPE GANACIOSO: +{ouroExtra}G")
             sleep(0.5)
 
 
 def cabeloColorido (jogador):
     if "ACC" in jogador.artefatos and jogador.foiCritico == True:
-        jogador.danoReal += int((jogador.dano*2) - jogador.danoReal)
-        jogador.vida += int(jogador.dano/4)
-        print(f"CABELO COLORIDO:  {jogador.dano - jogador.danoReal} DANO EXTRA/nCABELO COLORIDO: +{int(jogador.dano/4)}HP")
+        danoExtra = int((jogador.dano*2) - (2*jogador.danoReal))
+        jogador.danoReal += danoExtra
+        jogador.vida += int(jogador.dano/3)
+        print(f"CABELO COLORIDO:  {danoExtra} DANO EXTRA/nCABELO COLORIDO: +{int(jogador.dano/3)}HP")
         sleep(0.5)
 
 

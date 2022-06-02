@@ -33,13 +33,14 @@ class CriarPersonagem():
 
 
 class timers():
-    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades):
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque):
         self.defesa = defesa
         self.podeAgir = podeAgir
         self.danoAumentado = danoAumentado
         self.monstroAgir = monstroAgir
         self.tempoCombate = tempoCombate
         self.quantidadeHabilidades = quantidadeHabilidades
+        self.ataque = ataque
 
 
 class npc():
@@ -66,7 +67,8 @@ efx = timers(defesa = 0,
             danoAumentado = 0,
             monstroAgir = 0,
             tempoCombate=0,
-            quantidadeHabilidades = 0)
+            quantidadeHabilidades = 0,
+            ataque= 0)
 
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,

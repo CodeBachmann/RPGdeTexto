@@ -1,6 +1,9 @@
-import keyboard
+listaNaoCompradosArtefatos = ["ALB","AGG","AIX"]
+listaNaoCompradosPocoes = ["PA","PD","PI","PV"]
+listaNaoCompradosHabilidades = ["HCL","HPA"]
 while True:
-    
-    if keyboard.press_and_release("1"):
-        print("fogo")  
-           
+    print(listaNaoCompradosArtefatos)
+    print(listaNaoCompradosHabilidades)
+    h = "HCL"
+    input('qq')
+    listaNaoCompradosHabilidades.remove(h)

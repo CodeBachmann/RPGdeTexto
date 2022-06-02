@@ -27,26 +27,29 @@ def multilacaoRegenerativa (jogador, monstro):
         jogador.dano = 0
 
 def rapDeAcademia (jogador, efeito):
-    jogador.mana -= 2
+    jogador.mana -= 3
     aumentarDano = jogador.ataque + int(jogador.defesa/7)
     jogador.danoAumentado = aumentarDano
     efeito.danoAumentado = 1
-    print(f"-2 MP | +{aumentarDano} dano no proximo ataque")
+    print(f"-3 MP | +{aumentarDano} dano no proximo ataque")
     sleep(0.5)
-    efeito.monstroAgir = 1
-    efeito.podeAgir = 5
-    jogador.passar = True
+    if jogador.acaoBonus == True:
+        jogador.acaoBonus = False
+        print("Você usou sua ação Bonus")
+    else:
+        jogador.passar = True
 
 def organizarAMente (jogador):
-    jogador.mana -= 2
-    jogador.vida += int(jogador.inteligencia/2)
-    print("-2 MP | Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
+    jogador.mana -= 3
+    cura = int(jogador.inteligencia/2)
+    jogador.vida += cura
+    print(F"-3 MP | +{cura} HP | Você organiza sua mente, sua resiliencia aumenta e seu proximo golpe será critico ")
     sleep(0.5)
     jogador.criticoGarantido = True
     jogador.passar = True
 
 def curaLeve (jogador):
-    jogador.mana -= 4
+    jogador.mana -= 5
     cura = 3+int(jogador.inteligencia*0.7)+random.randint(1, int(jogador.inteligencia*0.5))
     jogador.vida += cura
     print(f"+{cura} HP | -4 MP | Você sente sua energia ser drenada, mas seu corpo se recupera\n")
@@ -59,7 +62,7 @@ def curaLeve (jogador):
     
 def pancadaAtordoante (jogador, monstro, efeito):
     jogador.mana -= 3
-    print("-3 MP")
+    print("-3 MP |")
     sorte = random.randint(0,100)
     if sorte > 49:
         efeito.monstroAgir = 1
@@ -68,3 +71,15 @@ def pancadaAtordoante (jogador, monstro, efeito):
     Funcoes.calculaDano(jogador, monstro)
     print(f"VOCÊ INFLINGE: {jogador.danoReal}")
     monstro.vida -= jogador.danoReal
+    jogador.passar = True
+
+def enfraquecerOponente (jogador, monstro, efeito):
+    jogador.mana -= 2
+    print(f"-3 MP | DANO MONSTRO -50%")
+    sleep(0.5)
+    efeito.ataque = int(monstro.ataque/2)
+    if jogador.acaoBonus == True:
+        jogador.acaoBonus = False
+        print("Você usou sua ação Bonus")
+    else:
+        jogador.passar = True

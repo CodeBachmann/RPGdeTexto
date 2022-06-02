@@ -3,11 +3,16 @@ from time import sleep
 import Funcoes
 import keyboard
 from time import sleep
+listaNaoCompradosArtefatos = ['ALB','AGG','AIX']
+listaNaoCompradosPocoes = ["PA","PD","PI","PV"]
+listaNaoCompradosHabilidades = ['HCL','HPA',"HEO"]
 def comprarNaLoja (jogador):
+    print(listaNaoCompradosArtefatos)
+    print(listaNaoCompradosHabilidades)
     fecharLoja = False
-    itemLojaPocao = random.randint(0,100)
-    itemLojaArtefato = random.randint(0,100)
-    itemLojaHabilidade = random.randint(0,100)
+    itemLojaPocao = random.choice(listaNaoCompradosPocoes)
+    itemLojaArtefato = random.choice(listaNaoCompradosArtefatos)
+    itemLojaHabilidade = random.choice(listaNaoCompradosHabilidades)
     pocaoComprado = False
     artefatoComprado = False
     habilidadeComprado = False
@@ -17,51 +22,55 @@ def comprarNaLoja (jogador):
         print("Você adentra a loja... ")
         sleep(1)
         print("Sair da loja - (5)")
-        if itemLojaPocao <= 25:
+        if itemLojaPocao == "PA":
             podeComprarPocao = "PA"
             precoPocao = 60
             print("Pocao de Ataque - 60g(1)")
 
-        elif itemLojaPocao <= 50:
+        elif itemLojaPocao == "PD":
             podeComprarPocao = "PD"
             precoPocao = 45
             print("Pocao de Defesa - 45g(1)")
 
-        elif itemLojaPocao <= 75:
+        elif itemLojaPocao == "PI":
             podeComprarPocao = "PI"
             precoPocao = 50
             print("Pocao de Inteligencia - 40g(1)")
             
-        elif itemLojaPocao <= 100:
+        elif itemLojaPocao == "PV":
             podeComprarPocao = "PV" 
             precoPocao = 55
             print("Pocao de Vida - 55g(1)")
 
-        if itemLojaArtefato <= 33:
+        if itemLojaArtefato == "ALB":
             podeComprarArtefato = "ALB"
             precoArtefato = 95
-            print(f"Lagrima do Berserker - 95g(2)")
+            print(f"Lagrima do Berserker - {precoArtefato}g(2)")
 
-        elif itemLojaArtefato <= 66:
+        elif itemLojaArtefato == "AGG":
             podeComprarArtefato = "AGG"
             precoArtefato = 40
-            print(f"Golpe Ganancioso - 40g(2)")
+            print(f"Golpe Ganancioso - {precoArtefato}g(2)")
 
-        elif itemLojaArtefato <= 100:
+        elif itemLojaArtefato == "AIX":
             podeComprarArtefato = "AIX"
             precoArtefato = 65
-            print(f"Idolo Xaoc - 65g(2)")
+            print(f"Idolo Xaoc - {precoArtefato}g(2)")
 
-        if itemLojaHabilidade <= 50:
+        if itemLojaHabilidade == "HCL":
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve - 70g(3)")
+            print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)")
 
-        elif itemLojaHabilidade <= 100:
+        elif itemLojaHabilidade == "HPA":
             podeComprarHabilidade = "HPA"
-            precoHabilidade = 85
-            print(f"Pancada Atordoante - 80g(3)")
+            precoHabilidade = 75
+            print(f"Pancada Atordoante - {precoHabilidade}g(3)")
 
+        elif itemLojaHabilidade == "HEO":
+            podeComprarHabilidade = "HEO"
+            precoHabilidade = 65
+            print(f"Enfraquecer Oponente - {precoHabilidade}g(3)")
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")
@@ -100,6 +109,7 @@ def comprarNaLoja (jogador):
                         jogador.artefatos.append(podeComprarArtefato)
                         jogador.ouro -= precoArtefato
                         artefatoComprado = True
+                        listaNaoCompradosArtefatos.remove(podeComprarArtefato)
                         print("Item comprado com sucesso")
                 else:
                     print("Você não tem ouro o suficiente")
@@ -110,6 +120,7 @@ def comprarNaLoja (jogador):
                         jogador.habilidades.append(podeComprarHabilidade)
                         jogador.ouro -= precoHabilidade
                         habilidadeComprado = True
+                        listaNaoCompradosHabilidades.remove(podeComprarHabilidade)
                         print("Item comprado com sucesso")
 
             if keyboard.read_key() == "5":

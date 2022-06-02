@@ -15,15 +15,17 @@ def manaLimite (jogador):
 def adicionarHabilidade (jogador, efeito):
     habilidade = []
     if "HRDA" in jogador.habilidades:
-        habilidade.append("(HRDA) Custo: [2] Rap de Academia -- Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
+        habilidade.append("(HRDA) Custo: [3] Rap de Academia -- Aumenta o dano do proximo ataque, se o inimigo sobreviver o jogador e atordoado ")
     if "HMR" in jogador.habilidades:
         habilidade.append("(HMR) Custo: [4] Multilação Regenerativa -- Perde até 2 de vida, causa dano baseado em INT + ATT, o dano causado é convertido em vida")
     if "HOAM" in jogador.habilidades:
-        habilidade.append("(HOAM) Custo: [2] Organizar a Mente -- Recupera um pouco de vida, o proximo ataque será Critico")
+        habilidade.append("(HOAM) Custo: [3] Organizar a Mente -- Recupera um pouco de vida, o proximo ataque será Critico")
     if "HCL" in jogador.habilidades:
-        habilidade.append("(HCL) Custo: [4] Cura Leve -- Recupera vida baseado na sua inteligencia")
+        habilidade.append("(HCL) Custo: [5] Cura Leve -- Recupera vida baseado na sua inteligencia")
     if "HPA" in jogador.habilidades:
         habilidade.append("(HPA) Custo: [3] Pancada Atordoante -- Causa dano e tem 1/2 chance de atordoar")
+    if "HEO" in jogador.habilidades:
+        habilidade.append("(HEO) Custo: [2] Enfraquecer Oponente -- Reduz o dano do proximo ataque pela metade")
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(f"{efeito.quantidadeHabilidades} - " + elemento)
@@ -57,8 +59,8 @@ def atacar(jogador, monstro, efeito):
     sleep(0.5)
 
     
-def monstroAtacar(jogador, monstro):
-    monstro.dano = (monstro.ataque + (random.randint(0, int(monstro.ataque*0.7))))
+def monstroAtacar(jogador, monstro, efeito):
+    monstro.dano = (monstro.ataque - efeito.ataque + (random.randint(0, int(monstro.ataque-efeito.ataque)*0.7)))
     calculaDano(monstro, jogador)
     Artefacts.conhecimentoDor(jogador, monstro)
     Artefacts.masoquistaAcademia(jogador, monstro)
@@ -69,13 +71,12 @@ def monstroAtacar(jogador, monstro):
     
 
 def status(jogador):
-    print(f"STATUS {jogador.nome} \nVIDA : {jogador.vida}\nATAQUE : {jogador.ataque}\nDEFESA : {jogador.defesa}\n\
-        MANA : {jogador.mana}")
+    print(f"STATUS {jogador.nome} \nVIDA : {jogador.vida}\nATAQUE : {jogador.ataque}\nDEFESA : {jogador.defesa}\nMANA : {jogador.mana}")
     return "\b"
 
 
 def statusMonstro(monstro):
-    print(f"STATUS {monstro.nome} \nVida : {monstro.vida}\nAtaque : {monstro.ataque}\nDefesa : {monstro.defesa}\n")
+    print(f"STATUS {monstro.nome} \nVIDA : {monstro.vida}\nATAQUE : {monstro.ataque}\nDEFESA : {monstro.defesa}\n")
     return "\b"
 
 

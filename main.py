@@ -159,26 +159,33 @@ while jogador.vida > 0:
         if decisaoMonstro == 0 and enfrentarMonstroComun:
 
             print("UM SLIME APARECE!!!\n")
-            monstro = personagens.npc(vida = 20, vidaMax= 20, ataque= 4, defesa= 24,
+            monstro = personagens.npc(vida = 22, vidaMax= 22, ataque= 5, defesa= 24,
                 nome="SLIME", critico= 5, ouro= 23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
-            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 6, defesa= 15,
+            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 7, defesa= 15,
                 nome="GOBLIN", critico= 7, ouro=23, podeAgir = True, dano = 0, danoReal = 0)
             enfrentarMonstroComun = False
 
-        elif enfrentarMonstroElite:
+        elif decisaoMonstro == 0 and enfrentarMonstroElite:
             print("UM GOLEM BEBE APARECE!!!\n")
-            monstro = personagens.npc(vida = 35, vidaMax= 35, ataque= 8, defesa= 41,
-                nome="GOLEM BEBE", critico= 0, ouro= 40, podeAgir = True, dano = 0, danoReal = 0)
+            monstro = personagens.npc(vida = 40, vidaMax= 40, ataque= 8, defesa= 41,
+                nome="GOLEM BEBE", critico= 0, ouro= 55, podeAgir = True, dano = 0, danoReal = 0)
+            efeito.monstroAgir = 1
+            enfrentarMonstroElite = False
+
+        elif decisaoMonstro == 1 and enfrentarMonstroElite:
+            print("UM CULTISTA XAOC APARECE!!!\n")
+            monstro = personagens.npc(vida = 28, vidaMax= 28, ataque= 11, defesa= 15,
+                nome="CULTISTA XAOC", critico= 0, ouro= 55, podeAgir = True, dano = 0, danoReal = 0)
             efeito.monstroAgir = 1
             enfrentarMonstroElite = False
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 50, vidaMax= 50, ataque= 10, defesa= 36,
+            monstro = personagens.npc(vida = 55, vidaMax= 55, ataque= 10, defesa= 34,
                 nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1
@@ -262,6 +269,8 @@ while jogador.vida > 0:
                         elif decisaoHabilidade == "HPA" and "HPA" in jogador.habilidades and jogador.mana >= 3:
                             Skills.pancadaAtordoante(jogador, monstro, efeito)
 
+                        elif decisaoHabilidade == "HEO" and "HEO" in jogador.habilidades and jogador.mana >= 2:
+                            Skills.enfraquecerOponente(jogador, monstro, efeito)
                         elif "V":
                             break
 
@@ -279,11 +288,13 @@ while jogador.vida > 0:
         jogador.mana += jogador.regenMana
         #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
         if monstro.vida > 0 and efeito.monstroAgir == 0:
-           Funcoes.monstroAtacar(jogador, monstro)
+           Funcoes.monstroAtacar(jogador, monstro, efeito)
 
         elif efeito.monstroAgir > 0:
             print("O monstro não age nesse turno!")
             efeito.monstroAgir -= 1
+        
+        
 
         if jogador.vida <= 0:
             encerrarCombate = True
