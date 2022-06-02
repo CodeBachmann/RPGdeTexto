@@ -2,17 +2,18 @@ import random
 from time import sleep
 import Funcoes
 import keyboard
+import personagens
 from time import sleep
-listaNaoCompradosArtefatos = ['ALB','AGG','AIX']
+
+loja = personagens.Compraveis
+
 listaNaoCompradosPocoes = ["PA","PD","PI","PV"]
-listaNaoCompradosHabilidades = ['HCL','HPA',"HEO"]
+
 def comprarNaLoja (jogador):
-    print(listaNaoCompradosArtefatos)
-    print(listaNaoCompradosHabilidades)
     fecharLoja = False
     itemLojaPocao = random.choice(listaNaoCompradosPocoes)
-    itemLojaArtefato = random.choice(listaNaoCompradosArtefatos)
-    itemLojaHabilidade = random.choice(listaNaoCompradosHabilidades)
+    itemLojaArtefato = random.choice(loja.artefatosComprados)
+    itemLojaHabilidade = random.choice(loja.habilidadesComprados)
     pocaoComprado = False
     artefatoComprado = False
     habilidadeComprado = False
@@ -109,7 +110,7 @@ def comprarNaLoja (jogador):
                         jogador.artefatos.append(podeComprarArtefato)
                         jogador.ouro -= precoArtefato
                         artefatoComprado = True
-                        listaNaoCompradosArtefatos.remove(podeComprarArtefato)
+                        loja.artefatosComprados.remove(podeComprarArtefato)
                         print("Item comprado com sucesso")
                 else:
                     print("Você não tem ouro o suficiente")
@@ -120,7 +121,7 @@ def comprarNaLoja (jogador):
                         jogador.habilidades.append(podeComprarHabilidade)
                         jogador.ouro -= precoHabilidade
                         habilidadeComprado = True
-                        listaNaoCompradosHabilidades.remove(podeComprarHabilidade)
+                        loja.habilidadesComprados.remove(podeComprarHabilidade)
                         print("Item comprado com sucesso")
 
             if keyboard.read_key() == "5":

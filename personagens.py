@@ -33,7 +33,7 @@ class CriarPersonagem():
 
 
 class timers():
-    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque):
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque, tempoAtaque):
         self.defesa = defesa
         self.podeAgir = podeAgir
         self.danoAumentado = danoAumentado
@@ -41,6 +41,7 @@ class timers():
         self.tempoCombate = tempoCombate
         self.quantidadeHabilidades = quantidadeHabilidades
         self.ataque = ataque
+        self.tempoAtaque = tempoAtaque
 
 
 class npc():
@@ -56,6 +57,10 @@ class npc():
         self.dano = dano
         self.danoReal = danoReal
 
+class loja():
+    def __init__(self, artefatosComprados, habilidadesComprados):
+        self.artefatosComprados = artefatosComprados
+        self.habilidadesComprados = habilidadesComprados
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
@@ -68,8 +73,10 @@ efx = timers(defesa = 0,
             monstroAgir = 0,
             tempoCombate=0,
             quantidadeHabilidades = 0,
-            ataque= 0)
-
+            ataque= 0,
+            tempoAtaque = 0)
+Compraveis = loja   (artefatosComprados = ['ALB','AGG','AIX'],
+                    habilidadesComprados = ['HCL','HPA',"HEO"])
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,
                         ataque=8,
@@ -124,7 +131,7 @@ Santos = CriarPersonagem(vida=35,
 
 Reisch = CriarPersonagem(vida=21,
                         vidaMax=21,
-                        ataque=8,
+                        ataque=9,
                         defesa=29,
                         classe="REISCH",
                         critico=3,
@@ -147,5 +154,3 @@ Reisch = CriarPersonagem(vida=21,
                         dano = 0,
                         danoReal= 0,
                         acaoBonus=True)
-
-

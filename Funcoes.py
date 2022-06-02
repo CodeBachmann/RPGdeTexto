@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 import random
+from sre_constants import OP_UNICODE_IGNORE
 import Artefacts
 from time import sleep
 from re import S
@@ -40,15 +41,16 @@ def calculaDano(atacante, defensor):
 def atacar(jogador, monstro, efeito):
 
     jogador.dano = (jogador.ataque + (random.randint(0, int(jogador.ataque*0.7))))
+    jogador.dano += jogador.danoAumentado
     calculaDano(jogador, monstro)
     if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
         jogador.danoReal *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
-    Artefacts.golpeGanancioso(jogador, monstro)        
+            
     Artefacts.cabeloColorido(jogador)
     Artefacts.lagrimaBerserker(jogador, efeito)
-    jogador.danoReal += jogador.danoAumentado
+    Artefacts.golpeGanancioso(jogador, monstro)
     monstro.vida -= jogador.danoReal
     vidaLimite(jogador)
     jogador.danoAumentado = 0
@@ -60,7 +62,7 @@ def atacar(jogador, monstro, efeito):
 
     
 def monstroAtacar(jogador, monstro, efeito):
-    monstro.dano = (monstro.ataque - efeito.ataque + (random.randint(0, int(monstro.ataque-efeito.ataque)*0.7)))
+    monstro.dano = ((monstro.ataque - efeito.ataque) + (random.randint(0, int((monstro.ataque-efeito.ataque)*0.7))))
     calculaDano(monstro, jogador)
     Artefacts.conhecimentoDor(jogador, monstro)
     Artefacts.masoquistaAcademia(jogador, monstro)
@@ -83,9 +85,6 @@ def statusMonstro(monstro):
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")
 
-#Loja
-
-
 
 def todosOsStatus(jogador):
     print(f"Vida: {jogador.vida}")
@@ -100,11 +99,12 @@ def todosOsStatus(jogador):
 
 def apresentacaoDeClasse(classe, caracteristica):
   print(f"""{classe.classe}, {caracteristica}
-  ATAQUE:       {classe.ataque}
-  DEFESA:       {classe.defesa}
-  VIDA:         {classe.vida}
-  INTELIGENCIA: {classe.inteligencia}
-  MANA:         {classe.mana}
+    ATAQUE:       {classe.ataque}
+    DEFESA:       {classe.defesa}
+    VIDA:         {classe.vida}
+    INTELIGENCIA: {classe.inteligencia}
+    MANA:         {classe.mana}
+    OURO:         {classe.ouro}            
   """)
 
 def apresentacaoDeClasses1(classes):
@@ -120,7 +120,7 @@ def apresentacaoDeClasses1(classes):
     # Ifs para que o tamanho, em string, das variáveis seja o mesmo
     # caso o valor seja menor q 10, ou seja, tenha apenas um digito, é adicionado um espaço antes
     ataque       = '' if c[0].ataque > 9 else ' '  
-    defesa       = '' if c[0].defesa > 9 else ' '  
+    defesa       = '' if c[0].defesa > 9 else ' ' 
     vida         = '' if c[0].vida > 9 else ' '  
     inteligencia = '' if c[0].inteligencia > 9 else ' '  
 
@@ -146,6 +146,7 @@ def apresentacaoDeClasses2(classes):
   defesa       = f'Def:       '
   vida         = f'Vid:       '
   inteligencia = f'Int:       '
+
 
   for classe in classes:
     espaco = len(classe[0].classe) + 5

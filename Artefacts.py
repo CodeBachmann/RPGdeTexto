@@ -13,7 +13,7 @@ def golpeGanancioso (jogador, monstro):
 
 def cabeloColorido (jogador):
     if "ACC" in jogador.artefatos and jogador.foiCritico == True:
-        danoExtra = int((jogador.dano*2) - (2*jogador.danoReal))
+        danoExtra = int((jogador.dano*2) - (jogador.danoReal))
         jogador.danoReal += danoExtra
         jogador.vida += int(jogador.dano/3)
         print(f"CABELO COLORIDO:  {danoExtra} DANO EXTRA/nCABELO COLORIDO: +{int(jogador.dano/3)}HP")

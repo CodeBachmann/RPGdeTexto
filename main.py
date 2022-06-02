@@ -8,6 +8,7 @@ from typing import Any
 import Funcoes
 import personagens
 import os
+import sys
 import Artefacts
 import Effects
 import Skills
@@ -84,7 +85,12 @@ sleep(2)
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
     if marcadorArea == 0 and not monologo:
-        print("Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores...")
+        texto = "Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores..."
+        for c in texto:
+            print(c, end="")
+            sys.stdout.flush()
+            sleep(0.05)
+            
         sleep(1)
         os.system('cls') or None
         monologo = True
@@ -122,7 +128,9 @@ while jogador.vida > 0:
             print(f"Lutar com um monstro comun(1)\n")
             caminhoMonstroComun = True
         else:
-            input(f"Você sente uma presença ameaçadora !:")
+            print(f"Você sente uma presença ameaçadora!!!")
+            sleep(2)
+            os.system('cls') or None
             caminhoChefe = True
             jogador.caminhado = 0
             jogador.passar = True
@@ -131,20 +139,24 @@ while jogador.vida > 0:
         while True:
             if caminhoChefe:
                 jogador.passar = True
+                os.system('cls') or None
                 break
 
             elif keyboard.read_key() == "1" and caminhoMonstroComun:
                 enfrentarMonstroComun = True
                 jogador.passar = True
+                os.system('cls') or None
                 break
 
             elif keyboard.read_key() == "2" and caminhoMonstroElite:
                 enfrentarMonstroElite = True
                 jogador.passar = True
+                os.system('cls') or None
                 break
 
             elif keyboard.read_key() == "3" and caminhoLoja:
                 Loja.comprarNaLoja(jogador)
+                os.system('cls') or None
                 break
                 
             else:
@@ -161,12 +173,14 @@ while jogador.vida > 0:
             print("UM SLIME APARECE!!!\n")
             monstro = personagens.npc(vida = 22, vidaMax= 22, ataque= 5, defesa= 24,
                 nome="SLIME", critico= 5, ouro= 23, podeAgir = True, dano = 0, danoReal = 0)
+            efeito.monstroAgir = 0
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 1 and enfrentarMonstroComun:
             print("UM GOBLIN APARECE!!!\n")
             monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 7, defesa= 15,
                 nome="GOBLIN", critico= 7, ouro=23, podeAgir = True, dano = 0, danoReal = 0)
+            efeito.monstroAgir = 0
             enfrentarMonstroComun = False
 
         elif decisaoMonstro == 0 and enfrentarMonstroElite:
@@ -180,12 +194,12 @@ while jogador.vida > 0:
             print("UM CULTISTA XAOC APARECE!!!\n")
             monstro = personagens.npc(vida = 28, vidaMax= 28, ataque= 11, defesa= 15,
                 nome="CULTISTA XAOC", critico= 0, ouro= 55, podeAgir = True, dano = 0, danoReal = 0)
-            efeito.monstroAgir = 1
+            efeito.monstroAgir = 0
             enfrentarMonstroElite = False
 
         elif caminhoChefe:
             print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 55, vidaMax= 55, ataque= 10, defesa= 34,
+            monstro = personagens.npc(vida = 63, vidaMax= 63, ataque= 10, defesa= 34,
                 nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
             caminhoChefe = False
             marcadorArea = 1
@@ -204,13 +218,16 @@ while jogador.vida > 0:
         Effects.atordoar(jogador, efeito)
 
         #MOSTRA OS STATUS ATUAIS DO JOGADOR E DO MONSTRO
+        
         Funcoes.statusMonstro(monstro)
         Funcoes.status(jogador)
+        print("\n")
         sleep(1)
         #MOSTRA AS DECISOES DE COMBATE PARA O JOGADOR
         if jogador.podeAgir:
             jogador.passar = False
             while not jogador.passar:
+                
                 print("AÇÕES :\n(1)ATACAR\n(2)HABILIDADES\n(3)FUGIR\n(4)ITENS\n")
                 
                 if keyboard.read_key() == "1":
@@ -268,9 +285,12 @@ while jogador.vida > 0:
 
                         elif decisaoHabilidade == "HPA" and "HPA" in jogador.habilidades and jogador.mana >= 3:
                             Skills.pancadaAtordoante(jogador, monstro, efeito)
+                            break
 
                         elif decisaoHabilidade == "HEO" and "HEO" in jogador.habilidades and jogador.mana >= 2:
                             Skills.enfraquecerOponente(jogador, monstro, efeito)
+                            break
+
                         elif "V":
                             break
 
@@ -285,16 +305,22 @@ while jogador.vida > 0:
                     print("\n")
                 else:
                     print("")
+            
         jogador.mana += jogador.regenMana
-        #CALCULA, APLICA E MOSTRA O DANO DO MONSTRO ALEM DE VERIFICAR SE UMA EMBOSCADA JA FOI REALIZADA
+        print("+1 MP")
+        sleep(1)
+
         if monstro.vida > 0 and efeito.monstroAgir == 0:
-           Funcoes.monstroAtacar(jogador, monstro, efeito)
+            Funcoes.monstroAtacar(jogador, monstro, efeito)
+            print("\n") 
+
 
         elif efeito.monstroAgir > 0:
             print("O monstro não age nesse turno!")
             efeito.monstroAgir -= 1
         
-        
+        Effects.debuffAtaque(monstro, efeito)
+
 
         if jogador.vida <= 0:
             encerrarCombate = True
@@ -308,6 +334,7 @@ while jogador.vida > 0:
             encerrarCombate = True
             sleep(1)
             ouro = random.randint(int(monstro.ouro),int(monstro.ouro*1.5))
-            print(f"+{ouro}G")
+            print(f"+{ouro}G\n")
             jogador.ouro += ouro
             efeito.podeAgir = 0
+            sleep(1)

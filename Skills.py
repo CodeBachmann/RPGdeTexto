@@ -71,13 +71,19 @@ def pancadaAtordoante (jogador, monstro, efeito):
     Funcoes.calculaDano(jogador, monstro)
     print(f"VOCÊ INFLINGE: {jogador.danoReal}")
     monstro.vida -= jogador.danoReal
-    jogador.passar = True
+    if jogador.acaoBonus == True:
+        jogador.acaoBonus = False
+        print("Você usou sua ação Bonus")
+    else:
+        jogador.passar = True
+    
 
 def enfraquecerOponente (jogador, monstro, efeito):
     jogador.mana -= 2
-    print(f"-3 MP | DANO MONSTRO -50%")
+    print(f"-2 MP | DANO MONSTRO -50%")
     sleep(0.5)
     efeito.ataque = int(monstro.ataque/2)
+    efeito.tempoAtaque = 1
     if jogador.acaoBonus == True:
         jogador.acaoBonus = False
         print("Você usou sua ação Bonus")
