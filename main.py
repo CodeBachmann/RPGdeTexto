@@ -14,8 +14,14 @@ import Effects
 import Skills
 import Loja
 import keyboard
+import Save
 # --------------------------------- VARIÁVEIS --------------------------------- #
+save= open("save.txt","w+")
 
+for i in range(10):
+    save.write(f"This is line  {(i+1)}")
+print(save)
+save.close()
 #EVENTOS
 encerrarCombate = False
 emboscada = False
@@ -80,17 +86,21 @@ sleep(2)
 os.system('cls') or None
 jogador.nome = nome
 os.system('cls') or None
-sleep(2)
+
 
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
     if marcadorArea == 0 and not monologo:
-        texto = "Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores..."
-        for c in texto:
-            print(c, end="")
-            sys.stdout.flush()
-            sleep(0.05)
-            
+        print("1 - Pular monologo\n2 - Ver monologo\n\n")
+        while True:
+            if keyboard.read_key() == '2':
+                texto = "Você adentra a floresta de Cornwood, o sol se torna apenas um borrão entre as árvores..."
+                for c in texto:
+                    print(c, end="")
+                    sys.stdout.flush()
+                    sleep(0.05)
+            if keyboard.read_key() == '1':
+                break
         sleep(1)
         os.system('cls') or None
         monologo = True
@@ -107,6 +117,7 @@ while jogador.vida > 0:
     jogador.passar = False
 
     while not jogador.passar:
+        print(jogador)
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
@@ -227,6 +238,8 @@ while jogador.vida > 0:
         if jogador.podeAgir:
             jogador.passar = False
             while not jogador.passar:
+                Save.armazenarStatus(jogador)
+                
                 
                 print("AÇÕES :\n(1)ATACAR\n(2)HABILIDADES\n(3)FUGIR\n(4)ITENS\n")
                 
