@@ -172,7 +172,7 @@ while jogador.vida > 0:
                 
             else:
                 print("Decisao Invalida")
-
+        Save.salvar(jogador)
         os.system('cls') or None
         
 
@@ -238,8 +238,6 @@ while jogador.vida > 0:
         if jogador.podeAgir:
             jogador.passar = False
             while not jogador.passar:
-                Save.armazenarStatus(jogador)
-                
                 
                 print("AÇÕES :\n(1)ATACAR\n(2)HABILIDADES\n(3)FUGIR\n(4)ITENS\n")
                 

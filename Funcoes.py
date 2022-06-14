@@ -1,6 +1,5 @@
 from asyncio.windows_events import NULL
 import random
-from sre_constants import OP_UNICODE_IGNORE
 import Artefacts
 from time import sleep
 from re import S
