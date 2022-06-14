@@ -4,7 +4,7 @@ class CriarPersonagem():
     def __init__(self, vida, vidaMax, ataque, defesa, classe, nome, critico,
     inteligencia, mana, manaMax, regenMana, habilidades, habilidadesDesc, artefatosDesc, 
     ouro, caminhado, artefatos, danoAumentado, passar, podeAgir, criticoGarantido, foiCritico,
-    dano, danoReal, acaoBonus, listaSave, carregado):
+    dano, danoReal, acaoBonus):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -30,8 +30,7 @@ class CriarPersonagem():
         self.dano = dano
         self.danoReal = danoReal
         self.acaoBonus = acaoBonus
-        self.listaSave = listaSave
-        self.carregado = carregado
+        
 
 
 class timers():
@@ -63,12 +62,19 @@ class loja():
     def __init__(self, artefatosComprados, habilidadesComprados):
         self.artefatosComprados = artefatosComprados
         self.habilidadesComprados = habilidadesComprados
+class carregar():
+    def __init__ (self, listaSave, contSave):
+        self.listaSave = listaSave
+        self.contSave = contSave
+        
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
 habilidades = []
 habilidadesDesc = []
 artefatos = []
 artefatosDesc = []
+salvo = carregar(listaSave= [],
+                contSave = 50)
 efx = timers(defesa = 0,
             podeAgir= 0,
             danoAumentado = 0,
@@ -103,8 +109,7 @@ Sabel = CriarPersonagem(vida=26,
                         foiCritico= False,
                         dano = 0,
                         danoReal= 0,
-                        acaoBonus=True,
-                        listaSave= [])
+                        acaoBonus=True)
 
 Santos = CriarPersonagem(vida=35,
                         vidaMax=35,
@@ -130,8 +135,7 @@ Santos = CriarPersonagem(vida=35,
                         foiCritico= False,
                         dano = 0,
                         danoReal= 0,
-                        acaoBonus=True,
-                        listaSave= [])
+                        acaoBonus=True)
 
 Reisch = CriarPersonagem(vida=21,
                         vidaMax=21,
@@ -157,5 +161,4 @@ Reisch = CriarPersonagem(vida=21,
                         foiCritico= False,
                         dano = 0,
                         danoReal= 0,
-                        acaoBonus=True,
-                        listaSave=[])
+                        acaoBonus=True)

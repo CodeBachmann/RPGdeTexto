@@ -16,6 +16,7 @@ import Loja
 import keyboard
 import Save
 # --------------------------------- VARIÁVEIS --------------------------------- #
+salvado = personagens.salvo
 save= open("save.txt","w+")
 
 for i in range(10):
@@ -44,7 +45,7 @@ classes = ["SA", "S", "R"]
 decisaoClasse = ""
 decisaoHabilidade = ""
 efeito = personagens.efx
-
+dddecisao = int(input('1 ou 2:'))
 # --------------------------------- INÍCIO --------------------------------- #
 os.system('cls') or None
 nome = input("Digite seu nome: ")
@@ -56,7 +57,7 @@ Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(2)')
 Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(3)')
 quebra = False
 
-#ESCOLHA DE CLASSE
+# ----------------------------ESCOLHA DE CLASSE ------------------------------------
 
 while True:
         if keyboard.read_key() == "1":
@@ -79,13 +80,16 @@ while True:
             personagens.Reisch.habilidades.append("HMR")
             jogador = personagens.Reisch
             break
-
-# input("1")
+# ------------------------------
 print(f"CLASSE {jogador.classe} ESCOLHIDA")
 sleep(2)
 os.system('cls') or None
 jogador.nome = nome
 os.system('cls') or None
+if dddecisao == 1:
+    Save.salvar(jogador, salvado)
+if dddecisao == 2: 
+    Save.carregar(jogador, salvado)
 
 
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
@@ -172,7 +176,7 @@ while jogador.vida > 0:
                 
             else:
                 print("Decisao Invalida")
-        Save.salvar(jogador)
+        Save.salvar(jogador, salvado)
         os.system('cls') or None
         
 
