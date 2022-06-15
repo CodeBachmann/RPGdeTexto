@@ -1,1 +1,4 @@
-['Gus', 35, 35, 6, 55, 'SANTOS', 6, 3, 6, 6, 1, ['HRDA'], 85, 0, ['AMDA']]
+Gusta 35 35 6 55 SANTOS 6 3 6 6 1 HRDA 85 1 AMDA 
+Vinicius, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA
+Gustavinho, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA
+Maria, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA

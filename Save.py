@@ -1,3 +1,6 @@
+from mailbox import NotEmptyError
+
+
 def salvar (jogador, salvado):
     salvado.listaSave = []
     salvado.listaSave.append(jogador.nome)
@@ -16,17 +19,27 @@ def salvar (jogador, salvado):
     salvado.listaSave.append(jogador.caminhado)
     salvado.listaSave.append(jogador.artefatos)
 
-    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','w+')
+    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
     lista = save.read().splitlines()
-    
+    save.close()
     cont = 0
     for i in lista:
-        i.replace("'","")
+        lista[cont] = i.replace("'", "")
+        lista[cont] = lista[cont].replace("[","")
+        lista[cont] = lista[cont].replace("]","")
+        print(lista[cont])
+        cont+=1
+    cont = 0
+    nome = jogador.nome
+    print(nome)
+    for i in lista:
         linha = i.split(', ')
-        print(linha)
-        if jogador.nome in linha:
+        print(linha[0])
+        if nome in linha:
             salvado.contSave = cont
         cont+= 1
+    
+        print(salvado.contSave)
     if salvado.contSave != 50:
         texto2 = ''
         for i in salvado.listaSave:
@@ -37,16 +50,22 @@ def salvar (jogador, salvado):
     textoNovo = ''
     for i in lista:
         textoNovo += (str(i)+"\n")
-    print(textoNovo)
+    textoNovo = textoNovo.replace("'", "")
+    textoNovo = textoNovo.replace("[", "")
+    textoNovo = textoNovo.replace("]", "")
+    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','w+')
     save.write(textoNovo)
     save.close()
 
 
 def carregar(jogador, salvado):
-    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','r')
+    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
     lista = save.read().splitlines()
     for i in lista:
-        i.replace("'", "")
+        lista[i] = i.replace("'", "")
+        lista[i] = i.replace("[", "")
+        lista[i] = i.replace("]", "")
+        
     save.close()
     for i in lista:
         print(i)
