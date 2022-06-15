@@ -16,7 +16,7 @@ def salvar (jogador, salvado):
     salvado.listaSave.append(jogador.caminhado)
     salvado.listaSave.append(jogador.artefatos)
 
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','w+')
+    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','w')
     lista = save.read().splitlines()
     
     cont = 0
@@ -35,12 +35,13 @@ def salvar (jogador, salvado):
     textoNovo = ''
     for i in lista:
         textoNovo += (str(i)+"\n")
+    print(textoNovo)
     save.write(textoNovo)
     save.close()
 
 
 def carregar(jogador, salvado):
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
+    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','r')
     lista = save.read().splitlines()
     
     save.close()
