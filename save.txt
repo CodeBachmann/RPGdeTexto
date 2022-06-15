@@ -1,4 +1,4 @@
-Gusta 35 35 6 55 SANTOS 6 3 6 6 1 HRDA 85 1 AMDA 
-Vinicius, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA
-Gustavinho, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA
-Maria, 35, 35, 6, 55, SANTOS, 6, 3, 6, 6, 1, HRDA, 85, 0, AMDA
+Gusta_ 21_ 26_ 10_ 34_ SABEL_ 8_ 4_ 7_ 7_ 1_ HOAM, HCL_ 33_ 2_ ACC, AMDA
+Vinicius_ 35_ 35_ 6_ 55_ SANTOS_ 6_ 3_ 6_ 6_ 1_ HRDA_ 85_ 0_ AMDA
+Gustavinho_ 35_ 35_ 6_ 55_ SANTOS_ 6_ 3_ 6_ 6_ 1_ HRDA_ 85_ 0_ AMDA
+Maria_ 35_ 35_ 6_ 55_ SANTOS_ 6_ 3_ 6_ 6_ 1_ HRDA_ 85_ 0_ AMDA

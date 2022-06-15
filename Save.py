@@ -14,10 +14,9 @@ def salvar (jogador, salvado):
     salvado.listaSave.append(jogador.mana)
     salvado.listaSave.append(jogador.manaMax)
     salvado.listaSave.append(jogador.regenMana)
-    salvado.listaSave.append(jogador.habilidades)
     salvado.listaSave.append(jogador.ouro)
     salvado.listaSave.append(jogador.caminhado)
-    salvado.listaSave.append(jogador.artefatos)
+    
 
     save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
     lista = save.read().splitlines()
@@ -33,8 +32,8 @@ def salvar (jogador, salvado):
     nome = jogador.nome
     print(nome)
     for i in lista:
-        linha = i.split(', ')
-        print(linha[0])
+        linha = i.split('_ ')
+        
         if nome in linha:
             salvado.contSave = cont
         cont+= 1
@@ -43,7 +42,7 @@ def salvar (jogador, salvado):
     if salvado.contSave != 50:
         texto2 = ''
         for i in salvado.listaSave:
-            texto2 += (str(i)+' ')
+            texto2 += (str(i)+'_ ')
         lista[salvado.contSave] = texto2
     else:
         lista.append(salvado.listaSave)
