@@ -16,12 +16,14 @@ def salvar (jogador, salvado):
     salvado.listaSave.append(jogador.caminhado)
     salvado.listaSave.append(jogador.artefatos)
 
-    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','w')
+    save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','w+')
     lista = save.read().splitlines()
     
     cont = 0
     for i in lista:
-        linha = i.split(' ')
+        i.replace("'","")
+        linha = i.split(', ')
+        print(linha)
         if jogador.nome in linha:
             salvado.contSave = cont
         cont+= 1
@@ -43,8 +45,11 @@ def salvar (jogador, salvado):
 def carregar(jogador, salvado):
     save = open(r'C:\Users\pcadmin\Documents\GitHub\RPGdeTexto\save.txt','r')
     lista = save.read().splitlines()
-    
+    for i in lista:
+        i.replace("'", "")
     save.close()
+    for i in lista:
+        print(i)
     cont = 0
     for i in lista:
         linha = i.split(' ')

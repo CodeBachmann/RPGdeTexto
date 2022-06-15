@@ -17,12 +17,6 @@ import keyboard
 import Save
 # --------------------------------- VARIÁVEIS --------------------------------- #
 salvado = personagens.salvo
-save= open("save.txt","w+")
-
-for i in range(10):
-    save.write(f"This is line  {(i+1)}")
-print(save)
-save.close()
 #EVENTOS
 encerrarCombate = False
 emboscada = False
@@ -88,6 +82,7 @@ jogador.nome = nome
 os.system('cls') or None
 if dddecisao == 1:
     Save.salvar(jogador, salvado)
+    input('a')
 if dddecisao == 2: 
     Save.carregar(jogador, salvado)
 
