@@ -63,9 +63,11 @@ class loja():
         self.artefatosComprados = artefatosComprados
         self.habilidadesComprados = habilidadesComprados
 class carregar():
-    def __init__ (self, listaSave, contSave):
-        self.listaSave = listaSave
+    def __init__ (self, listaNumerosSave ,listaHabilidades, listaArtefatos, contSave):
+        self.listaNumerosSave = listaNumerosSave
         self.contSave = contSave
+        self.listaHabilidades = listaHabilidades
+        self.listaArtefatos = listaArtefatos
         
 
 #-------------------------------------------- Personagens ---------------------------------------------------------
@@ -73,8 +75,10 @@ habilidades = []
 habilidadesDesc = []
 artefatos = []
 artefatosDesc = []
-salvo = carregar(listaSave= [],
-                contSave = 50)
+salvo = carregar(listaNumerosSave= [],
+                listaArtefatos = [],
+                contSave = 50,
+                listaArtefatos = [])
 efx = timers(defesa = 0,
             podeAgir= 0,
             danoAumentado = 0,
