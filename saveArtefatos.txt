@@ -1,5 +1,2 @@
-for i in listaArtefatos:
-        listaArtefatos[cont] = i.replace("'", "")
-        listaArtefatos[cont] = listaArtefatos[cont].replace("[","")
-        listaArtefatos[cont] = listaArtefatos[cont].replace("]","")
-        print(listaArtefatos[cont])
+Brubru, ACD, 
+karlao, AMDA, 

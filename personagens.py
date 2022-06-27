@@ -76,9 +76,10 @@ habilidadesDesc = []
 artefatos = []
 artefatosDesc = []
 salvo = carregar(listaNumerosSave= [],
-                listaArtefatos = [],
+                listaHabilidades= [],
                 contSave = 50,
                 listaArtefatos = [])
+
 efx = timers(defesa = 0,
             podeAgir= 0,
             danoAumentado = 0,

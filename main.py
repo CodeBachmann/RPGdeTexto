@@ -114,7 +114,7 @@ while jogador.vida > 0:
     caminhoMonstroElite = False
     caminhoLoja = False
     jogador.passar = False
-
+    Save.salvar(jogador, salvado)
     while not jogador.passar:
         print(jogador)
         jogador.caminhado += 1
@@ -171,7 +171,7 @@ while jogador.vida > 0:
                 
             else:
                 print("Decisao Invalida")
-        Save.salvar(jogador, salvado)
+        
         os.system('cls') or None
         
 

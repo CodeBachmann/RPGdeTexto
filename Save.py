@@ -24,13 +24,13 @@ def salvar (jogador, salvado):
     salvado.listaArtefatos.append(jogador.artefatos)
 
 
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','r')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','r')
     listaHabilidades = save.read().splitlines()
     save.close()
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\saveArtefatos.txt')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveArtefatos.txt')
     listaArtefatos = save.read().splitlines()
     save.close()
     cont = 0
@@ -40,12 +40,14 @@ def salvar (jogador, salvado):
         listaNumeros[cont] = listaNumeros[cont].replace("]","")
         print(listaNumeros[cont])
         cont+=1
+    cont = 0
     for i in listaHabilidades:
         listaHabilidades[cont] = i.replace("'", "")
         listaHabilidades[cont] = listaHabilidades[cont].replace("[","")
         listaHabilidades[cont] = listaHabilidades[cont].replace("]","")
         print(listaHabilidades[cont])
         cont+=1
+    cont = 0
     for i in listaArtefatos:
         listaArtefatos[cont] = i.replace("'", "")
         listaArtefatos[cont] = listaArtefatos[cont].replace("[","")
@@ -54,18 +56,6 @@ def salvar (jogador, salvado):
     cont = 0
     nome = jogador.nome
     print(nome)
-    for i in listaNumeros:
-        linha = i.split(', ')
-        if nome in linha:
-            salvado.contSave = cont
-        cont+= 1
-
-    for i in listaHabilidades:
-        linha = i.split(', ')
-        if nome in linha:
-            salvado.contSave = cont
-        cont+= 1
-
     for i in listaNumeros:
         linha = i.split(', ')
         if nome in linha:
@@ -82,11 +72,11 @@ def salvar (jogador, salvado):
     
     if salvado.contSave != 50:
         texto2 = ''
-        for i in salvado.listaNumerosSave:
+        for i in salvado.listaArtefatos:
             texto2 += (str(i)+', ')
         listaArtefatos[salvado.contSave] = texto2
     else:
-        listaArtefatos.append(salvado.listaNumerosSave)
+        listaArtefatos.append(salvado.listaArtefatos)
     
     if salvado.contSave != 50:
         texto2 = ''
@@ -102,7 +92,7 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','w+')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\save.txt','w+')
     save.write(textoNovo)
     save.close()
 
@@ -112,7 +102,7 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','w+')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','w+')
     save.write(textoNovo)
     save.close()
 
@@ -122,48 +112,9 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\saveArtefatos.txt','w+')
+    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveArtefatos.txt','w+')
     save.write(textoNovo)
     save.close()
 
-'''
-def carregar(jogador, salvado):
-    save = open(r'C:\Users\Aluno\Documents\GitHub\RPGdeTexto\save.txt','r')
-    listasNumeros = save.read().splitlines()
-    save.close()
 
-    for i in listaNumeros:
-        listaNumeros[i] = i.replace("'", "")
-        #listaNumeros[i] = i.replace("[", "")
-        #listaNumeros[i] = i.replace("]", "")
-        
-    
-    for i in listaNumeros:
-        print(i)
-    cont = 0
-    for i in listaNumeros:
-        linha = i.split(', ')
-        if jogador.nome in linha:
-            salvado.contSave = cont
-        cont+= 1
-    
-    texto2 = linha[salvado.contSave]
-    lista2 = texto2.split(', ')
-
-    lista2 = texto2
-    jogador.nome = lista2[0]
-    jogador.vida = int(lista2[1])
-    jogador.vidaMax = int(lista2[2])
-    jogador.ataque = int(lista2[3])
-    jogador.defesa = int(lista2[4])
-    jogador.classe = lista2[5]
-    jogador.critico = int(lista2[6])
-    jogador.inteligencia = int(lista2[7])
-    jogador.mana = int(lista2[8])
-    jogador.manaMax = int(lista2[9])
-    jogador.regenMana = int(lista2[10])
-
-    jogador.ouro = int(lista2[11])
-    jogador.caminhado = int(lista2[12])
-'''
     
