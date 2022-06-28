@@ -116,5 +116,6 @@ def salvar (jogador, salvado):
     save.write(textoNovo)
     save.close()
 
-
+def carregar(jogador, salvado):
+    
     
