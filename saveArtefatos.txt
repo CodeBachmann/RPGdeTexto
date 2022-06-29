@@ -1,2 +1,7 @@
-Brubru, ACD, 
-karlao, AMDA, 
+Brubru, , 
+karlao, AMDA
+(#__#), AMDA, 
+cavalo, AMDA
+pomba, AMDA
+picles, AMDA, ALB, 
+CHEIKI, ACC

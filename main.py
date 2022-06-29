@@ -1,10 +1,5 @@
-from asyncio.windows_events import NULL
-from distutils.command.clean import clean
-from operator import truediv
 import random
-from re import T
-from time import monotonic, sleep
-from typing import Any
+from time import  sleep
 import Funcoes
 import personagens
 import os
@@ -39,51 +34,52 @@ classes = ["SA", "S", "R"]
 decisaoClasse = ""
 decisaoHabilidade = ""
 efeito = personagens.efx
-dddecisao = int(input('1 ou 2:'))
+dddecisao = int(input('1 - Novo Jogo\n2 - Carregar Save:'))
 # --------------------------------- INÍCIO --------------------------------- #
-os.system('cls') or None
-nome = input("Digite seu nome: ")
-os.system('cls') or None
-print("\n ------------CLASSES------------")
-
-Funcoes.apresentacaoDeClasse(personagens.Santos, 'o bombado(1)')
-Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(2)')
-Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(3)')
-quebra = False
-
-# ----------------------------ESCOLHA DE CLASSE ------------------------------------
-
-while True:
-        if keyboard.read_key() == "1":
-
-            personagens.Santos.artefatos.append("AMDA")
-            personagens.Santos.habilidades.append("HRDA")
-            jogador = personagens.Santos
-            break
-
-        elif keyboard.read_key() == "2":
-
-            personagens.Sabel.artefatos.append("ACC")
-            personagens.Sabel.habilidades.append("HOAM")
-            jogador = personagens.Sabel
-            break
-
-        elif keyboard.read_key() == "3":
-
-            personagens.Reisch.artefatos.append("ACD") 
-            personagens.Reisch.habilidades.append("HMR")
-            jogador = personagens.Reisch
-            break
-# ------------------------------
-print(f"CLASSE {jogador.classe} ESCOLHIDA")
-sleep(2)
-os.system('cls') or None
-jogador.nome = nome
-os.system('cls') or None
 if dddecisao == 1:
-    Save.salvar(jogador, salvado)
-    input('a')
-if dddecisao == 2: 
+    os.system('cls') or None
+    nome = input("Digite seu nome: ")
+    os.system('cls') or None
+    print("\n ------------CLASSES------------")
+
+    Funcoes.apresentacaoDeClasse(personagens.Santos, 'o bombado(1)')
+    Funcoes.apresentacaoDeClasse(personagens.Sabel, 'o somelier de estagio(2)')
+    Funcoes.apresentacaoDeClasse(personagens.Reisch, 'o emo feliz(3)')
+    quebra = False
+
+    # ----------------------------ESCOLHA DE CLASSE ------------------------------------
+
+    while True:
+            if keyboard.read_key() == "1":
+
+                personagens.Santos.artefatos.append("AMDA")
+                personagens.Santos.habilidades.append("HRDA")
+                jogador = personagens.Santos
+                break
+
+            elif keyboard.read_key() == "2":
+
+                personagens.Sabel.artefatos.append("ACC")
+                personagens.Sabel.habilidades.append("HOAM")
+                jogador = personagens.Sabel
+                break
+
+            elif keyboard.read_key() == "3":
+
+                personagens.Reisch.artefatos.append("ACD") 
+                personagens.Reisch.habilidades.append("HMR")
+                jogador = personagens.Reisch
+                break
+    # ------------------------------
+    print(f"CLASSE {jogador.classe} ESCOLHIDA")
+    sleep(2)
+    os.system('cls') or None
+    jogador.nome = nome
+    os.system('cls') or None
+
+if dddecisao == 2:
+    jogador = personagens.Reisch
+    Save.escolherSave(jogador)
     Save.carregar(jogador, salvado)
 
 
@@ -98,6 +94,8 @@ while jogador.vida > 0:
                     print(c, end="")
                     sys.stdout.flush()
                     sleep(0.05)
+                sleep(1)
+                break
             if keyboard.read_key() == '1':
                 break
         sleep(1)
@@ -116,7 +114,6 @@ while jogador.vida > 0:
     jogador.passar = False
     Save.salvar(jogador, salvado)
     while not jogador.passar:
-        print(jogador)
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")

@@ -1,2 +1,7 @@
-Brubru, HMR, 
-karlao, HRDA, 
+Brubru, , 
+karlao, HRDA
+(#__#), HRDA, 
+cavalo, HRDA
+pomba, HRDA
+picles, HRDA, HEO, 
+CHEIKI, HOAM

@@ -1,5 +1,17 @@
 from mailbox import NotEmptyError
 
+def escolherSave(jogador):
+    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    save = open(caminho+'\\save.txt','r')
+    listaNumeros = save.read().splitlines()
+    save.close()
+    cont = 1
+    for i in listaNumeros:
+        print(str(cont) +' - '+ i)
+        cont+=1
+    escolha = int(input('Escolha o save (nmr): '))
+    lista = listaNumeros[(escolha-1)].split(', ')
+    jogador.nome = lista[0]
 
 def salvar (jogador, salvado):
     salvado.listaNumerosSave = []
@@ -23,14 +35,14 @@ def salvar (jogador, salvado):
     salvado.listaArtefatos.append(jogador.nome)
     salvado.listaArtefatos.append(jogador.artefatos)
 
-
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\save.txt','r')
+    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    save = open(caminho+'\\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','r')
+    save = open(caminho+'\\saveHabilidades.txt','r')
     listaHabilidades = save.read().splitlines()
     save.close()
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveArtefatos.txt')
+    save = open(caminho+'\\saveArtefatos.txt','r')
     listaArtefatos = save.read().splitlines()
     save.close()
     cont = 0
@@ -38,24 +50,21 @@ def salvar (jogador, salvado):
         listaNumeros[cont] = i.replace("'", "")
         listaNumeros[cont] = listaNumeros[cont].replace("[","")
         listaNumeros[cont] = listaNumeros[cont].replace("]","")
-        print(listaNumeros[cont])
         cont+=1
     cont = 0
     for i in listaHabilidades:
         listaHabilidades[cont] = i.replace("'", "")
         listaHabilidades[cont] = listaHabilidades[cont].replace("[","")
         listaHabilidades[cont] = listaHabilidades[cont].replace("]","")
-        print(listaHabilidades[cont])
         cont+=1
     cont = 0
     for i in listaArtefatos:
         listaArtefatos[cont] = i.replace("'", "")
         listaArtefatos[cont] = listaArtefatos[cont].replace("[","")
         listaArtefatos[cont] = listaArtefatos[cont].replace("]","")
-        print(listaArtefatos[cont])
+        cont+=1
     cont = 0
     nome = jogador.nome
-    print(nome)
     for i in listaNumeros:
         linha = i.split(', ')
         if nome in linha:
@@ -92,7 +101,7 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\save.txt','w+')
+    save = open(caminho+'\\save.txt','w+')
     save.write(textoNovo)
     save.close()
 
@@ -102,7 +111,7 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveHabilidades.txt','w+')
+    save = open(caminho+'\\saveHabilidades.txt','w+')
     save.write(textoNovo)
     save.close()
 
@@ -112,10 +121,55 @@ def salvar (jogador, salvado):
     textoNovo = textoNovo.replace("'", "")
     textoNovo = textoNovo.replace("[", "")
     textoNovo = textoNovo.replace("]", "")
-    save = open(r'C:\Users\Gustavo\Documents\GitHub\RPGdeTexto\saveArtefatos.txt','w+')
+    save = open(caminho+'\\saveArtefatos.txt','w+')
     save.write(textoNovo)
     save.close()
 
 def carregar(jogador, salvado):
     
+    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    save = open(caminho+'\\save.txt','r')
+    listaNumeros = save.read().splitlines()
+    save.close()
+    save = open(caminho+'\\saveHabilidades.txt','r')
+    listaHabilidades = save.read().splitlines()
+    save.close()
+    save = open(caminho+'\\saveArtefatos.txt','r')
+    listaArtefatos = save.read().splitlines()
     
+    cont = 0
+    nome = jogador.nome
+    for i in listaNumeros:
+        linha = i.split(',')
+        if nome in linha:
+            salvado.contSave = cont
+        cont+= 1
+    numeros = listaNumeros[salvado.contSave].split(', ')
+    habilidades = listaHabilidades[salvado.contSave].split(', ')
+    artefatos = listaArtefatos[salvado.contSave].split(', ')
+    numeros[-1].replace(',','')
+    artefatos[-1].replace(',','')
+    habilidades[-1].replace(',','')
+    jogador.vida = int(numeros[1])
+    jogador.vidaMax = int(numeros[2])
+    jogador.ataque = int(numeros[3])
+    jogador.defesa = int(numeros[4])
+    jogador.classe = (numeros[5])
+    jogador.critico = int(numeros[6])
+    jogador.inteligencia = int(numeros[7])
+    jogador.mana = int(numeros[8])
+    jogador.manaMax = int(numeros[9])
+    jogador.regenMana = int(numeros[10])
+    jogador.ouro = int(numeros[11])
+    jogador.caminhado = int(numeros[12])
+    jogador.habilidades = []
+    jogador.artefatos = []
+    cont = 1
+    for i in range((len(artefatos)-2)):
+        jogador.artefatos.append(artefatos[cont])
+        cont+=1
+    cont = 1
+    for i in range((len(habilidades)-2)):
+        
+        jogador.habilidades.append(habilidades[cont])
+        cont+=1
