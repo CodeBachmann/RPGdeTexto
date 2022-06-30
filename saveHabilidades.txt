@@ -4,4 +4,8 @@ karlao, HRDA
 cavalo, HRDA
 pomba, HRDA
 picles, HRDA, HEO, 
-CHEIKI, HOAM
+Ferraz, HRDA, HPA, 
+Gusta, HRDA, HEO, 
+Gusta, HRDA
+gusta, HRDA, 
+gusta, HRDA

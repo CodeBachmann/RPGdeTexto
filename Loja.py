@@ -10,6 +10,12 @@ loja = personagens.Compraveis
 listaNaoCompradosPocoes = ["PA","PD","PI","PV"]
 
 def comprarNaLoja (jogador):
+    for i in jogador.habilidades:
+        if i in loja.habilidadesComprados:
+            loja.habilidadesComprados.remove(i)
+    for i in jogador.artefatos:
+        if i in loja.artefatosComprados:
+            loja.artefatosComprados.remove(i)
     fecharLoja = False
     itemLojaPocao = random.choice(listaNaoCompradosPocoes)
     itemLojaArtefato = random.choice(loja.artefatosComprados)
@@ -57,6 +63,11 @@ def comprarNaLoja (jogador):
             podeComprarArtefato = "AIX"
             precoArtefato = 65
             print(f"Idolo Xaoc - {precoArtefato}g(2)")
+        
+        elif itemLojaArtefato == "APP":
+            podeComprarArtefato = "APP"
+            precoArtefato = 70
+            print(f"Pikeman Patience - {precoArtefato}g(2)")
 
         if itemLojaHabilidade == "HCL":
             podeComprarHabilidade = "HCL"
@@ -72,6 +83,11 @@ def comprarNaLoja (jogador):
             podeComprarHabilidade = "HEO"
             precoHabilidade = 65
             print(f"Enfraquecer Oponente - {precoHabilidade}g(3)")
+        
+        elif itemLojaHabilidade == "HFD":
+            podeComprarHabilidade = "HFD"
+            precoHabilidade = 70
+            print(f'Desespero Frenetico - {precoHabilidade}g(3)')
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")

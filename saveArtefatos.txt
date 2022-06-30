@@ -4,4 +4,8 @@ karlao, AMDA
 cavalo, AMDA
 pomba, AMDA
 picles, AMDA, ALB, 
-CHEIKI, ACC
+Ferraz, AMDA, AGG, 
+Gusta, AMDA, 
+Gusta, AMDA
+gusta, AMDA, 
+gusta, AMDA

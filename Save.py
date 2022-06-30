@@ -1,5 +1,55 @@
 from mailbox import NotEmptyError
+def deletarSave(jogador, salvado):
+    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    save = open(caminho+'\\save.txt','r')
+    listaNumeros = save.read().splitlines()
+    save.close()
+    save = open(caminho+'\\saveHabilidades.txt','r')
+    listaHabilidades = save.read().splitlines()
+    save.close()
+    save = open(caminho+'\\saveArtefatos.txt','r')
+    listaArtefatos = save.read().splitlines()
+    save.close()
+    cont = 0
+    for i in listaNumeros:
+        linha = i.split(', ')
+        if jogador.nome in linha:
+            salvado.contSave = cont
+        cont+= 1
 
+    listaNumeros.pop(salvado.contSave)
+    listaArtefatos.pop(salvado.contSave)
+    listaHabilidades.pop(salvado.contSave)
+    textoNovo = ''
+    for i in listaNumeros:
+        textoNovo += (str(i)+"\n")
+    textoNovo = textoNovo.replace("'", "")
+    textoNovo = textoNovo.replace("[", "")
+    textoNovo = textoNovo.replace("]", "")
+    save = open(caminho+'\\save.txt','w+')
+    save.write(textoNovo)
+    save.close()
+    textoNovo = ''
+    for i in listaHabilidades:
+        textoNovo += (str(i)+"\n")
+    textoNovo = textoNovo.replace("'", "")
+    textoNovo = textoNovo.replace("[", "")
+    textoNovo = textoNovo.replace("]", "")
+    save = open(caminho+'\\saveHabilidades.txt','w+')
+    save.write(textoNovo)
+    save.close()
+
+    textoNovo = ''
+    for i in listaArtefatos:
+        textoNovo += (str(i)+"\n")
+    textoNovo = textoNovo.replace("'", "")
+    textoNovo = textoNovo.replace("[", "")
+    textoNovo = textoNovo.replace("]", "")
+    save = open(caminho+'\\saveArtefatos.txt','w+')
+    save.write(textoNovo)
+    save.close()
+
+    
 def escolherSave(jogador):
     caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
     save = open(caminho+'\\save.txt','r')

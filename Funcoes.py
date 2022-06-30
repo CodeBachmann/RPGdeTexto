@@ -26,6 +26,8 @@ def adicionarHabilidade (jogador, efeito):
         habilidade.append("(HPA) Custo: [3] Pancada Atordoante -- Causa dano e tem 1/2 chance de atordoar")
     if "HEO" in jogador.habilidades:
         habilidade.append("(HEO) Custo: [2] Enfraquecer Oponente -- Reduz o dano do proximo ataque pela metade")
+    if "HFD" in jogador.habilidades:
+        habilidade.append("(HFD) Custo: [X] Frantic Despair -- Use all your mana to unleash a Final Blow")
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(f"{efeito.quantidadeHabilidades} - " + elemento)
@@ -47,9 +49,10 @@ def atacar(jogador, monstro, efeito):
         print("DANO CRITICO!!!")
         jogador.foiCritico = True
             
-    Artefacts.cabeloColorido(jogador)
-    Artefacts.lagrimaBerserker(jogador, efeito)
-    Artefacts.golpeGanancioso(jogador, monstro)
+    Artefacts.cabeloColorido(jogador, monstro, efeito)
+    Artefacts.lagrimaBerserker(jogador, monstro, efeito)
+    Artefacts.pikemanPatience(jogador, monstro, efeito)
+    Artefacts.golpeGanancioso(jogador, monstro, efeito)
     monstro.vida -= jogador.danoReal
     vidaLimite(jogador)
     jogador.danoAumentado = 0
@@ -63,8 +66,8 @@ def atacar(jogador, monstro, efeito):
 def monstroAtacar(jogador, monstro, efeito):
     monstro.dano = ((monstro.ataque - efeito.ataque) + (random.randint(0, int((monstro.ataque-efeito.ataque)*0.7))))
     calculaDano(monstro, jogador)
-    Artefacts.conhecimentoDor(jogador, monstro)
-    Artefacts.masoquistaAcademia(jogador, monstro)
+    Artefacts.conhecimentoDor(jogador, monstro, efeito)
+    Artefacts.masoquistaAcademia(jogador, monstro, efeito)
     print(f"VOCÊ SOFREU: {int(monstro.danoReal)}(-{int(monstro.dano-monstro.danoReal)}) DE DANO")
     if jogador.vida == NULL:
         jogador.vida = 0

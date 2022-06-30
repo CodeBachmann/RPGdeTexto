@@ -1,6 +1,8 @@
+from ntpath import join
 import random
 from time import  sleep
 import Funcoes
+import escolherMonstro
 import personagens
 import os
 import sys
@@ -12,6 +14,14 @@ import keyboard
 import Save
 # --------------------------------- VARIÁVEIS --------------------------------- #
 salvado = personagens.salvo
+dicSkillsMana = {'HCL' : 5,
+        'HRDA' : 3,
+        'HMR' : 4,
+        'HOAM' : 3,
+        'HPA' : 3,
+        'HEO' : 2,
+        'HFD' : 1}
+
 #EVENTOS
 encerrarCombate = False
 emboscada = False
@@ -20,7 +30,7 @@ monologo = False
 #CAMINHOS
 enfrentarMonstroElite = False
 caminhoChefe = False
-enfrentarMonstroComun = False
+enfrentarMonstroComum = False
 acessarMisterio = False
 
 #STATUS
@@ -83,6 +93,7 @@ if dddecisao == 2:
     Save.carregar(jogador, salvado)
 
 
+
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
 while jogador.vida > 0:
     if marcadorArea == 0 and not monologo:
@@ -108,7 +119,7 @@ while jogador.vida > 0:
 
     print("~~~~~~Caminhos~~~~~~\n")
     caminhoMisterio = False
-    caminhoMonstroComun = False
+    caminhoMonstroComum = False
     caminhoMonstroElite = False
     caminhoLoja = False
     jogador.passar = False
@@ -118,12 +129,12 @@ while jogador.vida > 0:
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
         cont = 0
-        if jogador.caminhado < 10 and jogador.caminhado != 1:
+        if jogador.caminhado < 12 and jogador.caminhado != 1:
             while cont < caminhos:
                 escolha = random.randint(1, 100)
                 if escolha > 0 and escolha <= 50:
-                    print(f"Lutar com um monstro comun(1)\n")
-                    caminhoMonstroComun = True
+                    print(f"Lutar com um monstro Comum(1)\n")
+                    caminhoMonstroComum = True
                 elif escolha > 50 and escolha <= 80:
                     print(f"Lutar com um monstro de Elite(2)\n")
                     caminhoMonstroElite = True
@@ -132,8 +143,11 @@ while jogador.vida > 0:
                     caminhoLoja = True
                 cont+= 1
         elif jogador.caminhado == 1:
-            print(f"Lutar com um monstro comun(1)\n")
-            caminhoMonstroComun = True
+            print(f"Lutar com um monstro Comum(1)\n")
+            caminhoMonstroComum = True
+        elif jogador.caminhado == 12:
+            print(f"Entrar na loja(3)\n")
+            caminhoLoja = True
         else:
             print(f"Você sente uma presença ameaçadora!!!")
             sleep(2)
@@ -149,8 +163,8 @@ while jogador.vida > 0:
                 os.system('cls') or None
                 break
 
-            elif keyboard.read_key() == "1" and caminhoMonstroComun:
-                enfrentarMonstroComun = True
+            elif keyboard.read_key() == "1" and caminhoMonstroComum:
+                enfrentarMonstroComum = True
                 jogador.passar = True
                 os.system('cls') or None
                 break
@@ -173,49 +187,13 @@ while jogador.vida > 0:
         
 
     #A PARTIR DE UMA INT ALEATORIA É ESCOLHIDO UM MONSTRO PARA BATALHAR
-    decisaoMonstro = random.randint(0,1)
-    if marcadorArea == 0:
-        if decisaoMonstro == 0 and enfrentarMonstroComun:
 
-            print("UM SLIME APARECE!!!\n")
-            monstro = personagens.npc(vida = 22, vidaMax= 22, ataque= 5, defesa= 24,
-                nome="SLIME", critico= 5, ouro= 23, podeAgir = True, dano = 0, danoReal = 0)
-            efeito.monstroAgir = 0
-            enfrentarMonstroComun = False
-
-        elif decisaoMonstro == 1 and enfrentarMonstroComun:
-            print("UM GOBLIN APARECE!!!\n")
-            monstro = personagens.npc(vida = 17, vidaMax= 17, ataque= 7, defesa= 15,
-                nome="GOBLIN", critico= 7, ouro=23, podeAgir = True, dano = 0, danoReal = 0)
-            efeito.monstroAgir = 0
-            enfrentarMonstroComun = False
-
-        elif decisaoMonstro == 0 and enfrentarMonstroElite:
-            print("UM GOLEM BEBE APARECE!!!\n")
-            monstro = personagens.npc(vida = 40, vidaMax= 40, ataque= 8, defesa= 41,
-                nome="GOLEM BEBE", critico= 0, ouro= 55, podeAgir = True, dano = 0, danoReal = 0)
-            efeito.monstroAgir = 1
-            enfrentarMonstroElite = False
-
-        elif decisaoMonstro == 1 and enfrentarMonstroElite:
-            print("UM CULTISTA XAOC APARECE!!!\n")
-            monstro = personagens.npc(vida = 28, vidaMax= 28, ataque= 11, defesa= 15,
-                nome="CULTISTA XAOC", critico= 0, ouro= 55, podeAgir = True, dano = 0, danoReal = 0)
-            efeito.monstroAgir = 0
-            enfrentarMonstroElite = False
-
-        elif caminhoChefe:
-            print("O REI SLIME SE IRRITOU COM SEUS ATOS!!!\n")
-            monstro = personagens.npc(vida = 63, vidaMax= 63, ataque= 10, defesa= 34,
-                nome="REI SLIME", critico= 0, ouro= 100, podeAgir = True, dano = 0, danoReal = 0)
-            caminhoChefe = False
-            marcadorArea = 1
+        monstro = escolherMonstro.monstroEscolhido(efeito, marcadorArea, enfrentarMonstroComum, enfrentarMonstroElite, caminhoChefe)
 
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
     efeito.tempoCombate = 0
     
-    #monstro.danoMitigado = monstro.defesa
 
     while not encerrarCombate:
         jogador.acaoBonus = True
@@ -235,7 +213,7 @@ while jogador.vida > 0:
             jogador.passar = False
             while not jogador.passar:
                 
-                print("AÇÕES :\n(1)ATACAR\n(2)HABILIDADES\n(3)FUGIR\n(4)ITENS\n")
+                print("AÇÕES :\n(1)ATACAR\n(2)HABILIDADES\n(3)FUGIR\n(4)PERSONAGEM\n")
                 
                 if keyboard.read_key() == "1":
                     Funcoes.atacar(jogador, monstro, efeito)
@@ -249,7 +227,6 @@ while jogador.vida > 0:
                         volta = str(efeito.quantidadeHabilidades)
 
                         while True:
-                            
                             if 1 <= efeito.quantidadeHabilidades and keyboard.read_key() == "0":
                                 decisaoHabilidade = jogador.habilidades[0]
                                 break
@@ -266,47 +243,35 @@ while jogador.vida > 0:
                                 decisaoHabilidade = jogador.habilidades[3]
                                 break
 
+                            if 5 <= efeito.quantidadeHabilidades and keyboard.read_key() == "4":
+                                decisaoHabilidade = jogador.habilidades[4]
+                                break
+
                             if keyboard.read_key() == volta:
                                 decisaoHabilidade = "V"
                                 break
 
                         efeito.quantidadeHabilidades = 0
                         jogador.habilidadesDesc = []
-                        
-                        if decisaoHabilidade == "HMR" and "HMR" in jogador.habilidades and jogador.mana >= 4:
-                            sleep(1)
-                            Skills.multilacaoRegenerativa(jogador, monstro)
+                        dicSkills = {'HCL' : Skills.organizarAMente,
+                                    'HRDA' : Skills.rapDeAcademia,
+                                    'HMR' : Skills.multilacaoRegenerativa,
+                                    'HOAM' : Skills.organizarAMente,
+                                    'HPA' : Skills.pancadaAtordoante,
+                                    'HEO' : Skills.enfraquecerOponente,
+                                    'HFD' : Skills.freneticDespair}
+                                    
+                        if decisaoHabilidade in jogador.habilidades and jogador.mana >= dicSkillsMana[decisaoHabilidade]:
+                            f'{dicSkills[decisaoHabilidade](jogador, monstro, efeito)}'
                             break
-
-                        elif decisaoHabilidade == "HOAM" and "HOAM" in jogador.habilidades and jogador.mana >= 2:
-                            Skills.organizarAMente(jogador)
-                            break
-
-                        elif decisaoHabilidade == "HRDA" and "HRDA" in jogador.habilidades and jogador.mana >= 2:
-                            Skills.rapDeAcademia(jogador, efeito)
-                            break
-
-                        elif decisaoHabilidade == "HCL" and "HCL" in jogador.habilidades and jogador.mana >= 3:
-                            Skills.curaLeve(jogador)
-                            break
-
-                        elif decisaoHabilidade == "HPA" and "HPA" in jogador.habilidades and jogador.mana >= 3:
-                            Skills.pancadaAtordoante(jogador, monstro, efeito)
-                            break
-
-                        elif decisaoHabilidade == "HEO" and "HEO" in jogador.habilidades and jogador.mana >= 2:
-                            Skills.enfraquecerOponente(jogador, monstro, efeito)
-                            break
-
+                            
                         elif "V":
                             break
-
-                        else:
-                            print("Decisao invalida!!")
 
                 elif keyboard.read_key() == "3":
                     encerrarCombate = True
                     jogador.passar = True
+
                 elif keyboard.read_key() == "4":
                     Funcoes.todosOsStatus(jogador)
                     print("\n")
@@ -314,13 +279,12 @@ while jogador.vida > 0:
                     print("")
             
         jogador.mana += jogador.regenMana
-        print("+1 MP")
+        print(f"+{jogador.regenMana} MP")
         sleep(1)
 
         if monstro.vida > 0 and efeito.monstroAgir == 0:
             Funcoes.monstroAtacar(jogador, monstro, efeito)
             print("\n") 
-
 
         elif efeito.monstroAgir > 0:
             print("O monstro não age nesse turno!")
@@ -332,12 +296,13 @@ while jogador.vida > 0:
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
+            Save.deletarSave(jogador, salvado)
             sleep(2)
             exit(0)
 
         elif monstro.vida <=0:
-            print("O MONSTRO MORREU!")
-            Artefacts.idoloXaoc(jogador, monstro)
+            print("O monstro morreu!")
+            Artefacts.idoloXaoc(jogador, monstro, efeito)
             encerrarCombate = True
             sleep(1)
             ouro = random.randint(int(monstro.ouro),int(monstro.ouro*1.5))

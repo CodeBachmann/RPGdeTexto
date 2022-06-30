@@ -34,7 +34,7 @@ class CriarPersonagem():
 
 
 class timers():
-    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque, tempoAtaque):
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque, tempoAtaque, custoMana):
         self.defesa = defesa
         self.podeAgir = podeAgir
         self.danoAumentado = danoAumentado
@@ -43,6 +43,7 @@ class timers():
         self.quantidadeHabilidades = quantidadeHabilidades
         self.ataque = ataque
         self.tempoAtaque = tempoAtaque
+        self.custoMana = custoMana
 
 
 class npc():
@@ -87,9 +88,10 @@ efx = timers(defesa = 0,
             tempoCombate=0,
             quantidadeHabilidades = 0,
             ataque= 0,
-            tempoAtaque = 0)
-Compraveis = loja   (artefatosComprados = ['ALB','AGG','AIX'],
-                    habilidadesComprados = ['HCL','HPA',"HEO"])
+            tempoAtaque = 0,
+            custoMana = 0)
+Compraveis = loja   (artefatosComprados = ['ALB','AGG','AIX','APP'],
+                    habilidadesComprados = ['HCL','HPA','HEO','HFD'])
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,
                         ataque=8,
@@ -105,7 +107,7 @@ Sabel = CriarPersonagem(vida=26,
                         artefatos=artefatos,
                         habilidadesDesc=habilidadesDesc,
                         artefatosDesc= artefatosDesc,
-                        ouro= 70,
+                        ouro= 85,
                         caminhado=0,
                         danoAumentado=0,
                         passar = False,
@@ -157,7 +159,7 @@ Reisch = CriarPersonagem(vida=21,
                         habilidadesDesc=habilidadesDesc,
                         artefatosDesc= artefatosDesc,
                         artefatos=artefatos,
-                        ouro= 45,
+                        ouro= 85,
                         caminhado=0,
                         danoAumentado=0,
                         passar = False,
