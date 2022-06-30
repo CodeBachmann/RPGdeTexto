@@ -54,3 +54,8 @@ def pikemanPatience(jogador, monstro, efeito):
         if efeito.tempoCombate != 1 and efeito.tempoCombate%3 == 0:
             jogador.danoReal += jogador.dano-jogador.danoReal
             print("Pikeman Patience: you spot a weak point in your opponent")
+
+def hardSnakeSkin(jogador, monstro, efeito):
+    if "HHSS" in jogador.artefatos:
+        monstro.dano -= int(jogador.defesa*0.05)
+        print("Hard Snake Skin: mitigate some damage")

@@ -47,6 +47,9 @@ def freneticDespair (jogador, monstro, efeito):
         dano = int((jogador.inteligencia/4)+(jogador.ataque/2))
     jogador.dano = dano
     Funcoes.calculaDano(jogador, monstro)
+    monstro.vida -= jogador.danoReal
+    print(f'-{manaUsada} MP | You unleash a frenetic blow\n Monster: -{dano} HP')
+    jogador.passar = True
 
 def organizarAMente (jogador, monstro, efeito):
     jogador.mana -= 3

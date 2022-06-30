@@ -1,6 +1,7 @@
 from mailbox import NotEmptyError
 def deletarSave(jogador, salvado):
-    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    caminho = 'C:\\Users\\Aluno\\Documents\\GitHub\\RPGdeTexto'
+
     save = open(caminho+'\\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()
@@ -51,7 +52,7 @@ def deletarSave(jogador, salvado):
 
     
 def escolherSave(jogador):
-    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    caminho = 'C:\\Users\\Aluno\\Documents\\GitHub\\RPGdeTexto'
     save = open(caminho+'\\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()
@@ -85,7 +86,7 @@ def salvar (jogador, salvado):
     salvado.listaArtefatos.append(jogador.nome)
     salvado.listaArtefatos.append(jogador.artefatos)
 
-    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    caminho = 'C:\\Users\\Aluno\\Documents\\GitHub\\RPGdeTexto'
     save = open(caminho+'\\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()
@@ -177,7 +178,7 @@ def salvar (jogador, salvado):
 
 def carregar(jogador, salvado):
     
-    caminho = 'C:\\Users\\pcadmin\\Documents\\GitHub\\RPGdeTexto'
+    caminho = 'C:\\Users\\Aluno\\Documents\\GitHub\\RPGdeTexto'
     save = open(caminho+'\\save.txt','r')
     listaNumeros = save.read().splitlines()
     save.close()

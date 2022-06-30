@@ -68,6 +68,7 @@ def monstroAtacar(jogador, monstro, efeito):
     calculaDano(monstro, jogador)
     Artefacts.conhecimentoDor(jogador, monstro, efeito)
     Artefacts.masoquistaAcademia(jogador, monstro, efeito)
+    Artefacts.hardSnakeSkin(jogador, monstro, efeito)
     print(f"VOCÊ SOFREU: {int(monstro.danoReal)}(-{int(monstro.dano-monstro.danoReal)}) DE DANO")
     if jogador.vida == NULL:
         jogador.vida = 0

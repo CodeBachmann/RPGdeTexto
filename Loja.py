@@ -68,6 +68,11 @@ def comprarNaLoja (jogador):
             podeComprarArtefato = "APP"
             precoArtefato = 70
             print(f"Pikeman Patience - {precoArtefato}g(2)")
+        
+        elif itemLojaArtefato == "AHSS":
+            podeComprarArtefato = "AHSS"
+            precoArtefato = 75
+            print(f"Hard Snake Skin - {precoArtefato}g(2)")
 
         if itemLojaHabilidade == "HCL":
             podeComprarHabilidade = "HCL"

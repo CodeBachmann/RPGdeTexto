@@ -188,8 +188,13 @@ while jogador.vida > 0:
 
     #A PARTIR DE UMA INT ALEATORIA É ESCOLHIDO UM MONSTRO PARA BATALHAR
 
-        monstro = escolherMonstro.monstroEscolhido(efeito, marcadorArea, enfrentarMonstroComum, enfrentarMonstroElite, caminhoChefe)
-
+    monstro = escolherMonstro.monstroEscolhido(efeito, marcadorArea, enfrentarMonstroComum, enfrentarMonstroElite, caminhoChefe)
+    enfrentarMonstroComum = False
+    enfrentarMonstroElite = False
+    if caminhoChefe:
+        caminhoChefe = False
+        marcadorArea += 1
+        
     #O COMBATE VAI OCORRER ENQUANTO A CONDIÇÃO "encerrarCombate" FOR FALSA
     encerrarCombate = False
     efeito.tempoCombate = 0

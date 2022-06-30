@@ -1,9 +1,6 @@
 
 # Assim que faz pra importar arquivos de pastas:
 
-from Funcao import prints 
-
-prints.printandos()
 
 
 # A pasta que contem os arquivos precisa também ter um arquivo chamado __init__.py (são 2 underlines no começo e 2 no final)

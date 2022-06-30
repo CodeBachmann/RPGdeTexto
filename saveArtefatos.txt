@@ -1,6 +1,6 @@
 Brubru, , 
 karlao, AMDA
-(#__#), AMDA, 
+cavalo, AMDA, AIX, 
 cavalo, AMDA
 pomba, AMDA
 picles, AMDA, ALB, 
@@ -8,4 +8,4 @@ Ferraz, AMDA, AGG,
 Gusta, AMDA, 
 Gusta, AMDA
 gusta, AMDA, 
-gusta, AMDA
+Bachmann, AMDA
