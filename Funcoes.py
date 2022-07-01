@@ -44,7 +44,10 @@ def atacar(jogador, monstro, efeito):
     jogador.dano = (jogador.ataque + (random.randint(0, int(jogador.ataque*0.7))))
     jogador.dano += jogador.danoAumentado
     calculaDano(jogador, monstro)
-    if random.randint(0, 100) < jogador.critico or jogador.criticoGarantido == True:
+    critico = random.randint(0, 100)
+    if 'AMP' in jogador.artefatos:
+        critico -= 10
+    if critico < jogador.critico or jogador.criticoGarantido == True:
         jogador.danoReal *= 2
         print("DANO CRITICO!!!")
         jogador.foiCritico = True

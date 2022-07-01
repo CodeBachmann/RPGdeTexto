@@ -32,67 +32,72 @@ def comprarNaLoja (jogador):
         if itemLojaPocao == "PA":
             podeComprarPocao = "PA"
             precoPocao = 60
-            print("Pocao de Ataque - 60g(1)")
+            print("Pocao de Ataque - 60g(1)\nIncreases your attack plus 2")
 
         elif itemLojaPocao == "PD":
             podeComprarPocao = "PD"
             precoPocao = 45
-            print("Pocao de Defesa - 45g(1)")
+            print("Pocao de Defesa - 45g(1)\nIncreases your defense plus 11")
 
         elif itemLojaPocao == "PI":
             podeComprarPocao = "PI"
             precoPocao = 50
-            print("Pocao de Inteligencia - 40g(1)")
+            print("Pocao de Inteligencia - 40g(1)\nIncreases your intelligence plus 2")
             
         elif itemLojaPocao == "PV":
             podeComprarPocao = "PV" 
             precoPocao = 55
-            print("Pocao de Vida - 55g(1)")
+            print("Pocao de Vida - 55g(1)\nIncreases your max health plus six")
 
         if itemLojaArtefato == "ALB":
             podeComprarArtefato = "ALB"
             precoArtefato = 95
-            print(f"Lagrima do Berserker - {precoArtefato}g(2)")
+            print(f"Lagrima do Berserker - {precoArtefato}g(2)\nEvery turn increases your damage")
 
         elif itemLojaArtefato == "AGG":
             podeComprarArtefato = "AGG"
             precoArtefato = 40
-            print(f"Golpe Ganancioso - {precoArtefato}g(2)")
+            print(f"Golpe Ganancioso - {precoArtefato}g(2)\nAll the over damage you do is converted in gold")
 
         elif itemLojaArtefato == "AIX":
             podeComprarArtefato = "AIX"
             precoArtefato = 65
-            print(f"Idolo Xaoc - {precoArtefato}g(2)")
+            print(f"Xaoc Idol - {precoArtefato}g(2)\nAt the end of every combat you recover some health")
         
         elif itemLojaArtefato == "APP":
             podeComprarArtefato = "APP"
             precoArtefato = 70
-            print(f"Pikeman Patience - {precoArtefato}g(2)")
+            print(f"Pikeman Patience - {precoArtefato}g(2)\nEvery 3 turns increases your damage")
         
         elif itemLojaArtefato == "AHSS":
             podeComprarArtefato = "AHSS"
             precoArtefato = 75
-            print(f"Hard Snake Skin - {precoArtefato}g(2)")
+            print(f"Hard Snake Skin - {precoArtefato}g(2)\nMitigate some flat damage")
+        
+        elif itemLojaArtefato == "AIE":
+            podeComprarArtefato = "AIE"
+            precoArtefato = 75
+            print(f"Ifrith Eyes - {precoArtefato}g(2)\nIncreases your critical chance")
 
         if itemLojaHabilidade == "HCL":
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)")
+            print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)\nHeal based on your intelligence (extra action)")
 
         elif itemLojaHabilidade == "HPA":
             podeComprarHabilidade = "HPA"
             precoHabilidade = 75
-            print(f"Pancada Atordoante - {precoHabilidade}g(3)")
+            print(f"Pancada Atordoante - {precoHabilidade}g(3)\nTry to stun your opponent and do some damage (extra action)")
 
         elif itemLojaHabilidade == "HEO":
             podeComprarHabilidade = "HEO"
             precoHabilidade = 65
-            print(f"Enfraquecer Oponente - {precoHabilidade}g(3)")
+            print(f"Enfraquecer Oponente - {precoHabilidade}g(3)\nHalf the opponent Attack (extra action)")
         
         elif itemLojaHabilidade == "HFD":
             podeComprarHabilidade = "HFD"
             precoHabilidade = 70
-            print(f'Desespero Frenetico - {precoHabilidade}g(3)')
+            print(f'Desespero Frenetico - {precoHabilidade}g(3)\nUse all your mana to unleash a final blow')
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")
