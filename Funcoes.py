@@ -28,6 +28,10 @@ def adicionarHabilidade (jogador, efeito):
         habilidade.append("(HEO) Custo: [2] Enfraquecer Oponente -- Reduz o dano do proximo ataque pela metade")
     if "HFD" in jogador.habilidades:
         habilidade.append("(HFD) Custo: [X] Frantic Despair -- Use all your mana to unleash a Final Blow")
+    if "HEP" in jogador.habilidades:
+        habilidade.append("(HEP) Custo: [4] Enchant with Poison -- Enchant your 3 next attacks with Poison")
+    if "HEF" in jogador.habilidades:
+        habilidade.append("(HEF) Custo: [4] Enchant with Fire -- Enchant your 3 next attacks with Fire")
     for elemento in habilidade:
         if elemento not in jogador.habilidadesDesc:
             jogador.habilidadesDesc.append(f"{efeito.quantidadeHabilidades} - " + elemento)
@@ -56,13 +60,35 @@ def atacar(jogador, monstro, efeito):
     Artefacts.lagrimaBerserker(jogador, monstro, efeito)
     Artefacts.pikemanPatience(jogador, monstro, efeito)
     Artefacts.golpeGanancioso(jogador, monstro, efeito)
+    if "POISON" in efeito.encantamentoAtivo:
+        if efeito.encantamentoAtivo["POISON"] > 0:
+            efeito.encantamentoAtivo["POISON"] -= 1
+            envenenar = 1
+            print(f"O monstro é envenenado em +{envenenar}")
+            monstro.envenenamento += 1
+        elif efeito.encantamentoAtivo["POISON"] == 0:
+            efeito.encantamentoAtivo = {0:0}
+    elif "FIRE" in efeito.encantamentoAtivo:
+        if efeito.encantamentoAtivo["FIRE"] > 0:
+            efeito.encantamentoAtivo["FIRE"] -= 1
+            dano = int((jogador.ataque+jogador.inteligencia)/4)
+            jogador.danoReal += dano
+            print(f"Extra fire damage +{dano}")
+        elif efeito.encantamentoAtivo["FIRE"] == 0:
+            efeito.encantamentoAtivo = {0:0}
+            
+    if monstro.envenenamento > 0:
+        dano = 1+int(monstro.vidaMax*(monstro.envenenamento*0.02))
+        monstro.vida -= dano
+        print(f"Dano envenenamento: {dano}")
+        
     monstro.vida -= jogador.danoReal
     vidaLimite(jogador)
     jogador.danoAumentado = 0
     jogador.criticoGarantido = False
     jogador.foiCritico = False
     jogador.passar = True
-    print(f"VOCÊ INFLINGE: {jogador.danoReal}(-{jogador.dano-jogador.danoReal}) DE DANO")
+    print(f"Dano inflingido: {jogador.danoReal}(-{jogador.dano-jogador.danoReal})")
     sleep(0.5)
 
     
@@ -86,7 +112,6 @@ def status(jogador):
 def statusMonstro(monstro):
     print(f"STATUS {monstro.nome} \nVIDA : {monstro.vida}\nATAQUE : {monstro.ataque}\nDEFESA : {monstro.defesa}\n")
     return "\b"
-
 
 def continuar():
     input("PRESSIONE ENTER PARA CONTINUAR")

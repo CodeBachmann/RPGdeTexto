@@ -82,22 +82,31 @@ def comprarNaLoja (jogador):
         if itemLojaHabilidade == "HCL":
             podeComprarHabilidade = "HCL"
             precoHabilidade = 70
-            print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)\nHeal based on your intelligence (extra action)")
+            print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)\n[4] Heal based on your (intelligence) (extra action)")
+        elif itemLojaArtefato == "HEF":
+            podeComprarHabilidade = "HEF"
+            precoHabilidade = 75
+            print(f"Enchant with Fire - {precoHabilidade}g(3)\n[4] Enchant your weapon with fire (intelligence + attack) (extra action)")
 
         elif itemLojaHabilidade == "HPA":
             podeComprarHabilidade = "HPA"
             precoHabilidade = 75
-            print(f"Pancada Atordoante - {precoHabilidade}g(3)\nTry to stun your opponent and do some damage (extra action)")
+            print(f"Pancada Atordoante - {precoHabilidade}g(3)\n[3] Try to stun your opponent and do some damage (extra action)")
 
         elif itemLojaHabilidade == "HEO":
             podeComprarHabilidade = "HEO"
             precoHabilidade = 65
-            print(f"Enfraquecer Oponente - {precoHabilidade}g(3)\nHalf the opponent Attack (extra action)")
+            print(f"Enfraquecer Oponente - {precoHabilidade}g(3)\n[2] Half the opponent Attack (extra action)")
         
         elif itemLojaHabilidade == "HFD":
             podeComprarHabilidade = "HFD"
             precoHabilidade = 70
-            print(f'Desespero Frenetico - {precoHabilidade}g(3)\nUse all your mana to unleash a final blow')
+            print(f'Desespero Frenetico - {precoHabilidade}g(3)\n[X] Use all your mana to unleash a final blow')
+
+        elif itemLojaHabilidade == "HEP":
+            podeComprarHabilidade = "HEP"
+            precoHabilidade = 80
+            print(f'Enchant with Poison - {precoHabilidade}g(3)\n[4] Enchant your next 3 hits with Poison (extra action)')
         print("Recuperar 1/3 HP MAX - 25g(4)")
         while not compraRealizada:
             print(f"Saldo atual: {jogador.ouro}")

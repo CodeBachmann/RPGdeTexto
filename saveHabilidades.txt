@@ -1,11 +1,1 @@
-Brubru, , 
-karlao, HRDA
-cavalo, HRDA, 
-cavalo, HRDA
-pomba, HRDA
-picles, HRDA, HEO, 
-Ferraz, HRDA, HPA, 
-Gusta, HRDA, HEO, 
-Gusta, HRDA
-gusta, HRDA, 
-Bachmann, HRDA
+Veneno, HOAM, HPA, HEP, HEF, 

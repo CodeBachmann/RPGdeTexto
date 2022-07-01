@@ -101,3 +101,23 @@ def enfraquecerOponente (jogador, monstro, efeito):
         print("Você usou sua ação Bonus")
     else:
         jogador.passar = True
+
+def enchantPoison(jogador, monstro, efeito):
+    jogador.mana -= 4
+    print(f"-4 MP | You enchant your weapon with poison")
+    efeito.encantamentoAtivo = {'POISON': 3}
+    if jogador.acaoBonus == True:
+        jogador.acaoBonus = False
+        print("Você usou sua ação Bonus")
+    else:
+        jogador.passar = True
+
+def enchantFire(jogador, monstro, efeito):
+    jogador.mana -= 4
+    print(f"-4 MP | You enchant your weapon with fire")
+    efeito.encantamentoAtivo = {'FIRE': 3}
+    if jogador.acaoBonus == True:
+        jogador.acaoBonus = False
+        print("Você usou sua ação Bonus")
+    else:
+        jogador.passar = True

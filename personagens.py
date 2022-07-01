@@ -34,7 +34,7 @@ class CriarPersonagem():
 
 
 class timers():
-    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque, tempoAtaque, custoMana):
+    def __init__(self, defesa, podeAgir, danoAumentado, monstroAgir, tempoCombate, quantidadeHabilidades, ataque, tempoAtaque, custoMana, encantamentoAtivo):
         self.defesa = defesa
         self.podeAgir = podeAgir
         self.danoAumentado = danoAumentado
@@ -44,10 +44,11 @@ class timers():
         self.ataque = ataque
         self.tempoAtaque = tempoAtaque
         self.custoMana = custoMana
+        self.encantamentoAtivo = encantamentoAtivo
 
 
 class npc():
-    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, podeAgir, dano, danoReal):
+    def __init__(self, vida, vidaMax, ataque, defesa, nome, critico, ouro, podeAgir, dano, danoReal, envenenamento):
         self.vida = vida
         self.vidaMax = vidaMax
         self.ataque = ataque
@@ -58,6 +59,7 @@ class npc():
         self.podeAgir = podeAgir
         self.dano = dano
         self.danoReal = danoReal
+        self.envenenamento = envenenamento
 
 class loja():
     def __init__(self, artefatosComprados, habilidadesComprados):
@@ -89,10 +91,11 @@ efx = timers(defesa = 0,
             quantidadeHabilidades = 0,
             ataque= 0,
             tempoAtaque = 0,
-            custoMana = 0)
+            custoMana = 0,
+            encantamentoAtivo= {0:0})
 Compraveis = loja   (artefatosComprados = ['ALB','AGG','AIX','APP','AHSS','AMP'],
-                    habilidadesComprados = ['HCL','HPA','HEO','HFD'])
-                    
+                    habilidadesComprados = ['HCL','HPA','HEO','HFD', 'HEP', 'HEF'])
+
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,
                         ataque=8,

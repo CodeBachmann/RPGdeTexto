@@ -1,11 +1,1 @@
-Brubru, , 
-karlao, AMDA
-cavalo, AMDA, AIX, 
-cavalo, AMDA
-pomba, AMDA
-picles, AMDA, ALB, 
-Ferraz, AMDA, AGG, 
-Gusta, AMDA, 
-Gusta, AMDA
-gusta, AMDA, 
-Bachmann, AMDA
+Veneno, ACC, 

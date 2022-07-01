@@ -20,7 +20,9 @@ dicSkillsMana = {'HCL' : 5,
         'HOAM' : 3,
         'HPA' : 3,
         'HEO' : 2,
-        'HFD' : 1}
+        'HFD' : 1,
+        'HEP' : 4,
+        'HEF' : 4}
 
 #EVENTOS
 encerrarCombate = False
@@ -252,6 +254,14 @@ while jogador.vida > 0:
                                 decisaoHabilidade = jogador.habilidades[4]
                                 break
 
+                            if 6 <= efeito.quantidadeHabilidades and keyboard.read_key() == "5":
+                                decisaoHabilidade = jogador.habilidades[5]
+                                break
+
+                            if 7 <= efeito.quantidadeHabilidades and keyboard.read_key() == "6":
+                                decisaoHabilidade = jogador.habilidades[6]
+                                break
+
                             if keyboard.read_key() == volta:
                                 decisaoHabilidade = "V"
                                 break
@@ -264,7 +274,9 @@ while jogador.vida > 0:
                                     'HOAM' : Skills.organizarAMente,
                                     'HPA' : Skills.pancadaAtordoante,
                                     'HEO' : Skills.enfraquecerOponente,
-                                    'HFD' : Skills.freneticDespair}
+                                    'HFD' : Skills.freneticDespair,
+                                    'HEP' : Skills.enchantPoison,
+                                    'HEF' : Skills.enchantFire}
                                     
                         if decisaoHabilidade in jogador.habilidades and jogador.mana >= dicSkillsMana[decisaoHabilidade]:
                             f'{dicSkills[decisaoHabilidade](jogador, monstro, efeito)}'
