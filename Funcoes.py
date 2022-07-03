@@ -38,7 +38,7 @@ def adicionarHabilidade (jogador, efeito):
             efeito.quantidadeHabilidades += 1
 
 def calculaDano(atacante, defensor):
-    mitiga = (defensor.defesa/100)+1
+    mitiga = (defensor.defesa/75)+1
     vidaReal = defensor.vidaMax*mitiga
     atacante.danoReal = int((atacante.dano * defensor.vidaMax)/vidaReal)
     
@@ -78,7 +78,7 @@ def atacar(jogador, monstro, efeito):
             efeito.encantamentoAtivo = {0:0}
             
     if monstro.envenenamento > 0:
-        dano = 1+int(monstro.vidaMax*(monstro.envenenamento*0.02))
+        dano = 1+int(monstro.vidaMax*(monstro.envenenamento*0.05))
         monstro.vida -= dano
         print(f"Dano envenenamento: {dano}")
         

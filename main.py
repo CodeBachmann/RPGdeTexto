@@ -1,4 +1,4 @@
-from ntpath import join
+
 import random
 from time import  sleep
 import Funcoes
@@ -48,6 +48,7 @@ decisaoClasse = ""
 decisaoHabilidade = ""
 efeito = personagens.efx
 dddecisao = int(input('1 - Novo Jogo\n2 - Carregar jogo\n'))
+sv = Salvar()
 # --------------------------------- INÍCIO --------------------------------- #
 if dddecisao == 1:
     os.system('cls') or None
@@ -92,8 +93,8 @@ if dddecisao == 1:
 
 if dddecisao == 2:
     jogador = personagens.Reisch
-    Salvar.escolherSave(Salvar(),jogador= jogador)
-    Salvar.carregar(Salvar(),jogador = jogador, salvado = salvado)
+    sv.escolherSave(jogador)
+    sv.carregar(jogador, salvado)
 
 
 
@@ -128,7 +129,7 @@ while jogador.vida > 0:
     jogador.passar = False
     
     while not jogador.passar:
-        Salvar.salvar(Salvar(), jogador, salvado)
+        sv.salvar(jogador, salvado)
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
@@ -315,7 +316,7 @@ while jogador.vida > 0:
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
-            Salvar.deletarSave(Salvar(),jogador = jogador, salvado = salvado)
+            sv.deletarSave(jogador, salvado)
             sleep(2)
             exit(0)
 
