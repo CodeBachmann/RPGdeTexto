@@ -11,8 +11,9 @@ import Effects
 import Skills
 import Loja
 import keyboard
-import Save
+from Save import *
 # --------------------------------- VARIÁVEIS --------------------------------- #
+
 salvado = personagens.salvo
 dicSkillsMana = {'HCL' : 5,
         'HRDA' : 3,
@@ -46,7 +47,7 @@ classes = ["SA", "S", "R"]
 decisaoClasse = ""
 decisaoHabilidade = ""
 efeito = personagens.efx
-dddecisao = int(input('1 - Novo Jogo\n2 - Carregar Save:'))
+dddecisao = int(input('1 - Novo Jogo\n2 - Carregar jogo\n'))
 # --------------------------------- INÍCIO --------------------------------- #
 if dddecisao == 1:
     os.system('cls') or None
@@ -91,8 +92,8 @@ if dddecisao == 1:
 
 if dddecisao == 2:
     jogador = personagens.Reisch
-    Save.escolherSave(jogador)
-    Save.carregar(jogador, salvado)
+    Salvar.escolherSave(Salvar(),jogador= jogador)
+    Salvar.carregar(Salvar(),jogador = jogador, salvado = salvado)
 
 
 
@@ -125,8 +126,9 @@ while jogador.vida > 0:
     caminhoMonstroElite = False
     caminhoLoja = False
     jogador.passar = False
-    Save.salvar(jogador, salvado)
+    
     while not jogador.passar:
+        Salvar.salvar(Salvar(), jogador, salvado)
         jogador.caminhado += 1
         caminhos = random.randint(4,5)
         print(f"Seu saldo: {jogador.ouro}\n\nVocê pode: ")
@@ -313,7 +315,7 @@ while jogador.vida > 0:
         if jogador.vida <= 0:
             encerrarCombate = True
             print("Você morreu... ")
-            Save.deletarSave(jogador, salvado)
+            Salvar.deletarSave(Salvar(),jogador = jogador, salvado = salvado)
             sleep(2)
             exit(0)
 
