@@ -8,18 +8,25 @@ from time import sleep
 loja = personagens.Compraveis
 
 listaNaoCompradosPocoes = ["PA","PD","PI","PV"]
-
-def comprarNaLoja (jogador):
+def arrumarLoja(jogador):
     for i in jogador.habilidades:
         if i in loja.habilidadesComprados:
             loja.habilidadesComprados.remove(i)
+            print(loja.habilidadesComprados)
     for i in jogador.artefatos:
         if i in loja.artefatosComprados:
             loja.artefatosComprados.remove(i)
+            print(loja.artefatoComprado)
+
+def comprarNaLoja (jogador):
+    print(loja.artefatosComprados)
+    print(loja.habilidadesComprados)
+
     fecharLoja = False
     itemLojaPocao = random.choice(listaNaoCompradosPocoes)
     itemLojaArtefato = random.choice(loja.artefatosComprados)
     itemLojaHabilidade = random.choice(loja.habilidadesComprados)
+    print(itemLojaHabilidade)
     pocaoComprado = False
     artefatoComprado = False
     habilidadeComprado = False
@@ -28,7 +35,7 @@ def comprarNaLoja (jogador):
         compraRealizada = False
         print("Você adentra a loja... ")
         sleep(1)
-        print("Sair da loja - (5)")
+        
         print('\n\n')
         if itemLojaPocao == "PA":
             podeComprarPocao = "PA"
@@ -86,10 +93,6 @@ def comprarNaLoja (jogador):
             podeComprarHabilidade = "HCL"
             precoHabilidade = 40
             print(f"Pergaminho de Habilidade Cura Leve - {precoHabilidade}g(3)\n[4] Heal based on your (intelligence) (extra action)")
-        elif itemLojaArtefato == "HEF":
-            podeComprarHabilidade = "HEF"
-            precoHabilidade = 35
-            print(f"Enchant with Fire - {precoHabilidade}g(3)\n[4] Enchant your weapon with fire (intelligence + attack) (extra action)")
 
         elif itemLojaHabilidade == "HPA":
             podeComprarHabilidade = "HPA"
@@ -110,12 +113,19 @@ def comprarNaLoja (jogador):
             podeComprarHabilidade = "HEP"
             precoHabilidade = 45
             print(f'Enchant with Poison - {precoHabilidade}g(3)\n[4] Enchant your next 3 hits with Poison (extra action)')
+        
+        elif itemLojaHabilidade == "HEF":
+            podeComprarHabilidade = "HEF"
+            precoHabilidade = 45
+            print(f"Enchant with Fire - {precoHabilidade}g(3)\n[4] Enchant your weapon with fire (intelligence + attack) (extra action)")
+
         print('\n\n')
         print("Recuperar 1/3 HP MAX - 25g(4)")
         print('\n\n')
+        print("Sair da loja - (5)")
+        print('\n\n')
         print(f"Saldo atual: {jogador.ouro}")
         while not compraRealizada:
-
             
             
             if keyboard.read_key() == "4":
@@ -131,20 +141,20 @@ def comprarNaLoja (jogador):
             if not pocaoComprado:
                 print('\n\n')
                 if keyboard.read_key() == "1":
-                     if precoPocao <= jogador.ouro:
-                        if podeComprarPocao == "PA":
-                            jogador.ataque += 2
-                        elif podeComprarPocao == "PD":
-                            jogador.defesa += 11
-                        elif podeComprarPocao == "PI":
-                            jogador.inteligencia += 2
-                        elif podeComprarPocao == "PV":
-                            jogador.vidaMax += 6
-                            jogador.vida += 6
-                        jogador.ouro -= precoPocao
-                        pocaoComprado = True
-                        print("Item comprado com sucesso")
-                        print(f"Saldo atual: {jogador.ouro}")
+                        if precoPocao <= jogador.ouro:
+                            if podeComprarPocao == "PA":
+                                jogador.ataque += 2
+                            elif podeComprarPocao == "PD":
+                                jogador.defesa += 11
+                            elif podeComprarPocao == "PI":
+                                jogador.inteligencia += 2
+                            elif podeComprarPocao == "PV":
+                                jogador.vidaMax += 6
+                                jogador.vida += 6
+                            jogador.ouro -= precoPocao
+                            pocaoComprado = True
+                            print("Item comprado com sucesso")
+                            print(f"Saldo atual: {jogador.ouro}")
                 else:
                     print("Você não tem ouro o suficiente")
 

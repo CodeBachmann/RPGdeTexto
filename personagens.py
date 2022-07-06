@@ -94,7 +94,7 @@ efx = timers(defesa = 0,
             custoMana = 0,
             encantamentoAtivo= {0:0})
 Compraveis = loja   (artefatosComprados = ['ALB','AGG','AIX','APP','AHSS','AIE'],
-                    habilidadesComprados = ['HCL','HPA','HEO','HFD', 'HEP', 'HEF'])
+                    habilidadesComprados = ['HCL','HPA','HEO','HFD','HEP','HEF'])
 
 Sabel = CriarPersonagem(vida=26,
                         vidaMax=26,

@@ -95,7 +95,7 @@ if dddecisao == 2:
     jogador = personagens.Reisch
     sv.escolherSave(jogador)
     sv.carregar(jogador, salvado)
-
+    Loja.arrumarLoja(jogador)
 
 
 #ENQUANTO A VIDA DO JOGADOR FOR MAIOR QUE 0 O JOGO VAI CONTINUAR RODANDO
@@ -289,8 +289,9 @@ while jogador.vida > 0:
                             break
 
                 elif keyboard.read_key() == "3":
-                    encerrarCombate = True
-                    jogador.passar = True
+                    if not caminhoChefe:
+                        encerrarCombate = True
+                        jogador.passar = True
 
                 elif keyboard.read_key() == "4":
                     Funcoes.todosOsStatus(jogador)
