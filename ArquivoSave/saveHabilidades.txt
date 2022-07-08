@@ -1,2 +1,2 @@
-Gusta, HRDA, HEO, HEP, HCL, HPA, HFD, HEF, 
 sunce, HRDA, HEP, 
+GUsta, HRDA, HEF, 
